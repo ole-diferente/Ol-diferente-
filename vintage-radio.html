@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Radio - OLÉ DIFERENTE</title>
+    <meta name="referrer" content="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="tienda.css">
+    <link rel="stylesheet" href="producto.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <header></header>
+    <div class="container">
+        <a href="tienda.html" class="back-to-shop">
+            <i data-lucide="arrow-left"></i> VOLVER A LA TIENDA
+        </a>
+        <div class="product-detail-container">
+            <div class="product-detail-image-wrapper">
+                <img src="Vintage Radio.jpg" alt="Lattafa Pride Vintage Radio" class="product-detail-image">
+            </div>
+            <div class="product-detail-info">
+                <span class="detail-gender">GÉNERO: UNISEX</span>
+                <h1 class="detail-title">Lattafa Pride Vintage Radio</h1>
+                <p class="detail-description">
+                    Una obra maestra ambarada y amaderada. Destaca por una seductora nota central de ciruela y palo santo, envuelta en la frescura inicial de la lavanda y la salvia, descansando sobre una base profunda de sándalo y oud. Elegante, cálida e inolvidable.
+                </p>
+                <div class="detail-price-container" style="margin-bottom: 25px;">
+                    <span class="detail-price" style="font-size: 32px; font-weight: 700; color: var(--text-primary);">$0.000</span>
+                    <span class="detail-size-label" style="font-size: 14px; color: var(--text-secondary); margin-left: 10px;">/ 100 ml</span>
+                </div>
+                <div class="visual-notes">
+                    <div class="note-section">
+                        <div class="note-section-header"><span>NOTAS DE SALIDA</span></div>
+                        <div class="ingredients-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="Imagenes_Notas_Olfativas/Lavanda.jpg" alt="Lavanda"></div>
+                                <span class="ingredient-name">Lavanda</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="Imagenes_Notas_Olfativas/Pimienta.jpg" alt="Salvia"></div>
+                                <span class="ingredient-name">Salvia</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note-section">
+                        <div class="note-section-header"><span>CORAZÓN</span></div>
+                        <div class="ingredients-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="Imagenes_Notas_Olfativas/Pimienta.jpg" alt="Ciruela"></div>
+                                <span class="ingredient-name">Ciruela</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="Imagenes_Notas_Olfativas/Sándalo.jpg" alt="Palo Santo"></div>
+                                <span class="ingredient-name">Palo Santo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note-section">
+                        <div class="note-section-header"><span>BASE</span></div>
+                        <div class="ingredients-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="Imagenes_Notas_Olfativas/Sándalo.jpg" alt="Sándalo"></div>
+                                <span class="ingredient-name">Sándalo</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="Imagenes_Notas_Olfativas/Oud.jpg" alt="Oud"></div>
+                                <span class="ingredient-name">Madera de Oud</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accords-container">
+                    <h3 class="accords-title">Acordes Principales</h3>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Amaderado</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 100%; background: #734d26;"></div></div>
+                    </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Afrutado</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 85%; background: #a64dff;"></div></div>
+                    </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Aromático</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 75%; background: #4d9900;"></div></div>
+                    </div>
+                </div>
+                <div class="purchase-controls" style="margin-top: 30px; display: flex; gap: 15px; align-items: center;">
+                    <input type="number" class="quantity-selector" value="1" min="1" style="width: 70px; padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-primary); text-align: center;">
+                    <button class="add-to-cart-btn" style="flex-grow: 1; padding: 18px 40px; font-size: 16px;">AGREGAR AL CARRITO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="components.js"></script>
+    <script src="product_manager.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

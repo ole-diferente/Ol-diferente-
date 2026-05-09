@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLÉ DIFERENTE | Perfumes Originales</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body class="home-page">
+    <!-- Background Text Removed -->
+
+    <div class="hero-screen">
+        <!-- Header / Nav -->
+    <header></header>
+
+    <!-- Main Video Slider Container -->
+    <main id="hero-slider" class="video-container slider-container">
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <video autoplay muted playsinline class="hero-video">
+                <source src="VIDEO WEB.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="slide">
+            <video muted playsinline class="hero-video">
+                <source src="video banner 2.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="slide">
+            <video muted playsinline class="hero-video">
+                <source src="Banner 3.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+
+        <!-- Slider Controls -->
+        <button class="slider-arrow prev" aria-label="Anterior"><i data-lucide="chevron-left"></i></button>
+        <button class="slider-arrow next" aria-label="Siguiente"><i data-lucide="chevron-right"></i></button>
+        
+        <div class="slider-dots">
+            <button class="dot active" data-index="0" aria-label="Slide 1"></button>
+            <button class="dot" data-index="1" aria-label="Slide 2"></button>
+            <button class="dot" data-index="2" aria-label="Slide 3"></button>
+        </div>
+    </main>
+
+        <!-- Footer Texts -->
+        <footer></footer>
+    </div>
+
+    <!-- Sección Sobre Mí -->
+    <section class="about-section">
+        <div class="about-container">
+            <!-- Columna de Fotos -->
+            <div class="photo-column">
+                <div class="polaroid pic1">
+                    <img src="luis 1.jpeg" alt="Luis Alvarez 1">
+                </div>
+                <div class="polaroid pic2">
+                    <img src="luis 2.jpeg" alt="Luis Alvarez 2">
+                </div>
+                <div class="polaroid pic3">
+                    <img src="luis 3.jpeg" alt="Luis Alvarez 3">
+                </div>
+            </div>
+
+            <!-- Columna de Textos -->
+            <div class="text-column">
+                <!-- Caja 1 -->
+                <div class="text-box">
+                    <h2>SOBRE MÍ</h2>
+                    <p>Bienvenidos a Olé Diferente. Soy Luis Álvarez, oriundo de la ciudad de Las Flores, en la provincia de Buenos Aires. Este espacio nació de una pasión íntima y profunda por el cautivador mundo de la perfumería. Olé Diferente no es solo una marca; es una invitación personal a descubrir la magia que se esconde detrás de cada gota.</p>
+                    <a href="#" class="btn-saber-mas">Saber Más</a>
+                </div>
+
+                <!-- Caja 2 -->
+                <div class="text-box">
+                    <h2>NUESTRA MISIÓN</h2>
+                    <p>Acercar a nuestros clientes las mejores y más distinguidas fragancias del mercado a precios verdaderamente accesibles. Queremos democratizar la elegancia y el buen gusto, asegurándonos de que el lujo de llevar un perfume extraordinario no sea un privilegio de pocos. Nos esforzamos para que puedas experimentar aromas únicos con la misma alegría con la que yo lo hago.</p>
+                </div>
+
+                <!-- Caja 3 -->
+                <div class="text-box">
+                    <h2>LA ESENCIA</h2>
+                    <blockquote>"El perfume es la llave invisible de nuestros recuerdos; un eco silencioso que envuelve el alma, define nuestra presencia y deja una huella imborrable mucho tiempo después de habernos ido."</blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="components.js"></script>
+    <script src="cart.js"></script>
+    <script src="slider.js"></script>
+</body>
+</html>

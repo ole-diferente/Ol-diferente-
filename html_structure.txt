@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OLÉ DIFERENTE | Perfumes Originales</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Text -->
+    <div class="bg-text">OLÉ DIFERENTE</div>
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="OLÉ DIFERENTE Logo" class="logo-img">
+        </div>
+        <nav>
+            <a href="#">MENÚ</a>
+            <a href="#">TIENDA</a>
+            <a href="#">LOS MÁS PEDIDOS</a>
+            <a href="#">NUEVOS INGRESOS</a>
+            <a href="#">OFERTAS</a>
+            <a href="#">CONTACTO</a>
+        </nav>
+        <div class="actions">
+            <button id="theme-toggle" aria-label="Toggle Theme">
+                <i data-lucide="moon" id="theme-icon"></i>
+            </button>
+            <button aria-label="Cart">
+                <i data-lucide="shopping-bag"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Canvas Container -->
+    <main id="canvas-container">
+        <!-- Three.js will render here -->
+    </main>
+
+    <!-- Footer Texts -->
+    <footer>
+        <h2 class="motivational-text">Despierta tus sentidos con las mejores fragancias</h2>
+        <p class="slogan">Perfumes originales - By Luis Álvarez</p>
+    </footer>

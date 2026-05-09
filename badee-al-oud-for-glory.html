@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bade'e Al Oud For Glory - OLÉ DIFERENTE</title>
+    <meta name="referrer" content="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="tienda.css">
+    <link rel="stylesheet" href="producto.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <header></header>
+    <div class="container">
+        <a href="tienda.html" class="back-to-shop">
+            <i data-lucide="arrow-left"></i> VOLVER A LA TIENDA
+        </a>
+        <div class="product-detail-container">
+            <div class="product-detail-image-wrapper">
+                <img src="Lattafa Bade'e Al Oud For Glory EDP.jpg" alt="Lattafa Bade'e Al Oud For Glory" class="product-detail-image">
+            </div>
+            <div class="product-detail-info">
+                <span class="detail-gender">GÉNERO: UNISEX</span>
+                <h1 class="detail-title">Lattafa Bade'e Al Oud For Glory</h1>
+                <p class="detail-description">
+                    Una majestuosa composición amaderada oriental que impone presencia. Abre con notas refinadas de azafrán, nuez moscada y lavanda, dando paso a un corazón de opulenta madera de oud y pachulí que ofrece un carácter profundo, oscuro y enigmático.
+                </p>
+                <div class="detail-price-container" style="margin-bottom: 25px;">
+                    <span class="detail-price" style="font-size: 32px; font-weight: 700; color: var(--text-primary);">$0.000</span>
+                    <span class="detail-size-label" style="font-size: 14px; color: var(--text-secondary); margin-left: 10px;">/ 100 ml</span>
+                </div>
+                <div class="visual-notes">
+                    <div class="note-section">
+                        <div class="note-section-header"><span>NOTAS DE SALIDA</span></div>
+                        <div class="ingredients-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="Imagenes_Notas_Olfativas/Azafrán.jpg" alt="Azafrán"></div>
+                                <span class="ingredient-name">Azafrán</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="Imagenes_Notas_Olfativas/Lavanda.jpg" alt="Lavanda"></div>
+                                <span class="ingredient-name">Lavanda</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note-section">
+                        <div class="note-section-header"><span>CORAZÓN</span></div>
+                        <div class="ingredients-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="Imagenes_Notas_Olfativas/Oud.jpg" alt="Oud"></div>
+                                <span class="ingredient-name">Madera de Oud</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="Imagenes_Notas_Olfativas/Pachulí.jpg" alt="Pachulí"></div>
+                                <span class="ingredient-name">Pachulí</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="note-section">
+                        <div class="note-section-header"><span>BASE</span></div>
+                        <div class="ingredients-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="Imagenes_Notas_Olfativas/Almizcle.jpg" alt="Almizcle"></div>
+                                <span class="ingredient-name">Almizcle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accords-container">
+                    <h3 class="accords-title">Acordes Principales</h3>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Oud</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 100%; background: #331a00;"></div></div>
+                    </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Cálido Especiado</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 85%; background: #a64dff;"></div></div>
+                    </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Amaderado</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 80%; background: #734d26;"></div></div>
+                    </div>
+                </div>
+                <div class="purchase-controls" style="margin-top: 30px; display: flex; gap: 15px; align-items: center;">
+                    <input type="number" class="quantity-selector" value="1" min="1" style="width: 70px; padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-primary); text-align: center;">
+                    <button class="add-to-cart-btn" style="flex-grow: 1; padding: 18px 40px; font-size: 16px;">AGREGAR AL CARRITO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="components.js"></script>
+    <script src="product_manager.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

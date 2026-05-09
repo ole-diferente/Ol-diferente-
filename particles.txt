@@ -1,0 +1,59 @@
+        // 5. Particle System (Delicate Vapor Spray)
+        // ==========================================
+        const particleCount = 2000;
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesPositions = new Float32Array(particleCount * 3);
+        const particleVelocities = [];
+
+        for (let i = 0; i < particleCount; i++) {
+            particlesPositions[i*3] = 0;
+            particlesPositions[i*3+1] = -100; // Hidden initially
+            particlesPositions[i*3+2] = 0;
+            particleVelocities.push({ x: 0, y: 0, z: 0, life: 0, maxLife: 1 });
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlesPositions, 3));
+
+        function getParticleColor(theme) {
+            return theme === 'dark' ? new THREE.Color(0xffffff) : new THREE.Color(0xffffff); // Always white/silver vapor
+        }
+
+        const particlesMaterial = new THREE.PointsMaterial({
+            color: getParticleColor(currentTheme),
+            size: 0.015, // Very delicate and small like real vapor
+            transparent: true,
+            opacity: 0.0,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        });
+
+        const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
+        particleSystem.frustumCulled = false; // Prevents disappearing when clicking!
+        bottleGroup.add(particleSystem); // Add to bottle so it rotates with it!
+
+        window.addEventListener('click', (e) => {
+            if (e.target.closest('header')) return; // Ignore UI clicks
+            
+            particlesMaterial.opacity = 0.5; // Soft opacity for delicate vapor
+            
+            for (let i = 0; i < particleCount; i++) {
+                // Emit from the spray nozzle (local y = 4.4 in bottleGroup)
+                particlesPositions[i*3] = (Math.random() - 0.5) * 0.1;
+                particlesPositions[i*3+1] = 4.4 + (Math.random() * 0.1);
+                particlesPositions[i*3+2] = (Math.random() - 0.5) * 0.1;
+                
+                const angle = Math.random() * Math.PI * 2;
+                const radius = Math.random() * 0.04;
+                
+                // Blast SIDEWAYS (X axis) with a wide spread, very little Y upward movement
+                particleVelocities[i].x = (Math.random() - 0.5) * 0.2; // Wide sideways spray
+                particleVelocities[i].y = (Math.random() - 0.2) * 0.02; // Mostly flat, slight drift
+                particleVelocities[i].z = (Math.random() - 0.5) * 0.05 + 0.05; // Slightly forward
+                
+                particleVelocities[i].maxLife = Math.random() * 150 + 50; // Last longer
+                particleVelocities[i].life = particleVelocities[i].maxLife;
+            }
+            particlesGeometry.attributes.position.needsUpdate = true;
+        });
+
+        // Update theme listener

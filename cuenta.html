@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta | OLÉ DIFERENTE</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cuenta.css">
+</head>
+<body class="page-standard">
+    <header></header>
+
+    <main class="cuenta-main">
+        <div class="cuenta-container">
+            <!-- Sección cuando no hay sesión (Login / Registro) -->
+            <div id="auth-section">
+                <!-- Login Form -->
+                <div id="login-box" class="auth-box">
+                    <h2>INICIAR SESIÓN</h2>
+                    <form id="login-form">
+                        <div class="input-group">
+                            <label for="login-email">Correo Electrónico</label>
+                            <input type="email" id="login-email" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="login-password">Contraseña</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <p class="error-msg" id="login-error"></p>
+                        <button type="submit" class="btn-auth">Ingresar</button>
+                        <p class="switch-form">¿No tienes cuenta? <a href="#" id="to-register">Regístrate aquí</a></p>
+                    </form>
+                </div>
+
+                <!-- Register Form -->
+                <div id="register-box" class="auth-box" style="display: none;">
+                    <h2>CREAR CUENTA</h2>
+                    <form id="register-form">
+                        <div class="input-group">
+                            <label for="reg-email">Correo Electrónico</label>
+                            <input type="email" id="reg-email" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="reg-password">Contraseña</label>
+                            <input type="password" id="reg-password" required>
+                        </div>
+                        
+                        <div class="avatar-selection">
+                            <label>Elige tu Avatar</label>
+                            <div class="avatar-grid">
+                                <img src="avatars/avatar_1.png" class="avatar-option active" data-avatar="avatar_1.png" alt="Avatar 1">
+                                <img src="avatars/avatar_2.png" class="avatar-option" data-avatar="avatar_2.png" alt="Avatar 2">
+                                <img src="avatars/avatar_3.png" class="avatar-option" data-avatar="avatar_3.png" alt="Avatar 3">
+                                <img src="avatars/avatar_4.png" class="avatar-option" data-avatar="avatar_4.png" alt="Avatar 4">
+                                <img src="avatars/avatar_5.png" class="avatar-option" data-avatar="avatar_5.png" alt="Avatar 5">
+                                <img src="avatars/avatar_6.png" class="avatar-option" data-avatar="avatar_6.png" alt="Avatar 6">
+                                <img src="avatars/avatar_7.png" class="avatar-option" data-avatar="avatar_7.png" alt="Avatar 7">
+                                <img src="avatars/avatar_8.png" class="avatar-option" data-avatar="avatar_8.png" alt="Avatar 8">
+                                <img src="avatars/avatar_9.png" class="avatar-option" data-avatar="avatar_9.png" alt="Avatar 9">
+                                <img src="avatars/avatar_10.png" class="avatar-option" data-avatar="avatar_10.png" alt="Avatar 10">
+                            </div>
+                        </div>
+
+                        <p class="error-msg" id="reg-error"></p>
+                        <button type="submit" class="btn-auth">Registrarse</button>
+                        <p class="switch-form">¿Ya tienes cuenta? <a href="#" id="to-login">Inicia sesión</a></p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Sección de Perfil (Usuario Logueado) -->
+            <div id="profile-section" style="display: none;">
+                <div class="dashboard-layout">
+                    <!-- Sidebar -->
+                    <aside class="dashboard-sidebar auth-box">
+                        <div class="profile-info-mini">
+                            <img id="profile-avatar" src="avatars/avatar_1.png" alt="Mi Avatar">
+                            <h3 id="profile-email">usuario@correo.com</h3>
+                        </div>
+                        <nav class="dashboard-tabs">
+                            <button class="tab-btn active" data-target="tab-datos">Datos Personales</button>
+                            <button class="tab-btn" data-target="tab-domicilio">Domicilios</button>
+                            <button class="tab-btn" data-target="tab-pedidos">Mis Pedidos</button>
+                            <button class="tab-btn" data-target="tab-envio">Envío</button>
+                        </nav>
+                        <button id="logout-btn" class="btn-auth btn-logout" style="margin-top:auto;">Cerrar Sesión</button>
+                    </aside>
+
+                    <!-- Main Content -->
+                    <div class="dashboard-content auth-box">
+                        <!-- Tab: Datos Personales -->
+                        <div id="tab-datos" class="tab-pane active">
+                            <h2>DATOS PERSONALES</h2>
+                            <form id="form-datos">
+                                <div class="input-row">
+                                    <div class="input-group">
+                                        <label for="per-nombre">Nombre</label>
+                                        <input type="text" id="per-nombre">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="per-apellido">Apellido</label>
+                                        <input type="text" id="per-apellido">
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="per-dni">DNI</label>
+                                    <input type="text" id="per-dni">
+                                </div>
+                                <p class="success-msg" id="datos-success"></p>
+                                <button type="submit" class="btn-auth">Guardar Datos</button>
+                            </form>
+                        </div>
+
+                        <!-- Tab: Domicilios -->
+                        <div id="tab-domicilio" class="tab-pane">
+                            <h2>DOMICILIOS</h2>
+                            <form id="form-domicilio">
+                                <div class="input-group">
+                                    <label for="dom-direccion">Dirección completa</label>
+                                    <input type="text" id="dom-direccion" placeholder="Calle, Número, Depto">
+                                </div>
+                                <div class="input-row">
+                                    <div class="input-group">
+                                        <label for="dom-provincia">Provincia</label>
+                                        <input type="text" id="dom-provincia">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="dom-localidad">Localidad</label>
+                                        <input type="text" id="dom-localidad">
+                                    </div>
+                                </div>
+                                <div class="input-group" style="width: 50%;">
+                                    <label for="dom-cp">Código Postal</label>
+                                    <input type="text" id="dom-cp">
+                                </div>
+                                <p class="success-msg" id="dom-success"></p>
+                                <button type="submit" class="btn-auth">Guardar Domicilio</button>
+                            </form>
+                        </div>
+
+                        <!-- Tab: Mis Pedidos -->
+                        <div id="tab-pedidos" class="tab-pane">
+                            <h2>MIS PEDIDOS</h2>
+                            <div class="orders-list">
+                                <!-- Order 1 -->
+                                <div class="order-card">
+                                    <div class="order-header">
+                                        <span class="order-id">#PED-00482</span>
+                                        <span class="order-date">05/09/2026</span>
+                                    </div>
+                                    <div class="order-body">
+                                        <p>1x Lattafa Asad (100ml)</p>
+                                        <p>1x Body Splash Bare Vanilla</p>
+                                    </div>
+                                    <div class="order-footer">
+                                        <span class="order-total">$85,000 ARS</span>
+                                        <span class="order-status status-paid">Pago Aprobado</span>
+                                    </div>
+                                </div>
+                                <!-- Order 2 -->
+                                <div class="order-card">
+                                    <div class="order-header">
+                                        <span class="order-id">#PED-00315</span>
+                                        <span class="order-date">12/08/2026</span>
+                                    </div>
+                                    <div class="order-body">
+                                        <p>1x Armaf Club de Nuit Intense Man</p>
+                                    </div>
+                                    <div class="order-footer">
+                                        <span class="order-total">$72,000 ARS</span>
+                                        <span class="order-status status-pending">Pendiente de Pago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab: Envío -->
+                        <div id="tab-envio" class="tab-pane">
+                            <h2>ESTADO DEL ENVÍO</h2>
+                            <div class="shipping-list">
+                                <!-- Shipping 1 -->
+                                <div class="shipping-card">
+                                    <div class="shipping-header">
+                                        <h4>Pedido #PED-00482</h4>
+                                        <span class="shipping-status status-transit">En Camino</span>
+                                    </div>
+                                    <div class="shipping-timeline">
+                                        <div class="timeline-step done">Preparando envío</div>
+                                        <div class="timeline-step done">Entregado al correo</div>
+                                        <div class="timeline-step current">En camino</div>
+                                        <div class="timeline-step">Entregado</div>
+                                    </div>
+                                    <div class="tracking-info">
+                                        <p>Código de seguimiento:</p>
+                                        <strong>AR9847291054CA</strong>
+                                        <button class="btn-track">Rastrear en Andreani</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer></footer>
+
+    <script src="components.js"></script>
+    <script src="cuenta.js"></script>
+</body>
+</html>

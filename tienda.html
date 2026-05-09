@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda - OLÉ DIFERENTE</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="tienda.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+
+    <!-- Header / Nav -->
+    <header></header>
+
+    <div class="container">
+        <div class="catalog-controls">
+            <div class="filters">
+                <label for="category-filter"><strong>Categoría:</strong></label>
+                <select id="category-filter">
+                    <option value="todos">Todos los productos</option>
+                    <option value="masculinas">Fragancias Masculinas</option>
+                    <option value="femeninas">Fragancias Femeninas</option>
+                    <option value="body-splash">Body Splash</option>
+                    <option value="decants">Decants</option>
+                </select>
+            </div>
+            
+            <div class="sorting">
+                <label for="price-sort"><strong>Ordenar por:</strong></label>
+                <select id="price-sort">
+                    <option value="relevancia">Relevancia</option>
+                    <option value="menor-mayor">Precio: Menor a mayor</option>
+                    <option value="mayor-menor">Precio: Mayor a menor</option>
+                    <option value="nombre-az">Nombre: A a Z</option>
+                    <option value="nombre-za">Nombre: Z a A</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="product-grid">
+            
+            <!-- Product 1 -->
+            <div class="product-card" data-category="masculinas" data-price="48500" data-name="Lattafa Asad">
+                <a href="lattafa-asad.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Assad lattafa.jpg" alt="Lattafa Asad" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Árabe</span>
+                    <a href="lattafa-asad.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Lattafa Asad</h3>
+                    </a>
+                    
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="48.500">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="12.500">10 ml</button>
+                            <button class="size-btn active" data-price="8.500">5 ml</button>
+                        </div>
+                    </div>
+
+                    <div class="product-price">$48.500</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 1b: His Confession -->
+            <div class="product-card out-of-stock" data-category="masculinas" data-price="49500" data-name="Lattafa His Confession">
+                <a href="lattafa-his-confession.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <div class="out-of-stock-badge">Sin Stock</div>
+                        <img src="Lattafa His Confession – A Bold Tale of Passion & Power.jpg" alt="Lattafa His Confession" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Árabe</span>
+                    <a href="lattafa-his-confession.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Lattafa His Confession</h3>
+                    </a>
+                    
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="49.500" disabled>100 ml</button>
+                            <button class="size-btn" data-type="decant" disabled>Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="13.000" disabled>10 ml</button>
+                            <button class="size-btn active" data-price="8.500" disabled>5 ml</button>
+                        </div>
+                    </div>
+
+                    <div class="product-price">$49.500</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad" disabled>
+                        <button class="add-to-cart-btn" disabled>Sin Stock</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" data-category="masculinas" data-price="62000" data-name="Armaf Club de Nuit">
+                <a href="club-de-nuit.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Club de nuit.jpg" alt="Armaf Club de Nuit" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Amaderada</span>
+                    <a href="club-de-nuit.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Armaf Club de Nuit</h3>
+                    </a>
+                    
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="62.000">105 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="18.000">10 ml</button>
+                            <button class="size-btn active" data-price="12.000">5 ml</button>
+                        </div>
+                    </div>
+
+                    <div class="product-price">$62.000</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" data-category="masculinas" data-price="52000" data-name="Afnan 9 PM">
+                <a href="afnan-9pm.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="9 pm afnan.jpg" alt="Afnan 9 PM" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Dulce</span>
+                    <a href="afnan-9pm.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Afnan 9 PM</h3>
+                    </a>
+                    
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="52.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="14.500">10 ml</button>
+                            <button class="size-btn active" data-price="9.200">5 ml</button>
+                        </div>
+                    </div>
+
+                    <div class="product-price">$52.000</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card" data-category="femeninas body-splash" data-price="18500" data-name="VS Aqua Kiss">
+                <a href="aqua-kiss.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Body splash aqua kiss.jpg" alt="Aqua Kiss" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Body Splash</span>
+                    <a href="aqua-kiss.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">VS Aqua Kiss</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="18.500">250 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="4.500">10 ml</button>
+                            <button class="size-btn active" data-price="2.800">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">$18.500</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card" data-category="femeninas body-splash" data-price="18500" data-name="VS Bare Vanilla">
+                <a href="bare-vanilla.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Body splash Bare Vanilla.jpg" alt="Bare Vanilla" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Body Splash</span>
+                    <a href="bare-vanilla.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">VS Bare Vanilla</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="18.500">250 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="4.500">10 ml</button>
+                            <button class="size-btn active" data-price="2.800">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">$18.500</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card" data-category="femeninas body-splash" data-price="18500" data-name="VS Coconut Passion">
+                <a href="coconut-passion.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Body splash Coconut passion.jpg" alt="Coconut Passion" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Body Splash</span>
+                    <a href="coconut-passion.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">VS Coconut Passion</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="18.500">250 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="4.500">10 ml</button>
+                            <button class="size-btn active" data-price="2.800">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">$18.500</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card" data-category="femeninas body-splash" data-price="18500" data-name="VS Pure Seduction">
+                <a href="pure-seduction.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Body splash Pure seduction.jpg" alt="Pure Seduction" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Body Splash</span>
+                    <a href="pure-seduction.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">VS Pure Seduction</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="18.500">250 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="4.500">10 ml</button>
+                            <button class="size-btn active" data-price="2.800">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">$18.500</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 8: VS Rush -->
+            <div class="product-card" data-category="femeninas body-splash" data-price="18500" data-name="VS Rush">
+                <a href="vs-rush.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Rush Victoria secret.jpg" alt="VS Rush" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Body Splash</span>
+                    <a href="vs-rush.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">VS Rush</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="18.500">250 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="4.500">10 ml</button>
+                            <button class="size-btn active" data-price="2.800">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">$18.500</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 9 -->
+            <div class="product-card" data-category="masculinas" data-price="45000" data-name="Dark Door Sport">
+                <a href="dark-door-sport.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="DARK DOOR.jpg" alt="Dark Door Sport" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Sport</span>
+                    <a href="dark-door-sport.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Dark Door Sport</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="45.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="12.500">10 ml</button>
+                            <button class="size-btn active" data-price="7.800">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">$45.000</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 9: Turathi Blue -->
+            <div class="product-card" data-category="masculinas" data-price="48000" data-name="Afnan Turathi Blue">
+                <a href="turathi-blue.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="turathi blue.jpeg" alt="Turathi Blue" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Cítrica</span>
+                    <a href="turathi-blue.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Afnan Turathi Blue</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="48.000">90 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="12.500">10 ml</button>
+                            <button class="size-btn active" data-price="8.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">$48.000</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Salvo Elixir -->
+            <div class="product-card" data-category="masculinas" data-price="0" data-name="Maison Alhambra Salvo Elixir">
+                <a href="salvo-elixir.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="SALVO ELIXIR.png" alt="Maison Alhambra Salvo Elixir" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Amaderada</span>
+                    <a href="salvo-elixir.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Salvo Elixir</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Qaed Al Fursan -->
+            <div class="product-card" data-category="masculinas" data-price="0" data-name="Lattafa Qaed Al Fursan">
+                <a href="qaed-al-fursan.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="QAED AL FURSAN.jpg" alt="Lattafa Qaed Al Fursan" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Árabe</span>
+                    <a href="qaed-al-fursan.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Lattafa Qaed Al Fursan</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">90 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Bade'e Al Oud For Glory -->
+            <div class="product-card" data-category="masculinas" data-price="0" data-name="Lattafa Bade'e Al Oud For Glory">
+                <a href="badee-al-oud-for-glory.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Lattafa Bade'e Al Oud For Glory EDP.jpg" alt="Lattafa Bade'e Al Oud For Glory" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Árabe</span>
+                    <a href="badee-al-oud-for-glory.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Bade'e Al Oud For Glory</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Shaheen Gold -->
+            <div class="product-card" data-category="masculinas" data-price="0" data-name="Lattafa Pride Shaheen Gold">
+                <a href="shaheen-gold.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Lattafa Pride Shaheen Gold EDP 100ml.jpg" alt="Lattafa Pride Shaheen Gold" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Árabe</span>
+                    <a href="shaheen-gold.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Shaheen Gold</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Khamrah -->
+            <div class="product-card" data-category="masculinas" data-price="0" data-name="Lattafa Khamrah">
+                <a href="khamrah-dukhan.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Khamra Dukhan.jpeg" alt="Lattafa Khamrah" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Dulce</span>
+                    <a href="khamrah-dukhan.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Lattafa Khamrah</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Club De Nuit Woman -->
+            <div class="product-card" data-category="femeninas" data-price="0" data-name="Armaf Club De Nuit Woman">
+                <a href="club-de-nuit-women.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Armaf Club De Nuit for Women Eau de Parfum.jpg" alt="Armaf Club De Nuit Woman" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Floral</span>
+                    <a href="club-de-nuit-women.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Club De Nuit Woman</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">105 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Eclaire -->
+            <div class="product-card" data-category="femeninas" data-price="0" data-name="Lattafa Eclaire">
+                <a href="eclaire.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Parfum éclaire de lattafa.jpg" alt="Lattafa Eclaire" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Dulce</span>
+                    <a href="eclaire.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Lattafa Eclaire</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Sceptre Malachite -->
+            <div class="product-card" data-category="masculinas" data-price="0" data-name="Maison Alhambra Sceptre Malachite">
+                <a href="sceptre-malachite.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Sceptre Malachite Eau De Parfum.jpeg" alt="Maison Alhambra Sceptre Malachite" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Aromática</span>
+                    <a href="sceptre-malachite.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Sceptre Malachite</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Odyssey Homme Black -->
+            <div class="product-card" data-category="masculinas" data-price="0" data-name="Armaf Odyssey Homme Black">
+                <a href="odyssey-homme-black.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Odyssey Homme Black Eau de Parfum.jpg" alt="Armaf Odyssey Homme Black" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Especiada</span>
+                    <a href="odyssey-homme-black.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Odyssey Homme Black</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Honor & Glory -->
+            <div class="product-card" data-category="masculinas" data-price="0" data-name="Lattafa Bade'e Al Oud Honor & Glory">
+                <a href="honor-and-glory.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Lattafa Badee Al Oud Honor & Glory Eua De Parfum Nicho Dubái 100ml.jpg" alt="Lattafa Bade'e Al Oud Honor & Glory" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Gourmand</span>
+                    <a href="honor-and-glory.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Honor & Glory</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Hawas for Him -->
+            <div class="product-card" data-category="masculinas" data-price="0" data-name="Rasasi Hawas for Him">
+                <a href="hawas-for-him.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Hawas for him.jpg" alt="Rasasi Hawas for Him" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Acuática</span>
+                    <a href="hawas-for-him.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Hawas for Him</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Lattafa Atlas -->
+            <div class="product-card" data-category="masculinas" data-price="0" data-name="Lattafa Atlas">
+                <a href="lattafa-atlas.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Lataffa Atlas.jpg" alt="Lattafa Atlas" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Marina</span>
+                    <a href="lattafa-atlas.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Lattafa Atlas</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Vintage Radio -->
+            <div class="product-card" data-category="masculinas" data-price="0" data-name="Lattafa Pride Vintage Radio">
+                <a href="vintage-radio.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Vintage Radio.jpg" alt="Lattafa Pride Vintage Radio" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Amaderada</span>
+                    <a href="vintage-radio.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Vintage Radio</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product: Uniq Oud Forever -->
+            <div class="product-card" data-category="masculinas" data-price="0" data-name="Armaf Uniq Oud Forever">
+                <a href="oud-forever.html" style="text-decoration: none; color: inherit;">
+                    <div class="product-image-container">
+                        <img src="Uniq Oud Forever.jpeg" alt="Armaf Uniq Oud Forever" class="product-image">
+                    </div>
+                </a>
+                <div class="product-info">
+                    <span class="product-category">Fragancia Oriental</span>
+                    <a href="oud-forever.html" style="text-decoration: none; color: inherit;">
+                        <h3 class="product-title">Uniq Oud Forever</h3>
+                    </a>
+                    <div class="size-selectors">
+                        <div class="selector-group main-options">
+                            <button class="size-btn active" data-type="full" data-price="0.000">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options">
+                            <button class="size-btn" data-price="0.000">10 ml</button>
+                            <button class="size-btn active" data-price="0.000">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="product-price">Por definir</div>
+                    <div class="purchase-controls">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">Agregar al carrito</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer></footer>
+
+    <script src="components.js"></script>
+    <script src="tienda.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

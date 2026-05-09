@@ -1,0 +1,260 @@
+.product-detail-container {
+    max-width: 1100px;
+    margin: 140px auto 60px;
+    padding: 40px;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    border: 1px solid var(--border-color);
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+}
+
+.product-detail-image-wrapper {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.03);
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+
+.product-detail-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.8s ease;
+}
+
+.product-detail-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-gender {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.detail-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    color: var(--text-primary);
+}
+
+.detail-description {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+}
+
+/* Visual Notes Section (Fragrantica Inspired) */
+.visual-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.note-section-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.note-section-header span {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.note-section-header::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border-color), transparent);
+}
+
+.ingredients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 20px;
+}
+
+.ingredient-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.ingredient-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ingredient-icon i {
+    font-size: 24px;
+    color: var(--accent-color);
+}
+
+.ingredient-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ingredient-item:hover .ingredient-icon {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-color: var(--accent-color);
+}
+
+.ingredient-name {
+    font-size: 11px;
+    text-transform: lowercase;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Main Accords Bars */
+.accords-container {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+}
+
+.accords-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.accord-bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.accord-label {
+    font-size: 10px;
+    text-transform: lowercase;
+    color: var(--text-secondary);
+}
+
+.accord-bar-bg {
+    height: 12px;
+    background: rgba(0,0,0,0.05);
+    border-radius: 6px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.accord-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
+
+.add-to-cart-btn {
+    background: #111111;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-transform: uppercase;
+}
+
+.add-to-cart-btn:hover {
+    background: #D4AF37;
+    color: #000000;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+}
+
+/* Dark Mode Adjustments */
+[data-theme="dark"] .ingredient-icon {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .accord-bar-bg {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .add-to-cart-btn {
+    background: #ffffff;
+    color: #000000;
+}
+
+[data-theme="dark"] .add-to-cart-btn:hover {
+    background: #D4AF37;
+}
+
+.add-to-cart-btn:disabled {
+    background: var(--border-color);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    border-color: var(--border-color);
+    opacity: 0.7;
+    box-shadow: none;
+    transform: none;
+}
+
+[data-theme="dark"] .add-to-cart-btn:disabled:hover {
+    background: var(--border-color);
+}
+
+
+.back-to-shop {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    transition: color 0.3s ease;
+}
+
+.back-to-shop:hover {
+    color: var(--accent-color);
+}
+
+@media (max-width: 900px) {
+    .product-detail-container {
+        grid-template-columns: 1fr;
+        padding: 30px;
+        margin-top: 100px;
+    }
+    .detail-title {
+        font-size: 36px;
+    }
+}

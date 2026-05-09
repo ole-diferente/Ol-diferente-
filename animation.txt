@@ -1,0 +1,29 @@
+            // Animate Particles
+            const positions = particlesGeometry.attributes.position.array;
+            let activeParticles = false;
+
+            for (let i = 0; i < particleCount; i++) {
+                const p = particleVelocities[i];
+                if (p.life > 0) {
+                    activeParticles = true;
+                    positions[i * 3] += p.x;
+                    positions[i * 3 + 1] += p.y;
+                    positions[i * 3 + 2] += p.z;
+                    
+                    // Elegantly slow down (air resistance)
+                    p.x *= 0.96;
+                    p.y *= 0.96;
+                    p.z *= 0.96;
+
+                    p.life--;
+                }
+            }
+            
+            if (activeParticles) {
+                particlesGeometry.attributes.position.needsUpdate = true;
+                if (particlesMaterial.opacity > 0) {
+                    particlesMaterial.opacity -= 0.003; // Extremely slow fade out
+                }
+            }
+
+            renderer.render(scene, camera);
