@@ -13,6 +13,8 @@ class WebComponents {
         this.renderFooter();
         this.setupTheme();
         this.setupMobileMenu();
+        this.setupAuthListener();
+        this.updateUserAuthStatus();
     }
 
     setupTheme() {
@@ -157,6 +159,44 @@ class WebComponents {
                 }
                 lucide.createIcons();
             });
+        }
+    }
+
+    setupAuthListener() {
+        if (window.supabase) {
+            window.supabase.auth.onAuthStateChange(() => {
+                this.updateUserAuthStatus();
+            });
+        }
+    }
+
+    async updateUserAuthStatus() {
+        const accountBtn = document.getElementById('account-btn');
+        if (!accountBtn || !window.supabase) return;
+
+        const { data: { session } } = await window.supabase.auth.getSession();
+
+        if (session) {
+            const { data: profile } = await window.supabase
+                .from('profiles')
+                .select('nombre, avatar_url')
+                .eq('id', session.user.id)
+                .single();
+
+            const nombre = profile?.nombre || 'Usuario';
+            const avatar = profile?.avatar_url || 'avatar_1.png';
+
+            accountBtn.classList.add('user-profile-btn');
+            accountBtn.innerHTML = `
+                <img src="avatars/${avatar}" alt="${nombre}" class="user-avatar-header">
+                <span class="user-greeting-header">Hola, ${nombre}</span>
+            `;
+        } else {
+            accountBtn.classList.remove('user-profile-btn');
+            accountBtn.innerHTML = `<i data-lucide="user"></i>`;
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
         }
     }
 }

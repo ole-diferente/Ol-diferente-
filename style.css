@@ -150,9 +150,10 @@ nav a:hover::after {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     background: var(--card-bg);
-    min-width: 200px;
+    min-width: 180px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     backdrop-filter: blur(15px);
     border: 1px solid var(--border-color);
@@ -168,15 +169,16 @@ nav a:hover::after {
     content: '';
     position: absolute;
     top: -20px;
-    left: 0;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px; /* Bridge is now only as wide as the menu item area */
     height: 20px;
     background: transparent;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
 .dropdown:hover .dropdown-content {
@@ -604,5 +606,49 @@ body.home-page::before {
     }
     .polaroid {
         width: 200px;
+    }
+}
+
+/* Header Profile Styles */
+.user-profile-btn {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 5px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+    min-width: 80px;
+}
+
+.user-profile-btn:hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.user-avatar-header {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.user-greeting-header {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: none;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+    .user-profile-btn {
+        min-width: auto;
+    }
+    .user-greeting-header {
+        display: none; /* Hide name on mobile to save space */
     }
 }

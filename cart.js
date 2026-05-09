@@ -80,16 +80,16 @@ class ShoppingCart {
 
         // Finalizar Compra
         document.querySelector('.checkout-btn')?.addEventListener('click', () => {
-            if (this.items.length === 0) {
-                alert('Tu carrito está vacío');
-                return;
-            }
             this.checkoutWhatsApp();
         });
     }
 
-    checkoutWhatsApp() {
-        const phoneNumber = "5492244462412"; // Número actualizado
+    async checkoutWhatsApp() {
+        if (this.items.length === 0) {
+            alert('Tu carrito está vacío');
+            return;
+        }
+
         let total = 0;
         let message = "¡Hola! Quisiera realizar un pedido en Olé Diferente:\n\n";
         
@@ -104,10 +104,45 @@ class ShoppingCart {
         message += `*Total a pagar: $${this.formatPrice(total)}*\n\n`;
         message += "Muchas gracias.";
 
+        // --- Integración con Supabase ---
+        const { data: { session } } = await window.supabase.auth.getSession();
+        
+        if (session) {
+            try {
+                const { error } = await window.supabase
+                    .from('orders')
+                    .insert([
+                        {
+                            user_id: session.user.id,
+                            items: this.items,
+                            total: total,
+                            status: 'pendiente'
+                        }
+                    ]);
+
+                if (error) throw error;
+                console.log("Pedido guardado en la base de datos.");
+            } catch (err) {
+                console.error("Error al guardar el pedido:", err);
+            }
+        } else {
+            const confirmAnon = confirm("No has iniciado sesión. Puedes completar el pedido por WhatsApp, pero no quedará guardado en tu historial de 'Mi Cuenta'. ¿Deseas continuar?");
+            if (!confirmAnon) {
+                window.location.href = 'cuenta.html';
+                return;
+            }
+        }
+
+        const phoneNumber = "5492244462412";
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
         
         window.open(whatsappUrl, '_blank');
+
+        // Limpiar carrito después de la compra
+        this.items = [];
+        this.saveAndRefresh();
+        this.closeCart();
     }
 
     handleAddToCart(button) {

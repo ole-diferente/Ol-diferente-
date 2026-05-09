@@ -1,10 +1,10 @@
 /**
  * cuenta.js
- * Lógica para el sistema de inicio de sesión, registro y perfiles guardando en localStorage.
+ * Lógica para el sistema de inicio de sesión, registro y perfiles usando Supabase.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Auth Elements
+document.addEventListener('DOMContentLoaded', async () => {
+    // --- Referencias a Elementos del DOM ---
     const loginBox = document.getElementById('login-box');
     const registerBox = document.getElementById('register-box');
     const profileSection = document.getElementById('profile-section');
@@ -30,6 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const datosSuccess = document.getElementById('datos-success');
     const domSuccess = document.getElementById('dom-success');
 
+    // Perfil Header
+    const profileEmailDisplay = document.getElementById('profile-email');
+    const profileAvatarDisplay = document.getElementById('profile-avatar');
+
     // Avatar Selection
     let selectedAvatar = 'avatar_1.png'; // Default
     const avatarOptions = document.querySelectorAll('.avatar-option');
@@ -42,24 +46,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Tab Navigation ---
+    // --- Navegación por Pestañas ---
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active from all
             tabBtns.forEach(b => b.classList.remove('active'));
             tabPanes.forEach(p => p.classList.remove('active'));
             
-            // Add active to clicked
             btn.classList.add('active');
             const target = btn.dataset.target;
             document.getElementById(target).classList.add('active');
         });
     });
 
-    // --- Check if user is logged in on load ---
+    // --- Lógica de Autenticación con Supabase ---
+
+    // Verificar estado inicial
     checkAuthState();
 
-    // Toggle forms
+    // Escuchar cambios en la autenticación
+    window.supabase.auth.onAuthStateChange((event, session) => {
+        console.log("Cambio de Auth:", event, session);
+        checkAuthState();
+    });
+
+    // Alternar formularios
     toRegisterLink.addEventListener('click', (e) => {
         e.preventDefault();
         loginBox.style.display = 'none';
@@ -74,8 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
         clearErrors();
     });
 
-    // --- Register Handler ---
-    registerForm.addEventListener('submit', (e) => {
+    // --- Handler de Registro ---
+    registerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = document.getElementById('reg-email').value.trim();
         const password = document.getElementById('reg-password').value.trim();
@@ -85,144 +95,239 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        let users = JSON.parse(localStorage.getItem('oleUsers')) || [];
+        const { data, error } = await window.supabase.auth.signUp({
+            email: email,
+            password: password,
+        });
 
-        const userExists = users.some(u => u.email === email);
-        if (userExists) {
-            regError.textContent = 'El correo ya está registrado.';
+        if (error) {
+            regError.textContent = error.message;
             return;
         }
 
-        // Add user with empty profile data
-        const newUser = {
-            email: email,
-            password: password,
-            avatar: selectedAvatar,
-            datosPersonales: { nombre: '', apellido: '', dni: '' },
-            domicilio: { direccion: '', provincia: '', localidad: '', cp: '' }
-        };
+        if (data.user) {
+            // Crear el perfil inicial en la tabla 'profiles'
+            const { error: profileError } = await window.supabase
+                .from('profiles')
+                .insert([
+                    { 
+                        id: data.user.id, 
+                        email: email, 
+                        avatar_url: selectedAvatar 
+                    }
+                ]);
 
-        users.push(newUser);
-        localStorage.setItem('oleUsers', JSON.stringify(users));
-
-        // Auto login
-        localStorage.setItem('oleActiveUser', JSON.stringify(newUser));
-        
-        checkAuthState();
+            if (profileError) {
+                console.error("Error creando perfil:", profileError);
+            }
+            
+            alert("¡Registro exitoso! Por favor, revisa tu correo para confirmar la cuenta (si está habilitado) o inicia sesión.");
+            toLoginLink.click();
+        }
     });
 
-    // --- Login Handler ---
-    loginForm.addEventListener('submit', (e) => {
+    // --- Handler de Inicio de Sesión ---
+    loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = document.getElementById('login-email').value.trim();
         const password = document.getElementById('login-password').value.trim();
 
-        let users = JSON.parse(localStorage.getItem('oleUsers')) || [];
-        
-        const user = users.find(u => u.email === email && u.password === password);
+        const { data, error } = await window.supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
+        });
 
-        if (user) {
-            localStorage.setItem('oleActiveUser', JSON.stringify(user));
-            checkAuthState();
+        if (error) {
+            loginError.textContent = "Credenciales inválidas o correo no confirmado.";
+            return;
+        }
+
+        // checkAuthState() se disparará por el listener onAuthStateChange
+    });
+
+    // --- Handler de Cierre de Sesión ---
+    logoutBtn.addEventListener('click', async () => {
+        await window.supabase.auth.signOut();
+    });
+
+    // --- Handlers de Formularios de Perfil ---
+    formDatos.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const user = (await window.supabase.auth.getUser()).data.user;
+        if (!user) return;
+
+        const { error } = await window.supabase
+            .from('profiles')
+            .update({
+                nombre: document.getElementById('per-nombre').value.trim(),
+                apellido: document.getElementById('per-apellido').value.trim(),
+                dni: document.getElementById('per-dni').value.trim(),
+                updated_at: new Date()
+            })
+            .eq('id', user.id);
+
+        if (error) {
+            alert("Error al actualizar datos.");
         } else {
-            loginError.textContent = 'Correo o contraseña incorrectos.';
+            datosSuccess.textContent = 'Datos actualizados correctamente.';
+            setTimeout(() => datosSuccess.textContent = '', 3000);
         }
     });
 
-    // --- Logout Handler ---
-    logoutBtn.addEventListener('click', () => {
-        localStorage.removeItem('oleActiveUser');
-        checkAuthState();
-    });
-
-    // --- Form Handlers ---
-    formDatos.addEventListener('submit', (e) => {
+    formDomicilio.addEventListener('submit', async (e) => {
         e.preventDefault();
-        updateUserProfile('datosPersonales', {
-            nombre: document.getElementById('per-nombre').value.trim(),
-            apellido: document.getElementById('per-apellido').value.trim(),
-            dni: document.getElementById('per-dni').value.trim()
-        });
-        datosSuccess.textContent = 'Datos actualizados correctamente.';
-        setTimeout(() => datosSuccess.textContent = '', 3000);
-    });
+        const user = (await window.supabase.auth.getUser()).data.user;
+        if (!user) return;
 
-    formDomicilio.addEventListener('submit', (e) => {
-        e.preventDefault();
-        updateUserProfile('domicilio', {
-            direccion: document.getElementById('dom-direccion').value.trim(),
-            provincia: document.getElementById('dom-provincia').value.trim(),
-            localidad: document.getElementById('dom-localidad').value.trim(),
-            cp: document.getElementById('dom-cp').value.trim()
-        });
-        domSuccess.textContent = 'Domicilio actualizado correctamente.';
-        setTimeout(() => domSuccess.textContent = '', 3000);
-    });
+        const { error } = await window.supabase
+            .from('profiles')
+            .update({
+                direccion: document.getElementById('dom-direccion').value.trim(),
+                provincia: document.getElementById('dom-provincia').value.trim(),
+                localidad: document.getElementById('dom-localidad').value.trim(),
+                cp: document.getElementById('dom-cp').value.trim(),
+                updated_at: new Date()
+            })
+            .eq('id', user.id);
 
-    // --- Core Functions ---
-    function updateUserProfile(key, data) {
-        let activeUser = JSON.parse(localStorage.getItem('oleActiveUser'));
-        if(!activeUser) return;
-
-        activeUser[key] = data;
-        localStorage.setItem('oleActiveUser', JSON.stringify(activeUser));
-
-        // Update in users array
-        let users = JSON.parse(localStorage.getItem('oleUsers')) || [];
-        const index = users.findIndex(u => u.email === activeUser.email);
-        if(index !== -1) {
-            users[index] = activeUser;
-            localStorage.setItem('oleUsers', JSON.stringify(users));
+        if (error) {
+            alert("Error al actualizar domicilio.");
+        } else {
+            domSuccess.textContent = 'Domicilio actualizado correctamente.';
+            setTimeout(() => domSuccess.textContent = '', 3000);
         }
-    }
+    });
 
-    function checkAuthState() {
-        const activeUser = JSON.parse(localStorage.getItem('oleActiveUser'));
+    // --- Funciones Core ---
+
+    async function checkAuthState() {
+        const { data: { session } } = await window.supabase.auth.getSession();
         
-        if (activeUser) {
-            // User is logged in
+        if (session) {
+            const user = session.user;
             authSection.style.display = 'none';
             profileSection.style.display = 'block';
             
-            // Populate profile header
-            document.getElementById('profile-email').textContent = activeUser.email;
-            document.getElementById('profile-avatar').src = `avatars/${activeUser.avatar}`;
+            profileEmailDisplay.textContent = user.email;
 
-            // Ensure profile data objects exist (for older accounts)
-            if(!activeUser.datosPersonales) activeUser.datosPersonales = { nombre: '', apellido: '', dni: '' };
-            if(!activeUser.domicilio) activeUser.domicilio = { direccion: '', provincia: '', localidad: '', cp: '' };
+            // Cargar datos del perfil
+            const { data: profile } = await window.supabase
+                .from('profiles')
+                .select('*')
+                .eq('id', user.id)
+                .single();
 
-            // Populate forms
-            document.getElementById('per-nombre').value = activeUser.datosPersonales.nombre || '';
-            document.getElementById('per-apellido').value = activeUser.datosPersonales.apellido || '';
-            document.getElementById('per-dni').value = activeUser.datosPersonales.dni || '';
+            if (profile) {
+                profileAvatarDisplay.src = `avatars/${profile.avatar_url || 'avatar_1.png'}`;
+                document.getElementById('per-nombre').value = profile.nombre || '';
+                document.getElementById('per-apellido').value = profile.apellido || '';
+                document.getElementById('per-dni').value = profile.dni || '';
+                document.getElementById('dom-direccion').value = profile.direccion || '';
+                document.getElementById('dom-provincia').value = profile.provincia || '';
+                document.getElementById('dom-localidad').value = profile.localidad || '';
+                document.getElementById('dom-cp').value = profile.cp || '';
+            }
 
-            document.getElementById('dom-direccion').value = activeUser.domicilio.direccion || '';
-            document.getElementById('dom-provincia').value = activeUser.domicilio.provincia || '';
-            document.getElementById('dom-localidad').value = activeUser.domicilio.localidad || '';
-            document.getElementById('dom-cp').value = activeUser.domicilio.cp || '';
+            // CARGAR PEDIDOS REALES
+            loadOrders(user.id);
             
-            // Reset to first tab
-            tabBtns[0].click();
-
         } else {
-            // User is not logged in
             profileSection.style.display = 'none';
             authSection.style.display = 'block';
             loginBox.style.display = 'block';
             registerBox.style.display = 'none';
-            
-            // Clear forms
             loginForm.reset();
             registerForm.reset();
             clearErrors();
         }
     }
 
+    async function loadOrders(userId) {
+        const ordersContainer = document.querySelector('.orders-list');
+        const shippingContainer = document.querySelector('.shipping-list');
+        if (!ordersContainer) return;
+
+        const { data: orders, error } = await window.supabase
+            .from('orders')
+            .select('*')
+            .eq('user_id', userId)
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            console.error("Error al cargar pedidos:", error);
+            return;
+        }
+
+        if (orders.length === 0) {
+            ordersContainer.innerHTML = '<p style="text-align:center; padding: 20px; opacity: 0.5;">Aún no tienes pedidos.</p>';
+            if (shippingContainer) shippingContainer.innerHTML = '<p style="text-align:center; padding: 20px; opacity: 0.5;">No hay envíos activos.</p>';
+            return;
+        }
+
+        // Renderizar en la pestaña "Mis Pedidos"
+        ordersContainer.innerHTML = '';
+        orders.forEach(order => {
+            const date = new Date(order.created_at).toLocaleDateString();
+            const itemsHtml = order.items.map(item => `<p>${item.quantity}x ${item.name} (${item.variant})</p>`).join('');
+            
+            const orderHtml = `
+                <div class="order-card">
+                    <div class="order-header">
+                        <span class="order-id">#${order.id.slice(0, 8).toUpperCase()}</span>
+                        <span class="order-date">${date}</span>
+                    </div>
+                    <div class="order-body">
+                        ${itemsHtml}
+                    </div>
+                    <div class="order-footer">
+                        <span class="order-total">$${order.total.toLocaleString('es-AR')} ARS</span>
+                        <span class="order-status ${getStatusClass(order.status)}">${order.status.toUpperCase()}</span>
+                    </div>
+                </div>
+            `;
+            ordersContainer.insertAdjacentHTML('beforeend', orderHtml);
+        });
+
+        // Renderizar en la pestaña "Envíos" (solo los que tengan tracking o estén en curso)
+        if (shippingContainer) {
+            shippingContainer.innerHTML = '';
+            orders.filter(o => o.status !== 'cancelado').forEach(order => {
+                const shippingHtml = `
+                    <div class="shipping-card">
+                        <div class="shipping-header">
+                            <h4>Pedido #${order.id.slice(0, 8).toUpperCase()}</h4>
+                            <span class="shipping-status ${getStatusClass(order.status)}">${order.status.toUpperCase()}</span>
+                        </div>
+                        <div class="shipping-timeline">
+                            <div class="timeline-step ${order.status !== 'pendiente' ? 'done' : 'current'}">Preparando envío</div>
+                            <div class="timeline-step ${['en camino', 'entregado'].includes(order.status.toLowerCase()) ? 'done' : ''}">Entregado al correo</div>
+                            <div class="timeline-step ${order.status.toLowerCase() === 'en camino' ? 'current' : (order.status.toLowerCase() === 'entregado' ? 'done' : '')}">En camino</div>
+                            <div class="timeline-step ${order.status.toLowerCase() === 'entregado' ? 'done' : ''}">Entregado</div>
+                        </div>
+                        <div class="tracking-info">
+                            <p>Código de seguimiento:</p>
+                            <strong>${order.tracking_code || 'Pendiente de asignación'}</strong>
+                            ${order.tracking_code ? `<button class="btn-track" onclick="window.open('https://www.correoargentino.com.ar/formularios/ondeliv', '_blank')">Rastrear envío</button>` : ''}
+                        </div>
+                    </div>
+                `;
+                shippingContainer.insertAdjacentHTML('beforeend', shippingHtml);
+            });
+        }
+    }
+
+    function getStatusClass(status) {
+        status = status.toLowerCase();
+        if (status === 'pagado' || status === 'entregado') return 'status-paid';
+        if (status === 'pendiente') return 'status-pending';
+        if (status === 'en camino') return 'status-transit';
+        return '';
+    }
+
     function clearErrors() {
         loginError.textContent = '';
         regError.textContent = '';
-        datosSuccess.textContent = '';
-        domSuccess.textContent = '';
+        if(datosSuccess) datosSuccess.textContent = '';
+        if(domSuccess) domSuccess.textContent = '';
     }
 });
