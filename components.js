@@ -185,10 +185,11 @@ class WebComponents {
 
             const nombre = profile?.nombre || 'Usuario';
             const avatar = profile?.avatar_url || 'avatar_1.png';
+            const avatarPath = avatar.startsWith('http') ? avatar : `avatars/${avatar}`;
 
             accountBtn.classList.add('user-profile-btn');
             accountBtn.innerHTML = `
-                <img src="avatars/${avatar}" alt="${nombre}" class="user-avatar-header">
+                <img src="${avatarPath}" alt="${nombre}" class="user-avatar-header">
                 <span class="user-greeting-header">Hola, ${nombre}</span>
             `;
         } else {
@@ -202,5 +203,5 @@ class WebComponents {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    new WebComponents();
+    window.WebComponentsInstance = new WebComponents();
 });

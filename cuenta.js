@@ -43,8 +43,97 @@ document.addEventListener('DOMContentLoaded', async () => {
             avatarOptions.forEach(opt => opt.classList.remove('active'));
             option.classList.add('active');
             selectedAvatar = option.dataset.avatar;
+            // Limpiar selección de custom si existe
+            document.getElementById('trigger-upload-reg').classList.remove('active');
         });
     });
+
+    // Custom Avatar Upload (Registration)
+    const regCustomInput = document.getElementById('reg-custom-avatar');
+    const triggerUploadReg = document.getElementById('trigger-upload-reg');
+
+    triggerUploadReg.addEventListener('click', () => regCustomInput.click());
+
+    regCustomInput.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Mostrar preview/feedback
+        triggerUploadReg.classList.add('active');
+        avatarOptions.forEach(opt => opt.classList.remove('active'));
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            triggerUploadReg.innerHTML = `<img src="${e.target.result}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
+        };
+        reader.readAsDataURL(file);
+        
+        // El upload real se hará al momento del registro o se puede hacer ahora
+        // Para simplificar, lo haremos al momento del submit si hay un archivo seleccionado
+    });
+
+    // Custom Avatar Upload (Dashboard)
+    const dashCustomInput = document.getElementById('dash-custom-avatar');
+    const triggerUploadDash = document.getElementById('trigger-upload-dash');
+
+    if (triggerUploadDash) {
+        triggerUploadDash.addEventListener('click', () => dashCustomInput.click());
+    }
+
+    if (dashCustomInput) {
+        dashCustomInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const user = (await window.supabase.auth.getUser()).data.user;
+            if (!user) return;
+
+            await uploadAndUpdateAvatar(file, user.id);
+        });
+    }
+
+    async function uploadAndUpdateAvatar(file, userId) {
+        const avatarWrapper = document.querySelector('.avatar-wrapper');
+        avatarWrapper.classList.add('avatar-uploading');
+
+        try {
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${userId}-${Math.random()}.${fileExt}`;
+            const filePath = `${fileName}`;
+
+            const { error: uploadError } = await window.supabase.storage
+                .from('user-avatars')
+                .upload(filePath, file);
+
+            if (uploadError) throw uploadError;
+
+            const { data: { publicUrl } } = window.supabase.storage
+                .from('user-avatars')
+                .getPublicUrl(filePath);
+
+            const { error: updateError } = await window.supabase
+                .from('profiles')
+                .update({ avatar_url: publicUrl })
+                .eq('id', userId);
+
+            if (updateError) throw updateError;
+
+            // Actualizar UI
+            profileAvatarDisplay.src = publicUrl;
+            // También actualizar header si WebComponents está disponible
+            if (window.WebComponentsInstance) {
+                window.WebComponentsInstance.updateUserAuthStatus();
+            } else {
+                location.reload(); // Fallback
+            }
+
+        } catch (error) {
+            console.error("Error subiendo avatar:", error);
+            alert("No se pudo subir la imagen. Asegúrate de que el bucket 'user-avatars' sea público en Supabase.");
+        } finally {
+            avatarWrapper.classList.remove('avatar-uploading');
+        }
+    }
 
     // --- Navegación por Pestañas ---
     tabBtns.forEach(btn => {
@@ -106,6 +195,30 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         if (data.user) {
+            let finalAvatar = selectedAvatar;
+
+            // Si hay un archivo custom seleccionado en el registro
+            const customFile = regCustomInput.files[0];
+            if (customFile) {
+                try {
+                    const fileExt = customFile.name.split('.').pop();
+                    const fileName = `${data.user.id}-${Math.random()}.${fileExt}`;
+                    
+                    const { error: uploadError } = await window.supabase.storage
+                        .from('user-avatars')
+                        .upload(fileName, customFile);
+                    
+                    if (!uploadError) {
+                        const { data: { publicUrl } } = window.supabase.storage
+                            .from('user-avatars')
+                            .getPublicUrl(fileName);
+                        finalAvatar = publicUrl;
+                    }
+                } catch (err) {
+                    console.error("Error subiendo avatar en registro:", err);
+                }
+            }
+
             // Crear el perfil inicial en la tabla 'profiles'
             const { error: profileError } = await window.supabase
                 .from('profiles')
@@ -113,7 +226,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     { 
                         id: data.user.id, 
                         email: email, 
-                        avatar_url: selectedAvatar 
+                        avatar_url: finalAvatar 
                     }
                 ]);
 
@@ -218,7 +331,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 .single();
 
             if (profile) {
-                profileAvatarDisplay.src = `avatars/${profile.avatar_url || 'avatar_1.png'}`;
+                const avatar = profile.avatar_url || 'avatar_1.png';
+                profileAvatarDisplay.src = avatar.startsWith('http') ? avatar : `avatars/${avatar}`;
+                
                 document.getElementById('per-nombre').value = profile.nombre || '';
                 document.getElementById('per-apellido').value = profile.apellido || '';
                 document.getElementById('per-dni').value = profile.dni || '';

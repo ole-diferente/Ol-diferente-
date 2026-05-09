@@ -520,3 +520,92 @@ body.page-standard::before {
         text-align: center;
     }
 }
+
+/* Custom Avatar Upload Styles */
+.custom-avatar-upload {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px dashed var(--accent-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(212, 175, 55, 0.05);
+    color: var(--accent-color);
+}
+
+.custom-avatar-upload:hover {
+    background: rgba(212, 175, 55, 0.15);
+    transform: scale(1.1);
+}
+
+.custom-avatar-upload i {
+    width: 20px;
+    height: 20px;
+}
+
+.custom-avatar-upload span {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.avatar-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.avatar-wrapper #profile-avatar {
+    margin-bottom: 0;
+}
+
+.btn-change-avatar {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    border: none;
+    color: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-change-avatar:hover {
+    transform: scale(1.1);
+    background: #e6c15c;
+}
+
+.avatar-uploading {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.avatar-uploading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+    border: 3px solid var(--accent-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

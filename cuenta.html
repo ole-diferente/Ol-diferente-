@@ -54,7 +54,7 @@
                         </div>
                         
                         <div class="avatar-selection">
-                            <label>Elige tu Avatar</label>
+                            <label>Elige tu Avatar o sube una foto</label>
                             <div class="avatar-grid">
                                 <img src="avatars/avatar_1.png" class="avatar-option active" data-avatar="avatar_1.png" alt="Avatar 1">
                                 <img src="avatars/avatar_2.png" class="avatar-option" data-avatar="avatar_2.png" alt="Avatar 2">
@@ -66,6 +66,12 @@
                                 <img src="avatars/avatar_8.png" class="avatar-option" data-avatar="avatar_8.png" alt="Avatar 8">
                                 <img src="avatars/avatar_9.png" class="avatar-option" data-avatar="avatar_9.png" alt="Avatar 9">
                                 <img src="avatars/avatar_10.png" class="avatar-option" data-avatar="avatar_10.png" alt="Avatar 10">
+                                
+                                <div class="custom-avatar-upload" id="trigger-upload-reg">
+                                    <i data-lucide="plus"></i>
+                                    <span>Subir</span>
+                                    <input type="file" id="reg-custom-avatar" accept="image/*" style="display: none;">
+                                </div>
                             </div>
                         </div>
 
@@ -82,7 +88,13 @@
                     <!-- Sidebar -->
                     <aside class="dashboard-sidebar auth-box">
                         <div class="profile-info-mini">
-                            <img id="profile-avatar" src="avatars/avatar_1.png" alt="Mi Avatar">
+                            <div class="avatar-wrapper">
+                                <img id="profile-avatar" src="avatars/avatar_1.png" alt="Mi Avatar">
+                                <button class="btn-change-avatar" id="trigger-upload-dash" title="Cambiar foto">
+                                    <i data-lucide="camera"></i>
+                                    <input type="file" id="dash-custom-avatar" accept="image/*" style="display: none;">
+                                </button>
+                            </div>
                             <h3 id="profile-email">usuario@correo.com</h3>
                         </div>
                         <nav class="dashboard-tabs">
