@@ -639,24 +639,27 @@ body.home-page::before {
     }
 
     .photo-column {
-        height: 500px; 
+        height: auto; 
         width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
         order: 1;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        padding-top: 20px;
     }
 
     .polaroid {
-        width: 180px; 
-        padding: 8px 8px 25px 8px;
-        position: absolute;
+        width: 240px; 
+        padding: 10px 10px 30px 10px;
+        position: relative;
+        margin-bottom: -50px; /* Slight overlap effect */
+        box-shadow: 0 10px 25px rgba(0,0,0,0.4);
     }
 
-    .pic1 { top: 20px; left: 15%; transform: rotate(-8deg); z-index: 1; }
-    .pic2 { top: 60px; left: 50%; transform: rotate(5deg); z-index: 2; }
-    .pic3 { top: 160px; left: 25%; transform: rotate(-3deg); z-index: 3; }
+    .pic1 { top: auto; left: auto; transform: rotate(-5deg); z-index: 3; }
+    .pic2 { top: auto; left: auto; transform: rotate(4deg); z-index: 2; }
+    .pic3 { top: auto; left: auto; transform: rotate(-2deg); z-index: 1; margin-bottom: 0; }
 
     .text-column {
         order: 2;
