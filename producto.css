@@ -248,13 +248,61 @@
     color: var(--accent-color);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
+    .container {
+        padding: 100px 15px 40px;
+    }
+
     .product-detail-container {
         grid-template-columns: 1fr;
-        padding: 30px;
-        margin-top: 100px;
+        padding: 20px;
+        margin-top: 20px;
+        gap: 30px;
+        border-radius: 20px;
     }
+
     .detail-title {
-        font-size: 36px;
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .detail-description {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 25px;
+    }
+
+    .detail-price {
+        font-size: 24px !important;
+    }
+
+    .ingredients-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .ingredient-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+    }
+
+    .ingredient-name {
+        font-size: 10px;
+    }
+
+    .purchase-controls {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .quantity-selector {
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+
+    .add-to-cart-btn {
+        width: 100%;
+        padding: 15px !important;
     }
 }

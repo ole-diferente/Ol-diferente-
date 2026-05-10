@@ -599,17 +599,99 @@ body.home-page::before {
     opacity: 0.8;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+    header {
+        padding: 1rem 1.5rem;
+    }
+    
+    .logo-img {
+        height: 100px;
+    }
+
+    nav {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Header */
+    .logo-img {
+        height: 80px;
+    }
+
+    /* Hero & Slider */
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .slider-arrow {
+        display: none; /* Hide arrows on mobile for cleaner look */
+    }
+
+    .slider-dots {
+        bottom: 40px;
+    }
+
+    /* Sobre Mí Section */
     .about-container {
         flex-direction: column;
+        padding: 0 15px;
+        gap: 20px;
     }
+
     .photo-column {
-        height: 600px;
+        height: 450px; /* Reduced height for mobile */
         width: 100%;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
+        order: 1;
     }
+
     .polaroid {
-        width: 200px;
+        width: 160px; /* Smaller polaroids */
+        padding: 8px 8px 20px 8px;
+    }
+
+    .pic1 { top: 0; left: 10%; transform: rotate(-5deg); }
+    .pic2 { top: 15%; left: 45%; transform: rotate(3deg); }
+    .pic3 { top: 45%; left: 25%; transform: rotate(-4deg); }
+
+    .text-column {
+        order: 2;
+    }
+
+    .text-box {
+        padding: 25px;
+    }
+
+    .text-box h2 {
+        font-size: 20px;
+    }
+
+    .text-box p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* Quiz Section */
+    #quiz-perfume {
+        padding: 40px 15px;
+    }
+
+    .quiz-container {
+        padding: 25px;
+    }
+
+    .quiz-question {
+        font-size: 1.2rem;
+    }
+
+    .quiz-option {
+        padding: 12px;
+        font-size: 0.9rem;
     }
 }
 

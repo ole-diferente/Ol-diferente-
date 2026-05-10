@@ -529,19 +529,70 @@ body.page-standard::before {
 }
 
 @media (max-width: 800px) {
+    .cuenta-main {
+        padding: 100px 15px 60px;
+    }
+
     .dashboard-layout {
         flex-direction: column;
+        gap: 20px;
     }
+
     .dashboard-sidebar {
         flex: none;
+        padding: 0;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 20px;
     }
+
     .dashboard-tabs {
         flex-direction: row;
-        flex-wrap: wrap;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        scrollbar-width: none; /* Hide scrollbar for cleaner look */
+        -ms-overflow-style: none;
+        gap: 8px;
     }
+
+    .dashboard-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
     .tab-btn {
-        flex: 1;
-        text-align: center;
+        flex: 0 0 auto;
+        white-space: nowrap;
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+
+    .input-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .profile-info-mini {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-align: left;
+    }
+
+    .profile-info-mini img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 0;
+    }
+
+    .profile-info-mini h3 {
+        font-size: 13px;
+    }
+
+    /* Orders Mobile */
+    .order-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
     }
 }
 
