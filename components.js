@@ -125,17 +125,18 @@ class WebComponents {
                     right: -100%;
                     width: 100%;
                     height: 100vh;
-                    background: rgba(10, 17, 40, 0.98); /* Deep midnight with slight transparency */
-                    backdrop-filter: blur(20px);
-                    display: flex !important; /* Force flex display */
+                    background: rgba(10, 17, 40, 0.98);
+                    backdrop-filter: blur(25px);
+                    display: flex !important;
                     flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding: 100px 40px;
                     transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
                     z-index: 2000;
                     opacity: 0;
                     visibility: hidden;
-                    padding-top: 80px;
+                    overflow-y: auto;
                 }
                 nav#main-nav.active { 
                     right: 0; 
@@ -143,49 +144,68 @@ class WebComponents {
                     visibility: visible;
                 }
                 nav#main-nav a { 
-                    font-size: 1.5rem; 
-                    margin: 0.8rem 0; 
-                    width: 100%;
-                    text-align: center;
+                    font-size: 1.1rem; 
+                    margin: 12px 0; 
+                    width: auto;
+                    text-align: left;
+                    font-weight: 300;
+                    letter-spacing: 2px;
+                    text-transform: uppercase;
+                    color: var(--text-primary);
+                    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+                    padding-bottom: 8px;
+                    display: block;
                 }
                 
+                nav#main-nav a.active {
+                    color: var(--accent-color);
+                    border-bottom-color: var(--accent-color);
+                }
+
                 /* Mobile Dropdown Adjustments */
+                .dropdown { width: 100%; }
                 .dropdown-content { 
                     position: static !important;
                     transform: none !important;
                     box-shadow: none !important;
                     background: transparent !important;
                     border: none !important;
-                    display: none; /* Hidden by default, toggled by JS */
+                    display: none;
                     width: 100%;
-                    padding: 0 !important;
-                    text-align: center;
+                    padding: 10px 0 10px 20px !important;
+                    text-align: left;
                 }
                 .dropdown.active .dropdown-content {
                     display: block !important;
                 }
                 .dropdown-content a {
-                    font-size: 1.1rem !important;
-                    opacity: 0.8;
-                    margin: 0.3rem 0 !important;
+                    font-size: 0.9rem !important;
+                    opacity: 0.7;
+                    margin: 8px 0 !important;
+                    text-transform: capitalize;
+                    letter-spacing: 1px;
+                    border-bottom: none;
                 }
+                .has-submenu { width: 100%; }
                 .has-submenu .submenu {
                     position: static !important;
                     display: none;
                     background: transparent !important;
                     border: none !important;
                     box-shadow: none !important;
-                    padding: 0 !important;
+                    padding: 5px 0 5px 20px !important;
                 }
                 .has-submenu.active .submenu {
                     display: block !important;
                 }
                 .has-submenu > a::after {
-                    right: 20% !important;
-                    transform: translateY(-50%) rotate(90deg);
+                    right: 0 !important;
+                    font-size: 1.2rem;
+                    opacity: 0.5;
+                    transition: transform 0.3s ease;
                 }
                 .has-submenu.active > a::after {
-                    transform: translateY(-50%) rotate(-90deg);
+                    transform: translateY(-50%) rotate(90deg);
                 }
             }
             .quiz-section {
@@ -196,7 +216,7 @@ class WebComponents {
                 width: 100%;
                 z-index: 2;
                 border-top: 1px solid rgba(212, 175, 55, 0.2);
-                margin-bottom: 200px; /* Even more margin */
+                margin-bottom: 200px;
                 clear: both;
             }
             footer { 
