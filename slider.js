@@ -102,6 +102,36 @@ document.addEventListener('DOMContentLoaded', () => {
     initDots();
     initVideos();
 
+    // --- Touch/Swipe Support ---
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeThreshold = 50; // Minimum distance in px to trigger a swipe
+
+    const handleGesture = () => {
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swiped left -> Next slide
+                nextSlide();
+            } else {
+                // Swiped right -> Previous slide
+                prevSlide();
+            }
+        }
+    };
+
+    const sliderContainer = document.getElementById('hero-slider');
+    if (sliderContainer) {
+        sliderContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        sliderContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleGesture();
+        }, { passive: true });
+    }
+
     // Re-initialize on resize to handle slide count changes
     let resizeTimer;
     window.addEventListener('resize', () => {
