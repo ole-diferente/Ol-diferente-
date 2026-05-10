@@ -109,28 +109,38 @@ class WebComponents {
         const style = document.createElement('style');
         style.textContent = `
             nav a.active { color: var(--accent-color) !important; font-weight: 600; }
-            .mobile-menu-toggle { display: none; cursor: pointer; color: var(--text-primary); }
+            .mobile-menu-toggle { 
+                display: none; 
+                cursor: pointer; 
+                color: var(--text-primary); 
+                font-size: 2rem;
+                padding: 10px;
+                z-index: 2100;
+            }
             @media (max-width: 1024px) {
-                .mobile-menu-toggle { display: block; z-index: 2001; }
+                .mobile-menu-toggle { display: block; }
                 nav#main-nav {
                     position: fixed;
                     top: 0;
                     right: -100%;
-                    width: 80%;
+                    width: 100%; /* Full width on mobile */
                     height: 100vh;
                     background: var(--card-bg);
-                    backdrop-filter: blur(20px);
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
                     transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
                     z-index: 2000;
-                    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+                    opacity: 0;
+                    visibility: hidden;
                 }
-                nav#main-nav.active { right: 0; }
-                nav#main-nav a { font-size: 1.5rem; margin: 1rem 0; }
-                .dropdown-content { position: static; box-shadow: none; background: transparent; padding: 0; text-align: center; display: none; }
-                .dropdown:hover .dropdown-content { display: block; }
+                nav#main-nav.active { 
+                    right: 0; 
+                    opacity: 1;
+                    visibility: visible;
+                }
+                nav#main-nav a { font-size: 1.8rem; margin: 1rem 0; }
+                .dropdown-content { display: none !important; } /* Hide complicated menus on mobile */
             }
             footer { padding: 60px 20px; text-align: center; border-top: 1px solid var(--border-color); margin-top: 80px; }
             .footer-social { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
@@ -148,14 +158,6 @@ class WebComponents {
             <div class="footer-content" style="padding: 40px 0;">
                 <h2 class="motivational-text" style="margin-bottom: 15px;">Despierta tus sentidos con las mejores fragancias</h2>
                 <p class="slogan" style="margin-bottom: 25px;">Perfumes originales - By Luis Álvarez</p>
-                <div class="footer-social">
-                    <a href="https://www.instagram.com/olediferente" target="_blank" aria-label="Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                    </a>
-                    <a href="https://www.tiktok.com/@olediferente" target="_blank" aria-label="TikTok">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-                    </a>
-                </div>
                 <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.5;">© 2026 Olé Diferente. Todos los derechos reservados.</p>
             </div>
         `;

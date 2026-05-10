@@ -644,20 +644,24 @@ body.home-page::before {
     }
 
     .photo-column {
-        height: 450px; /* Reduced height for mobile */
+        height: 500px; 
         width: 100%;
         margin-bottom: 20px;
         order: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .polaroid {
-        width: 160px; /* Smaller polaroids */
-        padding: 8px 8px 20px 8px;
+        width: 180px; 
+        padding: 8px 8px 25px 8px;
+        position: absolute;
     }
 
-    .pic1 { top: 0; left: 10%; transform: rotate(-5deg); }
-    .pic2 { top: 15%; left: 45%; transform: rotate(3deg); }
-    .pic3 { top: 45%; left: 25%; transform: rotate(-4deg); }
+    .pic1 { top: 20px; left: 15%; transform: rotate(-8deg); z-index: 1; }
+    .pic2 { top: 60px; left: 50%; transform: rotate(5deg); z-index: 2; }
+    .pic3 { top: 160px; left: 25%; transform: rotate(-3deg); z-index: 3; }
 
     .text-column {
         order: 2;
