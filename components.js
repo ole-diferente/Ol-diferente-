@@ -123,24 +123,70 @@ class WebComponents {
                     position: fixed;
                     top: 0;
                     right: -100%;
-                    width: 100%; /* Full width on mobile */
+                    width: 100%;
                     height: 100vh;
-                    background: var(--card-bg);
+                    background: rgba(10, 17, 40, 0.98); /* Deep midnight with slight transparency */
+                    backdrop-filter: blur(20px);
+                    display: flex !important; /* Force flex display */
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
-                    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                    transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
                     z-index: 2000;
                     opacity: 0;
                     visibility: hidden;
+                    padding-top: 80px;
                 }
                 nav#main-nav.active { 
                     right: 0; 
                     opacity: 1;
                     visibility: visible;
                 }
-                nav#main-nav a { font-size: 1.8rem; margin: 1rem 0; }
-                .dropdown-content { display: none !important; } /* Hide complicated menus on mobile */
+                nav#main-nav a { 
+                    font-size: 1.5rem; 
+                    margin: 0.8rem 0; 
+                    width: 100%;
+                    text-align: center;
+                }
+                
+                /* Mobile Dropdown Adjustments */
+                .dropdown-content { 
+                    position: static !important;
+                    transform: none !important;
+                    box-shadow: none !important;
+                    background: transparent !important;
+                    border: none !important;
+                    display: none; /* Hidden by default, toggled by JS */
+                    width: 100%;
+                    padding: 0 !important;
+                    text-align: center;
+                }
+                .dropdown.active .dropdown-content {
+                    display: block !important;
+                }
+                .dropdown-content a {
+                    font-size: 1.1rem !important;
+                    opacity: 0.8;
+                    margin: 0.3rem 0 !important;
+                }
+                .has-submenu .submenu {
+                    position: static !important;
+                    display: none;
+                    background: transparent !important;
+                    border: none !important;
+                    box-shadow: none !important;
+                    padding: 0 !important;
+                }
+                .has-submenu.active .submenu {
+                    display: block !important;
+                }
+                .has-submenu > a::after {
+                    right: 20% !important;
+                    transform: translateY(-50%) rotate(90deg);
+                }
+                .has-submenu.active > a::after {
+                    transform: translateY(-50%) rotate(-90deg);
+                }
             }
             .quiz-section {
                 padding: 120px 20px;
@@ -189,15 +235,54 @@ class WebComponents {
         const nav = document.getElementById('main-nav');
         
         if (toggle && nav) {
-            toggle.addEventListener('click', () => {
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
                 nav.classList.toggle('active');
                 const icon = toggle.querySelector('i');
                 if (nav.classList.contains('active')) {
                     icon.setAttribute('data-lucide', 'x');
+                    document.body.style.overflow = 'hidden'; // Prevent scroll when menu is open
                 } else {
                     icon.setAttribute('data-lucide', 'menu');
+                    document.body.style.overflow = '';
                 }
                 lucide.createIcons();
+            });
+
+            // Handle dropdowns on mobile
+            const dropdowns = nav.querySelectorAll('.dropdown, .has-submenu');
+            dropdowns.forEach(dropdown => {
+                const link = dropdown.querySelector('a');
+                link.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 1024) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        dropdown.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Close menu when clicking a direct link
+            const navLinks = nav.querySelectorAll('a:not([href="#"])');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    nav.classList.remove('active');
+                    document.body.style.overflow = '';
+                    const icon = toggle.querySelector('i');
+                    icon.setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (nav.classList.contains('active') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+                    nav.classList.remove('active');
+                    document.body.style.overflow = '';
+                    const icon = toggle.querySelector('i');
+                    icon.setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                }
             });
         }
     }

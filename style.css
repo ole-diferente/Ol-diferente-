@@ -87,7 +87,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 3;
+    z-index: 1000;
 }
 
 .logo {
@@ -451,7 +451,7 @@ footer {
         padding: 1.5rem 2rem;
     }
     nav {
-        display: none; /* Hide for simplicity on small screens, or implement burger menu later */
+        display: flex; /* Ensure it stays flex but will be handled by components.js for mobile */
     }
     .bg-text {
         font-size: 15vw;
