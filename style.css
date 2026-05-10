@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     /* Light Mode Variables */
     --bg-gradient: linear-gradient(135deg, #FFE5D9 0%, #E6E6FA 100%); /* Soft peach to ethereal lavender */
@@ -652,3 +656,25 @@ body.home-page::before {
         display: none; /* Hide name on mobile to save space */
     }
 }
+
+/* --- Animaciones de Entrada (Fade-in Reveal) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Retrasos escalonados */
+.reveal-delay-1 { transition-delay: 150ms; }
+.reveal-delay-2 { transition-delay: 300ms; }
+.reveal-delay-3 { transition-delay: 450ms; }
+.reveal-delay-4 { transition-delay: 600ms; }
+.reveal-delay-5 { transition-delay: 750ms; }
+

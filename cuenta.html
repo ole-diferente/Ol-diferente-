@@ -90,9 +90,12 @@
                         <div class="profile-info-mini">
                             <div class="avatar-wrapper">
                                 <img id="profile-avatar" src="avatars/avatar_1.png" alt="Mi Avatar">
-                                <button class="btn-change-avatar" id="trigger-upload-dash" title="Cambiar foto">
+                                <button class="btn-change-avatar" id="trigger-upload-dash" title="Subir foto propia">
                                     <i data-lucide="camera"></i>
                                     <input type="file" id="dash-custom-avatar" accept="image/*" style="display: none;">
+                                </button>
+                                <button class="btn-change-avatar" id="btn-open-avatar-editor" title="Elegir avatar predefinido" style="left: 5px; right: auto;">
+                                    <i data-lucide="pencil"></i>
                                 </button>
                             </div>
                             <h3 id="profile-email">usuario@correo.com</h3>
@@ -111,6 +114,24 @@
                         <!-- Tab: Datos Personales -->
                         <div id="tab-datos" class="tab-pane active">
                             <h2>DATOS PERSONALES</h2>
+                            
+                            <div id="avatar-editor-dash" style="display: none; margin-bottom: 25px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid var(--accent-color);">
+                                <label style="display: block; margin-bottom: 15px; font-size: 14px; opacity: 0.8;">Elegí un nuevo avatar predefinido</label>
+                                <div class="avatar-grid" style="grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 15px;">
+                                    <img src="avatars/avatar_1.png" class="avatar-option-dash" data-avatar="avatar_1.png" alt="Avatar 1">
+                                    <img src="avatars/avatar_2.png" class="avatar-option-dash" data-avatar="avatar_2.png" alt="Avatar 2">
+                                    <img src="avatars/avatar_3.png" class="avatar-option-dash" data-avatar="avatar_3.png" alt="Avatar 3">
+                                    <img src="avatars/avatar_4.png" class="avatar-option-dash" data-avatar="avatar_4.png" alt="Avatar 4">
+                                    <img src="avatars/avatar_5.png" class="avatar-option-dash" data-avatar="avatar_5.png" alt="Avatar 5">
+                                    <img src="avatars/avatar_6.png" class="avatar-option-dash" data-avatar="avatar_6.png" alt="Avatar 6">
+                                    <img src="avatars/avatar_7.png" class="avatar-option-dash" data-avatar="avatar_7.png" alt="Avatar 7">
+                                    <img src="avatars/avatar_8.png" class="avatar-option-dash" data-avatar="avatar_8.png" alt="Avatar 8">
+                                    <img src="avatars/avatar_9.png" class="avatar-option-dash" data-avatar="avatar_9.png" alt="Avatar 9">
+                                    <img src="avatars/avatar_10.png" class="avatar-option-dash" data-avatar="avatar_10.png" alt="Avatar 10">
+                                </div>
+                                <button type="button" id="btn-close-avatar-editor" style="background: transparent; border: none; color: var(--text-secondary); text-decoration: underline; font-size: 12px; cursor: pointer;">Cerrar Editor</button>
+                            </div>
+                            
                             <form id="form-datos">
                                 <div class="input-row">
                                     <div class="input-group">
@@ -142,11 +163,15 @@
                                 <div class="input-row">
                                     <div class="input-group">
                                         <label for="dom-provincia">Provincia</label>
-                                        <input type="text" id="dom-provincia">
+                                        <select id="dom-provincia" required>
+                                            <option value="" disabled selected>Seleccioná tu provincia</option>
+                                        </select>
                                     </div>
                                     <div class="input-group">
                                         <label for="dom-localidad">Localidad</label>
-                                        <input type="text" id="dom-localidad">
+                                        <select id="dom-localidad" required disabled>
+                                            <option value="" disabled selected>Seleccioná tu localidad</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="input-group" style="width: 50%;">

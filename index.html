@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="quiz.css">
 </head>
 <body class="home-page">
     <!-- Background Text Removed -->
@@ -27,7 +28,7 @@
         <!-- Slide 1 -->
         <div class="slide active">
             <video autoplay muted playsinline class="hero-video">
-                <source src="VIDEO WEB.mp4" type="video/mp4">
+                <source src="Video web 1.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
         </div>
@@ -66,13 +67,13 @@
         <div class="about-container">
             <!-- Columna de Fotos -->
             <div class="photo-column">
-                <div class="polaroid pic1">
+                <div class="polaroid pic1 reveal">
                     <img src="luis 1.jpeg" alt="Luis Alvarez 1">
                 </div>
-                <div class="polaroid pic2">
+                <div class="polaroid pic2 reveal reveal-delay-1">
                     <img src="luis 2.jpeg" alt="Luis Alvarez 2">
                 </div>
-                <div class="polaroid pic3">
+                <div class="polaroid pic3 reveal reveal-delay-2">
                     <img src="luis 3.jpeg" alt="Luis Alvarez 3">
                 </div>
             </div>
@@ -80,23 +81,47 @@
             <!-- Columna de Textos -->
             <div class="text-column">
                 <!-- Caja 1 -->
-                <div class="text-box">
+                <div class="text-box reveal reveal-delay-1">
                     <h2>SOBRE MÍ</h2>
                     <p>Bienvenidos a Olé Diferente. Soy Luis Álvarez, oriundo de la ciudad de Las Flores, en la provincia de Buenos Aires. Este espacio nació de una pasión íntima y profunda por el cautivador mundo de la perfumería. Olé Diferente no es solo una marca; es una invitación personal a descubrir la magia que se esconde detrás de cada gota.</p>
                     <a href="#" class="btn-saber-mas">Saber Más</a>
                 </div>
 
                 <!-- Caja 2 -->
-                <div class="text-box">
+                <div class="text-box reveal reveal-delay-2">
                     <h2>NUESTRA MISIÓN</h2>
                     <p>Acercar a nuestros clientes las mejores y más distinguidas fragancias del mercado a precios verdaderamente accesibles. Queremos democratizar la elegancia y el buen gusto, asegurándonos de que el lujo de llevar un perfume extraordinario no sea un privilegio de pocos. Nos esforzamos para que puedas experimentar aromas únicos con la misma alegría con la que yo lo hago.</p>
                 </div>
 
                 <!-- Caja 3 -->
-                <div class="text-box">
+                <div class="text-box reveal reveal-delay-3">
                     <h2>LA ESENCIA</h2>
                     <blockquote>"El perfume es la llave invisible de nuestros recuerdos; un eco silencioso que envuelve el alma, define nuestra presencia y deja una huella imborrable mucho tiempo después de habernos ido."</blockquote>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Quiz Olfativo -->
+    <section class="quiz-section reveal" id="quiz-perfume">
+        <div id="quiz-container" class="quiz-wrapper">
+            <div id="quiz-header">
+                <h2>Descubre tu Fragancia Ideal</h2>
+                <p>Responde 3 breves preguntas y encontraremos el aroma perfecto para ti.</p>
+            </div>
+          
+            <div id="quiz-content">
+                <div id="question-container" class="fade-in">
+                    <h3 id="question-text"></h3>
+                    <div id="options-container"></div>
+                </div>
+            </div>
+          
+            <div id="quiz-results" class="hidden fade-in">
+                <h3>Tus Recomendaciones de Olé Diferente</h3>
+                <p>Basado en tu perfil, estas fragancias y decants son ideales para ti:</p>
+                <div id="recommendation-cards"></div>
+                <button class="quiz-btn restart-btn" onclick="iniciarQuiz()">Volver a intentar</button>
             </div>
         </div>
     </section>
@@ -105,5 +130,6 @@
     <script src="components.js"></script>
     <script src="cart.js"></script>
     <script src="slider.js"></script>
+    <script src="quiz.js"></script>
 </body>
 </html>

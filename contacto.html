@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - OLÉ DIFERENTE</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contacto.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body class="contacto-page">
+
+    <div class="fixed-bg">
+        <img src="Luis - Pagina contacto.jpeg" alt="Fondo Contacto">
+        <div class="bg-overlay"></div>
+    </div>
+
+    <header></header>
+
+    <!-- Hero Contacto -->
+    <section class="contacto-hero">
+        <div class="hero-content reveal">
+            <h1>Contacto</h1>
+            <p class="hero-subtitle">Descubrí tu próxima fragancia favorita con Olé Diferente.</p>
+            <p class="hero-description">¿Tenés dudas sobre alguna nota olfativa, querés consultar por stock de nuestros perfumes o necesitás asesoramiento personalizado? Escribinos y te ayudamos a elegir.</p>
+        </div>
+    </section>
+
+    <main class="contacto-main">
+        <div class="contacto-container">
+            <!-- Columna 1: Formulario -->
+            <div class="contacto-form-column reveal">
+                <div class="contact-card">
+                    <h2>Envianos un mensaje</h2>
+                    <form id="contact-form">
+                        <div class="input-group">
+                            <label for="nombre">Nombre completo</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre..." required>
+                        </div>
+                        <div class="input-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="whatsapp">Teléfono / WhatsApp (Opcional)</label>
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="+54 9 ...">
+                        </div>
+                        <div class="input-group">
+                            <label for="asunto">Asunto</label>
+                            <select id="asunto" name="asunto" required>
+                                <option value="" disabled selected>Seleccioná un motivo</option>
+                                <option value="perfumes">Consulta sobre perfumes / fragancias</option>
+                                <option value="decants">Información sobre decants</option>
+                                <option value="pedido">Estado de mi pedido / Envíos</option>
+                                <option value="mayorista">Ventas por mayor / Otras consultas</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" rows="5" placeholder="¡Hola! Me gustaría saber más sobre..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-enviar">
+                            <span>Enviar mensaje</span>
+                            <i data-lucide="send"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Columna 2: Info Directa -->
+            <div class="contacto-info-column reveal reveal-delay-1">
+                <div class="info-card">
+                    <h2>Hablemos</h2>
+                    <p class="info-intro">Si preferís una respuesta más rápida, podés contactarnos directamente por nuestros canales de atención:</p>
+                    
+                    <ul class="contact-list">
+                        <li>
+                            <div class="contact-icon"><i data-lucide="message-circle"></i></div>
+                            <div class="contact-text">
+                                <strong>WhatsApp</strong>
+                                <a href="https://wa.me/5492244462412" target="_blank">+54 9 2244 46-2412</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon"><i data-lucide="mail"></i></div>
+                            <div class="contact-text">
+                                <strong>Email</strong>
+                                <a href="mailto:hola@olediferente.com.ar">hola@olediferente.com.ar</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon"><i data-lucide="map-pin"></i></div>
+                            <div class="contact-text">
+                                <strong>Ubicación</strong>
+                                <span>Las Flores, Provincia de Buenos Aires.</span>
+                                <small>Punto de encuentro o envíos online.</small>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon"><i data-lucide="clock"></i></div>
+                            <div class="contact-text">
+                                <strong>Horarios de atención</strong>
+                                <span>Lun a Vie: 09:00 a 18:00 hs.</span>
+                                <span>Sábados: 09:00 a 13:00 hs.</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="social-box">
+                        <h3>Seguinos en nuestras redes</h3>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/olediferente" target="_blank" aria-label="Instagram">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                            </a>
+                            <a href="https://www.tiktok.com/@olediferente" target="_blank" aria-label="TikTok">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección FAQ -->
+        <section class="contacto-faq reveal">
+            <div class="faq-container">
+                <h2>Preguntas Frecuentes</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>¿Hacen envíos?</h3>
+                        <p>Sí, realizamos envíos a todo el país a través de Correo Argentino y transportes seleccionados. Consultá los costos ingresando tu código postal en el carrito.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>¿Qué son los decants?</h3>
+                        <p>Son muestras de tamaño reducido extraídas directamente del perfume original. Son ideales para probar la fragancia en tu piel antes de invertir en el frasco grande.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>¿Qué medios de pago aceptan?</h3>
+                        <p>Aceptamos efectivo, transferencias bancarias, y todas las tarjetas de crédito y débito a través de plataformas seguras.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer></footer>
+
+    <script src="supabase-config.js"></script>
+    <script src="components.js"></script>
+    <script src="cart.js"></script>
+    <script>
+        document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Nos pondremos en contacto con vos a la brevedad.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>

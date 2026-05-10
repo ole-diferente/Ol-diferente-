@@ -15,6 +15,8 @@ class WebComponents {
         this.setupMobileMenu();
         this.setupAuthListener();
         this.updateUserAuthStatus();
+        this.initScrollEffects();
+        this.setupCustomCursor();
     }
 
     setupTheme() {
@@ -85,9 +87,9 @@ class WebComponents {
                     </div>
                 </div>
                 <a href="tienda.html" class="${currentPage === 'tienda.html' ? 'active' : ''}">TIENDA</a>
-                <a href="#">LOS MÁS PEDIDOS</a>
+                <a href="index.html#quiz-perfume">TU PERFUME IDEAL</a>
                 <a href="#">OFERTAS</a>
-                <a href="#">CONTACTO</a>
+                <a href="contacto.html" class="${currentPage === 'contacto.html' ? 'active' : ''}">CONTACTO</a>
             </nav>
             <div class="actions">
                 <button id="theme-toggle" aria-label="Toggle Theme">
@@ -130,6 +132,10 @@ class WebComponents {
                 .dropdown-content { position: static; box-shadow: none; background: transparent; padding: 0; text-align: center; display: none; }
                 .dropdown:hover .dropdown-content { display: block; }
             }
+            footer { padding: 60px 20px; text-align: center; border-top: 1px solid var(--border-color); margin-top: 80px; }
+            .footer-social { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+            .footer-social a { color: var(--text-primary); opacity: 0.7; transition: 0.3s; }
+            .footer-social a:hover { color: var(--accent-color); opacity: 1; transform: translateY(-3px); }
         `;
         document.head.appendChild(style);
     }
@@ -139,9 +145,21 @@ class WebComponents {
         if (!footer) return;
 
         footer.innerHTML = `
-            <h2 class="motivational-text">Despierta tus sentidos con las mejores fragancias</h2>
-            <p class="slogan">Perfumes originales - By Luis Álvarez</p>
+            <div class="footer-content" style="padding: 40px 0;">
+                <h2 class="motivational-text" style="margin-bottom: 15px;">Despierta tus sentidos con las mejores fragancias</h2>
+                <p class="slogan" style="margin-bottom: 25px;">Perfumes originales - By Luis Álvarez</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/olediferente" target="_blank" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@olediferente" target="_blank" aria-label="TikTok">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+                    </a>
+                </div>
+                <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.5;">© 2026 Olé Diferente. Todos los derechos reservados.</p>
+            </div>
         `;
+        lucide.createIcons();
     }
 
     setupMobileMenu() {
@@ -185,7 +203,7 @@ class WebComponents {
 
             const nombre = profile?.nombre || 'Usuario';
             const avatar = profile?.avatar_url || 'avatar_1.png';
-            const avatarPath = avatar.startsWith('http') ? avatar : `avatars/${avatar}`;
+            const avatarPath = avatar.startsWith('http') || avatar.startsWith('avatars/') ? avatar : `avatars/${avatar}`;
 
             accountBtn.classList.add('user-profile-btn');
             accountBtn.innerHTML = `
@@ -199,6 +217,130 @@ class WebComponents {
                 lucide.createIcons();
             }
         }
+    }
+
+    initScrollEffects() {
+        // --- Revelación suave (Fade-in) ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos existentes y futuros (si se inyectan dinámicamente)
+        const observeElements = () => {
+            const elementsToReveal = document.querySelectorAll('.reveal:not(.revealed)');
+            elementsToReveal.forEach(el => revealObserver.observe(el));
+        };
+
+        observeElements();
+        
+        // Ejecutar de nuevo tras un pequeño delay por si hay inyecciones
+        setTimeout(observeElements, 500);
+    }
+
+    setupCustomCursor() {
+        // No ejecutar en dispositivos móviles o tablets
+        if (window.matchMedia("(max-width: 1024px)").matches) return;
+
+        // Inyectar Estilos dinámicamente
+        const style = document.createElement('style');
+        style.textContent = `
+            body { cursor: none; }
+            a, button, input, select, textarea, .product-card, .btn-saber-mas, .avatar-option, .avatar-option-dash, .size-btn, .add-to-cart-btn {
+                cursor: none !important;
+            }
+            #cursor-punto, #cursor-aura {
+                position: fixed;
+                top: 0; left: 0;
+                pointer-events: none; 
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                z-index: 999999;
+                transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                            height 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                            background-color 0.3s ease, 
+                            border-color 0.3s ease, 
+                            opacity 0.3s ease;
+            }
+            #cursor-punto {
+                width: 8px; height: 8px;
+                background-color: var(--accent-color, #D4AF37);
+                box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            }
+            #cursor-aura {
+                width: 40px; height: 40px;
+                border: 1px solid var(--accent-color, #D4AF37);
+                opacity: 0.6;
+            }
+            .aura-expandida {
+                width: 70px !important;
+                height: 70px !important;
+                background-color: rgba(212, 175, 55, 0.15);
+                border-color: rgba(212, 175, 55, 0.3) !important;
+                opacity: 1 !important;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Inyectar elementos del cursor
+        const punto = document.createElement('div');
+        punto.id = 'cursor-punto';
+        const aura = document.createElement('div');
+        aura.id = 'cursor-aura';
+        document.body.appendChild(punto);
+        document.body.appendChild(aura);
+
+        // Movimiento del cursor
+        window.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            
+            // El punto sigue al mouse al instante
+            punto.style.left = `${clientX}px`;
+            punto.style.top = `${clientY}px`;
+
+            // El aura sigue con un retraso de 40ms para el efecto fluido
+            setTimeout(() => {
+                aura.style.left = `${clientX}px`;
+                aura.style.top = `${clientY}px`;
+            }, 40);
+        });
+
+        // Efecto de expansión en elementos interactivos
+        const setupInteractions = () => {
+            const targets = document.querySelectorAll('a, button, .product-card, .btn-saber-mas, .avatar-option, .avatar-option-dash, input, select, .size-btn, .add-to-cart-btn, .ingredient-item');
+            targets.forEach(el => {
+                // Evitar duplicar listeners
+                if (el.dataset.cursorBound) return;
+                el.dataset.cursorBound = "true";
+
+                el.addEventListener('mouseenter', () => aura.classList.add('aura-expandida'));
+                el.addEventListener('mouseleave', () => aura.classList.remove('aura-expandida'));
+            });
+        };
+
+        setupInteractions();
+
+        // Observar cambios en el DOM para nuevos elementos (como productos cargados dinámicamente)
+        const domObserver = new MutationObserver(() => setupInteractions());
+        domObserver.observe(document.body, { childList: true, subtree: true });
+
+        // Ocultar cursor al salir de la ventana
+        document.addEventListener('mouseleave', () => {
+            punto.style.opacity = '0';
+            aura.style.opacity = '0';
+        });
+        document.addEventListener('mouseenter', () => {
+            punto.style.opacity = '1';
+            aura.style.opacity = '1';
+        });
     }
 }
 
