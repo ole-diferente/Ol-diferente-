@@ -32,12 +32,12 @@ body {
     font-family: 'Playfair Display', serif;
     color: var(--text-primary);
     background: var(--bg-gradient);
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     position: relative;
     transition: background 0.8s ease, color 0.5s ease;
 }
@@ -342,12 +342,10 @@ footer {
 
 /* Video Hero Container */
 .video-container {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100vw;
     height: 100vh;
-    z-index: 0; /* Behind content but above body background */
+    z-index: 0;
     overflow: hidden;
 }
 
