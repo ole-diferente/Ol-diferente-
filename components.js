@@ -142,7 +142,27 @@ class WebComponents {
                 nav#main-nav a { font-size: 1.8rem; margin: 1rem 0; }
                 .dropdown-content { display: none !important; } /* Hide complicated menus on mobile */
             }
-            footer { padding: 60px 20px; text-align: center; border-top: 1px solid var(--border-color); margin-top: 80px; }
+            .quiz-section {
+                padding: 120px 20px;
+                background: var(--bg-text-brand);
+                position: relative;
+                display: block;
+                width: 100%;
+                z-index: 2;
+                border-top: 1px solid rgba(212, 175, 55, 0.2);
+                margin-bottom: 200px; /* Even more margin */
+                clear: both;
+            }
+            footer { 
+                padding: 100px 20px 60px; 
+                text-align: center; 
+                border-top: 1px solid var(--border-color); 
+                margin-top: 100px;
+                display: block;
+                position: relative;
+                width: 100%;
+                clear: both;
+            }
             .footer-social { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
             .footer-social a { color: var(--text-primary); opacity: 0.7; transition: 0.3s; }
             .footer-social a:hover { color: var(--accent-color); opacity: 1; transform: translateY(-3px); }

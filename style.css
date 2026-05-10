@@ -35,9 +35,6 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     position: relative;
     transition: background 0.8s ease, color 0.5s ease;
 }
