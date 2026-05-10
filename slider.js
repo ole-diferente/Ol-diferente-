@@ -1,6 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
+    // We'll define a function to get only visible elements to handle desktop vs mobile differences
+    const getVisibleElements = () => {
+        const allSlides = Array.from(document.querySelectorAll('.slide'));
+        const allDots = Array.from(document.querySelectorAll('.dot'));
+        
+        return {
+            slides: allSlides.filter(s => window.getComputedStyle(s).display !== 'none'),
+            dots: allDots.filter(d => window.getComputedStyle(d).display !== 'none')
+        };
+    };
+
+    let { slides, dots } = getVisibleElements();
     const prevBtn = document.querySelector('.slider-arrow.prev');
     const nextBtn = document.querySelector('.slider-arrow.next');
     
@@ -9,6 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
 
     const goToSlide = (index) => {
+        // Refresh elements in case of window resize
+        const currentElements = getVisibleElements();
+        slides = currentElements.slides;
+        dots = currentElements.dots;
+
+        if (slides.length === 0) return;
+
         // Pause all videos in current slide
         const currentVideos = slides[currentIndex].querySelectorAll('video');
         currentVideos.forEach(v => v.pause());
@@ -29,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Play visible video in new slide
         const newVideos = slides[currentIndex].querySelectorAll('video');
         newVideos.forEach(v => {
-            // Only play if video is visible (not display: none)
             if (window.getComputedStyle(v).display !== 'none') {
                 v.currentTime = 0;
                 v.play().catch(e => console.log('Auto-play prevented:', e));
@@ -45,45 +61,57 @@ document.addEventListener('DOMContentLoaded', () => {
         goToSlide(currentIndex - 1);
     };
 
-    // Event Listeners for arrows
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            nextSlide();
-        });
-    }
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
 
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            prevSlide();
-        });
-    }
-
-    // Event Listeners for dots
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            if (currentIndex !== index) {
-                goToSlide(index);
-            }
-        });
-    });
-
-    // Setup videos: pause inactive, play active, attach 'ended' event
-    slides.forEach((slide, index) => {
-        const videos = slide.querySelectorAll('video');
-        videos.forEach(video => {
-            if (index !== currentIndex) {
-                video.pause();
-            } else if (window.getComputedStyle(video).display !== 'none') {
-                video.play().catch(e => console.log('Initial play prevented:', e));
-            }
-
-            // Auto advance when video finishes
-            video.addEventListener('ended', () => {
-                // Only advance if this is the visible video
-                if (window.getComputedStyle(video).display !== 'none') {
-                    nextSlide();
+    const initDots = () => {
+        dots.forEach((dot, index) => {
+            // Remove old listeners by cloning
+            const newDot = dot.cloneNode(true);
+            dot.parentNode.replaceChild(newDot, dot);
+            
+            newDot.addEventListener('click', () => {
+                if (currentIndex !== index) {
+                    goToSlide(index);
                 }
             });
         });
+        // Update dots reference after cloning
+        dots = getVisibleElements().dots;
+    };
+
+    const initVideos = () => {
+        slides.forEach((slide, index) => {
+            const videos = slide.querySelectorAll('video');
+            videos.forEach(video => {
+                if (index !== currentIndex) {
+                    video.pause();
+                } else if (window.getComputedStyle(video).display !== 'none') {
+                    video.play().catch(e => console.log('Initial play prevented:', e));
+                }
+
+                video.addEventListener('ended', () => {
+                    if (window.getComputedStyle(video).display !== 'none') {
+                        nextSlide();
+                    }
+                });
+            });
+        });
+    };
+
+    initDots();
+    initVideos();
+
+    // Re-initialize on resize to handle slide count changes
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const elements = getVisibleElements();
+            slides = elements.slides;
+            dots = elements.dots;
+            initDots();
+            if (currentIndex >= slides.length) goToSlide(0);
+        }, 250);
     });
 });
