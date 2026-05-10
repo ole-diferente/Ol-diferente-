@@ -354,6 +354,19 @@ footer {
     transition: transform 0.5s ease;
 }
 
+.video-mobile {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .video-desktop {
+        display: none;
+    }
+    .video-mobile {
+        display: block;
+    }
+}
+
 .video-overlay {
     position: absolute;
     top: 0;

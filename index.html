@@ -25,24 +25,43 @@
 
     <!-- Main Video Slider Container -->
     <main id="hero-slider" class="video-container slider-container">
-        <!-- Slide 1 -->
+        <!-- Slide 1 (New Intro) -->
         <div class="slide active">
-            <video autoplay muted playsinline class="hero-video">
+            <video autoplay muted playsinline class="hero-video video-desktop">
                 <source src="Video web 1.mp4" type="video/mp4">
+            </video>
+            <video autoplay muted playsinline class="hero-video video-mobile">
+                <source src="Videos verticales web movil/video vertical - Ole diferente.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
         </div>
         <!-- Slide 2 -->
         <div class="slide">
-            <video muted playsinline class="hero-video">
+            <video muted playsinline class="hero-video video-desktop">
                 <source src="video banner 2.mp4" type="video/mp4">
+            </video>
+            <video muted playsinline class="hero-video video-mobile">
+                <source src="Videos verticales web movil/Video vertical 2.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
         </div>
         <!-- Slide 3 -->
         <div class="slide">
-            <video muted playsinline class="hero-video">
+            <video muted playsinline class="hero-video video-desktop">
                 <source src="Banner 3.mp4" type="video/mp4">
+            </video>
+            <video muted playsinline class="hero-video video-mobile">
+                <source src="Videos verticales web movil/video vertical lataffa.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+        <!-- Slide 4 -->
+        <div class="slide">
+            <video muted playsinline class="hero-video video-desktop">
+                <source src="Video web 1.mp4" type="video/mp4"> <!-- Reusing first for desktop placeholder -->
+            </video>
+            <video muted playsinline class="hero-video video-mobile">
+                <source src="Videos verticales web movil/video vertical eclaire.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
         </div>
@@ -55,6 +74,7 @@
             <button class="dot active" data-index="0" aria-label="Slide 1"></button>
             <button class="dot" data-index="1" aria-label="Slide 2"></button>
             <button class="dot" data-index="2" aria-label="Slide 3"></button>
+            <button class="dot" data-index="3" aria-label="Slide 4"></button>
         </div>
     </main>
 

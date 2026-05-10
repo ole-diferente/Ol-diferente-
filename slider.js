@@ -9,11 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
 
     const goToSlide = (index) => {
-        // Pause current video
-        const currentVideo = slides[currentIndex].querySelector('video');
-        if (currentVideo) {
-            currentVideo.pause();
-        }
+        // Pause all videos in current slide
+        const currentVideos = slides[currentIndex].querySelectorAll('video');
+        currentVideos.forEach(v => v.pause());
 
         // Remove active class
         slides[currentIndex].classList.remove('active');
@@ -28,12 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
         slides[currentIndex].classList.add('active');
         if (dots[currentIndex]) dots[currentIndex].classList.add('active');
 
-        // Play new video
-        const newVideo = slides[currentIndex].querySelector('video');
-        if (newVideo) {
-            newVideo.currentTime = 0;
-            newVideo.play().catch(e => console.log('Auto-play prevented:', e));
-        }
+        // Play visible video in new slide
+        const newVideos = slides[currentIndex].querySelectorAll('video');
+        newVideos.forEach(v => {
+            // Only play if video is visible (not display: none)
+            if (window.getComputedStyle(v).display !== 'none') {
+                v.currentTime = 0;
+                v.play().catch(e => console.log('Auto-play prevented:', e));
+            }
+        });
     };
 
     const nextSlide = () => {
@@ -68,15 +69,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Setup videos: pause inactive, play active, attach 'ended' event
     slides.forEach((slide, index) => {
-        const video = slide.querySelector('video');
-        if (video) {
+        const videos = slide.querySelectorAll('video');
+        videos.forEach(video => {
             if (index !== currentIndex) {
                 video.pause();
+            } else if (window.getComputedStyle(video).display !== 'none') {
+                video.play().catch(e => console.log('Initial play prevented:', e));
             }
+
             // Auto advance when video finishes
             video.addEventListener('ended', () => {
-                nextSlide();
+                // Only advance if this is the visible video
+                if (window.getComputedStyle(video).display !== 'none') {
+                    nextSlide();
+                }
             });
-        }
+        });
     });
 });
