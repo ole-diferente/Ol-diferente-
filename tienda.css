@@ -607,3 +607,9 @@ footer {
         font-size: 12px;
     }
 }
+
+/* Temporarily Disable Decants */
+.decant-options, 
+.size-btn[data-type="decant"] {
+    display: none !important;
+}

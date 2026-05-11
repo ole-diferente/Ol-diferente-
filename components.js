@@ -77,13 +77,13 @@ class WebComponents {
                             </div>
                         </div>
                         <a href="tienda.html?cat=body-splash">Body Splash</a>
-                        <div class="has-submenu">
+                        <!-- <div class="has-submenu">
                             <a href="#">Decants</a>
                             <div class="submenu">
                                 <a href="tienda.html?cat=decants">10 ml</a>
                                 <a href="tienda.html?cat=decants">5 ml</a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <a href="tienda.html" class="${currentPage === 'tienda.html' ? 'active' : ''}">TIENDA</a>
