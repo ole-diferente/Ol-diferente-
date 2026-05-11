@@ -88,7 +88,7 @@ class WebComponents {
                 </div>
                 <a href="tienda.html" class="${currentPage === 'tienda.html' ? 'active' : ''}">TIENDA</a>
                 <a href="index.html#quiz-perfume">TU PERFUME IDEAL</a>
-                <a href="#">OFERTAS</a>
+                <a href="famosos.html" class="${currentPage === 'famosos.html' ? 'active' : ''}">FAMOSOS</a>
                 <a href="contacto.html" class="${currentPage === 'contacto.html' ? 'active' : ''}">CONTACTO</a>
             </nav>
             <div class="actions">

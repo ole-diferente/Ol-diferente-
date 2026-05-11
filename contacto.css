@@ -310,6 +310,10 @@ body.contacto-page::before {
 
 /* Mobile Adjustments */
 @media (max-width: 900px) {
+    .fixed-bg img {
+        object-position: 80% center; /* Mueve la imagen a la izquierda para mostrar al modelo en la derecha */
+    }
+
     .contacto-container {
         grid-template-columns: 1fr;
     }
