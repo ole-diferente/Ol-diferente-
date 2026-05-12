@@ -53,7 +53,13 @@ class WebComponents {
         const header = document.querySelector('header');
         if (!header) return;
 
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const path = window.location.pathname;
+        let currentPage = path.split('/').pop() || 'index.html';
+        
+        // Ajuste para GitHub Pages (cuando la URL termina en el nombre del repo o raíz)
+        if (currentPage === 'WEB-perfume' || currentPage === 'WEB-perfume/' || !currentPage) {
+            currentPage = 'index.html';
+        }
         
         header.innerHTML = `
             <div class="logo">
