@@ -227,10 +227,11 @@
                 font-size: 0.9rem;
             }
             .tarjeta-imagen {
-                height: 300px;
+                height: auto; /* Permite que el aspect-ratio mande */
+                aspect-ratio: 4 / 5; /* Mantiene un formato vertical similar al original */
             }
             .tarjeta-imagen img {
-                object-position: center 20%; /* Asegura que se vean los rostros en móvil */
+                object-position: center top; /* Prioriza la parte superior de la foto (el rostro) */
             }
             .categoria-titulo h3 {
                 font-size: 1.4rem;
