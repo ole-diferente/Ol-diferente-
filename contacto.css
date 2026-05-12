@@ -9,6 +9,10 @@ body.contacto-page {
     flex-direction: column !important;
 }
 
+html {
+    background: transparent !important;
+}
+
 body.contacto-page main {
     flex: 1 0 auto;
 }
@@ -31,18 +35,19 @@ body.contacto-page::before {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh; /* Fallback */
-    height: 100lvh; /* Establece la altura máxima para evitar saltos al ocultar la barra de navegación */
-    z-index: -2;
+    height: 100vh;
+    height: 100lvh;
+    z-index: -1;
+    background-color: #000; /* Fondo negro base para evitar que se vea el fondo global */
 }
 
 .fixed-bg img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
-    filter: brightness(0.25) grayscale(20%);
-    will-change: transform; /* Optimización para evitar saltos en móvil */
+    object-position: right top; 
+    filter: brightness(0.7) grayscale(5%);
+    will-change: transform;
     backface-visibility: hidden;
 }
 
@@ -52,7 +57,8 @@ body.contacto-page::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.6) 100%);
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.5) 100%);
+    z-index: 1;
 }
 
 /* Hero Section */
@@ -314,7 +320,7 @@ body.contacto-page::before {
 /* Mobile Adjustments */
 @media (max-width: 900px) {
     .fixed-bg img {
-        object-position: 80% center; /* Mueve la imagen a la izquierda para mostrar al modelo en la derecha */
+        object-position: 90% center; /* Ajuste específico para que Luis se vea a la derecha en móviles */
     }
 
     .contacto-container {
