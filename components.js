@@ -57,7 +57,7 @@ class WebComponents {
         let currentPage = path.split('/').pop() || 'index.html';
         
         // Ajuste para GitHub Pages (cuando la URL termina en el nombre del repo o raíz)
-        if (currentPage === 'WEB-perfume' || currentPage === 'WEB-perfume/' || !currentPage) {
+        if (currentPage === 'Ol-diferente-' || currentPage === 'Ol-diferente-/' || !currentPage) {
             currentPage = 'index.html';
         }
         
