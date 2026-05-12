@@ -320,7 +320,7 @@ body.contacto-page::before {
 /* Mobile Adjustments */
 @media (max-width: 900px) {
     .fixed-bg img {
-        object-position: 90% center; /* Ajuste específico para que Luis se vea a la derecha en móviles */
+        object-position: 100% center; /* Lo desplaza totalmente a la derecha para que ocupe la zona centro-derecha en móviles */
     }
 
     .contacto-container {
