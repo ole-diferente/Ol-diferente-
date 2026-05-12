@@ -38,17 +38,12 @@ body.contacto-page::before {
     height: 100vh;
     height: 100lvh;
     z-index: -1;
-    background-color: #000; /* Fondo negro base para evitar que se vea el fondo global */
-}
-
-.fixed-bg img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: right top; 
-    filter: brightness(0.7) grayscale(5%);
-    will-change: transform;
-    backface-visibility: hidden;
+    background-color: #000;
+    background-image: url('luis-contacto.jpeg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    filter: brightness(0.6) grayscale(5%);
 }
 
 .bg-overlay {
@@ -319,9 +314,9 @@ body.contacto-page::before {
 
 /* Mobile Adjustments */
 @media (max-width: 900px) {
-    .fixed-bg img {
-        transform: scaleX(-1); /* Espejamos la imagen para mover a Luis a la derecha */
-        object-position: left center; /* Ajustamos el anclaje para el efecto espejo */
+    .fixed-bg {
+        background-image: url('luis-contacto-mobile.jpeg') !important;
+        background-position: 85% center !important; /* Ajuste para la nueva imagen vertical */
     }
 
     .contacto-container {
