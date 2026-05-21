@@ -402,6 +402,10 @@ class WebComponents {
 
         const { data: { session } } = await window.supabase.auth.getSession();
 
+        // Check if there's an existing admin btn and remove it to prevent duplicates
+        const existingAdminBtn = document.getElementById('admin-link-btn');
+        if (existingAdminBtn) existingAdminBtn.remove();
+
         if (session) {
             const { data: profile } = await window.supabase
                 .from('profiles')
@@ -418,6 +422,22 @@ class WebComponents {
                 <img src="${avatarPath}" alt="${nombre}" class="user-avatar-header">
                 <span class="user-greeting-header">Hola, ${nombre}</span>
             `;
+
+            // If user is admin, add an admin panel button next to the account button
+            if (session.user.email === 'olediferente@gmail.com') {
+                const adminBtn = document.createElement('button');
+                adminBtn.id = 'admin-link-btn';
+                adminBtn.setAttribute('aria-label', 'Panel Admin');
+                adminBtn.setAttribute('title', 'Panel de Administración');
+                adminBtn.style.color = 'var(--accent-color)';
+                adminBtn.innerHTML = `<i data-lucide="shield-check"></i>`;
+                adminBtn.onclick = () => window.location.href = 'admin.html';
+                
+                // Insert right before the account button
+                accountBtn.parentNode.insertBefore(adminBtn, accountBtn);
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
+
         } else {
             accountBtn.classList.remove('user-profile-btn');
             accountBtn.innerHTML = `<i data-lucide="user"></i>`;
