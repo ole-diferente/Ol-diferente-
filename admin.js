@@ -5,13 +5,28 @@ class AdminPanel {
     }
 
     async init() {
-        await this.checkAuth();
-        await this.loadOrders();
+        try {
+            await this.checkAuth();
+            await this.loadOrders();
+        } catch (err) {
+            console.error('Init error:', err);
+            if (this.container && this.container.innerHTML.includes('Cargando')) {
+                this.container.innerHTML = `<p style="text-align: center; color: #eb5757;">Error de conexión. Asegurate de tener sesión iniciada.</p>`;
+            }
+        }
     }
 
     async checkAuth() {
-        if (!window.supabase) return;
-        const { data: { session } } = await window.supabase.auth.getSession();
+        if (!window.supabase) throw new Error('Supabase no cargado');
+        
+        let session = null;
+        try {
+            const { data } = await window.supabase.auth.getSession();
+            session = data?.session;
+        } catch (err) {
+            console.error('Error getting session:', err);
+            // Continuar para mostrar el mensaje de acceso denegado
+        }
         
         // Check if logged in and email matches the admin email
         if (!session || session.user.email !== 'olediferente@gmail.com') {
@@ -19,7 +34,8 @@ class AdminPanel {
                 <div style="text-align: center; padding: 50px;">
                     <i data-lucide="lock" style="width: 48px; height: 48px; margin-bottom: 15px; color: #eb5757;"></i>
                     <h2 style="color: #eb5757; margin-bottom: 10px;">Acceso Denegado</h2>
-                    <p style="color: var(--text-secondary);">Esta página es exclusiva para el administrador. Por favor, inicia sesión con el correo de la empresa.</p>
+                    <p style="color: var(--text-secondary);">Esta página es exclusiva para el administrador. Por favor, inicia sesión con el correo de la empresa (olediferente@gmail.com).</p>
+                    <button class="btn-auth" style="margin-top: 20px; width: auto;" onclick="window.location.href='cuenta.html'">Ir a Iniciar Sesión</button>
                 </div>
             `;
             if (typeof lucide !== 'undefined') lucide.createIcons();
