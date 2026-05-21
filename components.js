@@ -17,6 +17,81 @@ class WebComponents {
         this.updateUserAuthStatus();
         this.initScrollEffects();
         this.setupCustomCursor();
+        this.checkInventory();
+    }
+
+    async checkInventory() {
+        if (!window.supabase) return;
+        
+        try {
+            const { data: inventory, error } = await window.supabase
+                .from('inventory')
+                .select('name, stock');
+                
+            if (error) throw error;
+            
+            // Apply out of stock to product cards in tienda.html
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                const product = inventory.find(p => p.name === name);
+                if (product && product.stock <= 0) {
+                    this.markAsOutOfStock(card, true);
+                } else if (product && product.stock > 0) {
+                    this.markAsOutOfStock(card, false);
+                }
+            });
+
+            // Apply out of stock to product detail pages
+            const detailTitle = document.querySelector('.detail-title');
+            if (detailTitle) {
+                const name = detailTitle.textContent.trim();
+                const product = inventory.find(p => p.name === name);
+                const detailContainer = document.querySelector('.product-detail-container');
+                if (product && product.stock <= 0 && detailContainer) {
+                    this.markAsOutOfStock(detailContainer, true);
+                } else if (product && product.stock > 0 && detailContainer) {
+                    this.markAsOutOfStock(detailContainer, false);
+                }
+            }
+            
+        } catch (err) {
+            console.error('Error fetching inventory:', err);
+        }
+    }
+
+    markAsOutOfStock(container, isOut) {
+        if (isOut) {
+            container.classList.add('out-of-stock');
+            
+            // Add badge if it doesn't exist
+            const imgContainer = container.querySelector('.product-image-container, .product-detail-image-wrapper');
+            if (imgContainer && !imgContainer.querySelector('.out-of-stock-badge')) {
+                imgContainer.insertAdjacentHTML('afterbegin', '<div class="out-of-stock-badge">Sin Stock</div>');
+            }
+            
+            // Disable buttons and inputs
+            const buttons = container.querySelectorAll('.size-btn, .add-to-cart-btn, .quantity-selector');
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                if (btn.classList.contains('add-to-cart-btn')) {
+                    btn.textContent = 'Sin Stock';
+                }
+            });
+        } else {
+            container.classList.remove('out-of-stock');
+            const badge = container.querySelector('.out-of-stock-badge');
+            if (badge) badge.remove();
+            
+            const buttons = container.querySelectorAll('.size-btn, .add-to-cart-btn, .quantity-selector');
+            buttons.forEach(btn => {
+                btn.disabled = false;
+                if (btn.classList.contains('add-to-cart-btn')) {
+                    // Check if it's mobile to set uppercase or not, or just set it
+                    btn.textContent = window.location.pathname.includes('.html') && !window.location.pathname.includes('tienda.html') ? 'AGREGAR AL CARRITO' : 'Agregar al carrito';
+                }
+            });
+        }
     }
 
     setupTheme() {
