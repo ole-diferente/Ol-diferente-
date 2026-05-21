@@ -13,9 +13,16 @@ class AdminPanel {
         if (!window.supabase) return;
         const { data: { session } } = await window.supabase.auth.getSession();
         
-        // Simple security: just ensure they are logged in. In a real app, check role.
-        if (!session) {
-            this.container.innerHTML = '<p style="text-align: center; color: #eb5757;">Acceso denegado. Debes iniciar sesión.</p>';
+        // Check if logged in and email matches the admin email
+        if (!session || session.user.email !== 'olediferente@gmail.com') {
+            this.container.innerHTML = `
+                <div style="text-align: center; padding: 50px;">
+                    <i data-lucide="lock" style="width: 48px; height: 48px; margin-bottom: 15px; color: #eb5757;"></i>
+                    <h2 style="color: #eb5757; margin-bottom: 10px;">Acceso Denegado</h2>
+                    <p style="color: var(--text-secondary);">Esta página es exclusiva para el administrador. Por favor, inicia sesión con el correo de la empresa.</p>
+                </div>
+            `;
+            if (typeof lucide !== 'undefined') lucide.createIcons();
             throw new Error('No autorizado');
         }
     }
