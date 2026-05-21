@@ -402,10 +402,6 @@ class WebComponents {
 
         const { data: { session } } = await window.supabase.auth.getSession();
 
-        // Check if there's an existing admin btn and remove it to prevent duplicates
-        const existingAdminBtn = document.getElementById('admin-link-btn');
-        if (existingAdminBtn) existingAdminBtn.remove();
-
         if (session) {
             const { data: profile } = await window.supabase
                 .from('profiles')
@@ -425,6 +421,10 @@ class WebComponents {
 
             // If user is admin, add an admin panel button next to the account button
             if (session.user.email === 'olediferente@gmail.com') {
+                // Remove any existing shield to prevent duplicates from concurrent calls
+                const existingAdminBtn = document.getElementById('admin-link-btn');
+                if (existingAdminBtn) existingAdminBtn.remove();
+
                 const adminBtn = document.createElement('button');
                 adminBtn.id = 'admin-link-btn';
                 adminBtn.setAttribute('aria-label', 'Panel Admin');
@@ -439,6 +439,10 @@ class WebComponents {
             }
 
         } else {
+            // Remove admin button if logged out
+            const existingAdminBtn = document.getElementById('admin-link-btn');
+            if (existingAdminBtn) existingAdminBtn.remove();
+
             accountBtn.classList.remove('user-profile-btn');
             accountBtn.innerHTML = `<i data-lucide="user"></i>`;
             if (typeof lucide !== 'undefined') {
