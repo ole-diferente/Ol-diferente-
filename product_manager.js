@@ -51,7 +51,14 @@ const NOTAS_OLFATIVAS = {
     "Especias": "Imagenes_Notas_Olfativas/Notas Especiadas.jpg",
     "Especias Frescas": "Imagenes_Notas_Olfativas/Notas Especiadas.jpg",
     "Resina de Elemi": "Imagenes_Notas_Olfativas/elemí.jpg",
-    "Notas Amaderadas": "Imagenes_Notas_Olfativas/Notas Amaderadas.jpg"
+    "Notas Amaderadas": "Imagenes_Notas_Olfativas/Notas Amaderadas.jpg",
+    "Caramelo": "Imagenes_Notas_Olfativas/Caramelo.jpg",
+    "Almendra Amarga": "Imagenes_Notas_Olfativas/Almendra.jpg",
+    "Albaricoque": "Imagenes_Notas_Olfativas/Albaricoque.jpg",
+    "Pimienta Rosa": "Imagenes_Notas_Olfativas/Pimienta rosa.jpg",
+    "Miel": "Imagenes_Notas_Olfativas/Miel.jpg",
+    "Ruibarbo": "Imagenes_Notas_Olfativas/Ruibarbo.jpg",
+    "Ládano": "Imagenes_Notas_Olfativas/Ládano.jpg"
 };
 
 /**
