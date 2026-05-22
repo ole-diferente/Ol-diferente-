@@ -5,6 +5,7 @@
 
 class WebComponents {
     constructor() {
+        this.adminNotificationInterval = null;
         this.init();
     }
 
@@ -467,12 +468,25 @@ class WebComponents {
                 adminBtn.setAttribute('aria-label', 'Panel Admin');
                 adminBtn.setAttribute('title', 'Panel de Administración');
                 adminBtn.style.color = 'var(--accent-color)';
-                adminBtn.innerHTML = `<i data-lucide="shield-check"></i>`;
+                adminBtn.style.position = 'relative'; // context for absolute positioned badge
+                adminBtn.innerHTML = `
+                    <i data-lucide="shield-check"></i>
+                    <span class="admin-badge hidden" id="admin-badge">0</span>
+                `;
                 adminBtn.onclick = () => window.location.href = 'admin.html';
                 
                 // Insert right before the account button
                 accountBtn.parentNode.insertBefore(adminBtn, accountBtn);
                 if (typeof lucide !== 'undefined') lucide.createIcons();
+
+                // Initial notifications check
+                this.updateAdminNotificationsBadge();
+
+                // Periodic refresh every 60 seconds
+                if (this.adminNotificationInterval) clearInterval(this.adminNotificationInterval);
+                this.adminNotificationInterval = setInterval(() => {
+                    this.updateAdminNotificationsBadge();
+                }, 60000);
             }
 
         } else {
@@ -480,11 +494,61 @@ class WebComponents {
             const existingAdminBtn = document.getElementById('admin-link-btn');
             if (existingAdminBtn) existingAdminBtn.remove();
 
+            // Clear refresh interval
+            if (this.adminNotificationInterval) {
+                clearInterval(this.adminNotificationInterval);
+                this.adminNotificationInterval = null;
+            }
+
             accountBtn.classList.remove('user-profile-btn');
             accountBtn.innerHTML = `<i data-lucide="user"></i>`;
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
             }
+        }
+    }
+
+    async updateAdminNotificationsBadge() {
+        if (!window.supabase) return;
+        
+        try {
+            // Ensure session is valid and is admin
+            const { data: { session } } = await window.supabase.auth.getSession();
+            if (!session || session.user.email !== 'olediferente@gmail.com') return;
+
+            // Fetch count of unread messages from contact_messages
+            const { count: unreadMessages, error: msgError } = await window.supabase
+                .from('contact_messages')
+                .select('*', { count: 'exact', head: true })
+                .eq('leido', false);
+
+            if (msgError) {
+                console.warn('Error querying contact_messages for badge:', msgError);
+            }
+
+            // Fetch count of pending orders from orders
+            const { count: pendingOrders, error: orderError } = await window.supabase
+                .from('orders')
+                .select('*', { count: 'exact', head: true })
+                .eq('status', 'pendiente');
+
+            if (orderError) {
+                console.warn('Error querying orders for badge:', orderError);
+            }
+
+            const totalNotifications = (unreadMessages || 0) + (pendingOrders || 0);
+            
+            const badge = document.getElementById('admin-badge');
+            if (badge) {
+                if (totalNotifications > 0) {
+                    badge.textContent = totalNotifications > 99 ? '99+' : totalNotifications;
+                    badge.classList.remove('hidden');
+                } else {
+                    badge.classList.add('hidden');
+                }
+            }
+        } catch (err) {
+            console.error('Error updating admin notification badge:', err);
         }
     }
 

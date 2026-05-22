@@ -216,6 +216,9 @@ class AdminPanel {
 
             alert('Pedido aprobado y stock descontado exitosamente.');
             this.loadOrders();
+            if (window.WebComponentsInstance && typeof window.WebComponentsInstance.updateAdminNotificationsBadge === 'function') {
+                window.WebComponentsInstance.updateAdminNotificationsBadge();
+            }
 
         } catch (err) {
             console.error('Error approving order:', err);
@@ -235,6 +238,9 @@ class AdminPanel {
             if (error) throw error;
             
             this.loadOrders();
+            if (window.WebComponentsInstance && typeof window.WebComponentsInstance.updateAdminNotificationsBadge === 'function') {
+                window.WebComponentsInstance.updateAdminNotificationsBadge();
+            }
         } catch (err) {
             console.error('Error rejecting order:', err);
             alert('Error al rechazar el pedido.');
@@ -370,6 +376,9 @@ class AdminPanel {
 
             if (error) throw error;
             this.loadMessages();
+            if (window.WebComponentsInstance && typeof window.WebComponentsInstance.updateAdminNotificationsBadge === 'function') {
+                window.WebComponentsInstance.updateAdminNotificationsBadge();
+            }
         } catch (err) {
             console.error('Error updating read status:', err);
             alert('Error al actualizar el estado del mensaje.');
@@ -387,6 +396,9 @@ class AdminPanel {
 
             if (error) throw error;
             this.loadMessages();
+            if (window.WebComponentsInstance && typeof window.WebComponentsInstance.updateAdminNotificationsBadge === 'function') {
+                window.WebComponentsInstance.updateAdminNotificationsBadge();
+            }
         } catch (err) {
             console.error('Error deleting message:', err);
             alert('Error al eliminar el mensaje.');
