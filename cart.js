@@ -188,7 +188,7 @@ class ShoppingCart {
     }
 
     
-    openCheckoutModal() {
+    async openCheckoutModal() {
         if (this.items.length === 0) {
             alert('Tu carrito está vacío');
             return;
@@ -200,6 +200,46 @@ class ShoppingCart {
         document.body.style.overflow = 'hidden';
         
         this.updateCheckoutTotals();
+
+        // Autocompletar datos si el usuario está logueado
+        try {
+            if (window.supabase) {
+                const { data: { session } } = await window.supabase.auth.getSession();
+                if (session) {
+                    const { data: profile } = await window.supabase
+                        .from('profiles')
+                        .select('*')
+                        .eq('id', session.user.id)
+                        .single();
+
+                    if (profile) {
+                        const nameInput = document.querySelector('#shipping-name');
+                        const fullName = [profile.nombre, profile.apellido].filter(Boolean).join(' ');
+                        if (fullName && !nameInput.value) nameInput.value = fullName;
+                        
+                        const dniInput = document.querySelector('#shipping-dni');
+                        if (profile.dni && !dniInput.value) dniInput.value = profile.dni;
+                        
+                        const cpInput = document.querySelector('#shipping-cp');
+                        if (profile.cp && !cpInput.value) {
+                            cpInput.value = profile.cp;
+                            this.updateCheckoutTotals();
+                        }
+                        
+                        const provInput = document.querySelector('#shipping-provincia');
+                        if (profile.provincia && !provInput.value) provInput.value = profile.provincia;
+                        
+                        const locInput = document.querySelector('#shipping-localidad');
+                        if (profile.localidad && !locInput.value) locInput.value = profile.localidad;
+                        
+                        const calleInput = document.querySelector('#shipping-calle');
+                        if (profile.direccion && !calleInput.value) calleInput.value = profile.direccion;
+                    }
+                }
+            }
+        } catch (error) {
+            console.error("Error autocompletando datos:", error);
+        }
     }
 
     closeCheckoutModal() {
