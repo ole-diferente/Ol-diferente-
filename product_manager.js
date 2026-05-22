@@ -76,6 +76,7 @@ const SEASONS_DATA = {
     "lattafa-his-confession.html": { winter: 90, autumn: 95, spring: 60, summer: 25 },
     
     // Femeninas / Unisex
+    "lattafa-teriaq.html": { winter: 100, autumn: 95, spring: 50, summer: 20 },
     "eclaire.html": { winter: 100, autumn: 95, spring: 55, summer: 20 },
     "club-de-nuit-women.html": { winter: 75, autumn: 90, spring: 100, summer: 85 },
     "coconut-passion.html": { winter: 25, autumn: 45, spring: 80, summer: 100 },
