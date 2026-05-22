@@ -818,29 +818,42 @@ body.home-page::before {
 /* Marquee Banner Envío Gratis */
 .marquee-banner {
     width: 100%;
+    height: 38px;
     background-color: var(--accent-color);
     color: #000000;
     overflow: hidden;
-    padding: 10px 0;
-    white-space: nowrap;
     position: relative;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 10;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 1010; /* visible above hero slides */
+    display: flex;
+    align-items: center;
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 25s linear infinite;
 }
 
 .marquee-content {
     display: inline-block;
     font-family: 'Inter', sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     letter-spacing: 2px;
-    animation: marquee 25s linear infinite;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-right: 2rem; /* Spacing between segments to avoid clutter */
 }
 
 @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+}
+
+/* Adjust Header position when the banner is present at the top of hero-screen */
+.hero-screen .marquee-banner + header {
+    top: 38px;
 }
 
 /* Admin Notification Badge Styles */
