@@ -831,6 +831,7 @@ body.home-page::before {
 
 .marquee-content {
     display: inline-block;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 2px;
