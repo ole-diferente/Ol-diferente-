@@ -351,6 +351,39 @@ class WebComponents {
             .footer-social { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
             .footer-social a { color: var(--text-primary); opacity: 0.7; transition: 0.3s; }
             .footer-social a:hover { color: var(--accent-color); opacity: 1; transform: translateY(-3px); }
+
+            /* Admin Notification Badge Styles */
+            .admin-badge {
+                position: absolute;
+                top: -6px;
+                right: -6px;
+                background: linear-gradient(135deg, #ff4b2b, #ff416c) !important; /* Vibrant modern red gradient */
+                color: #ffffff !important;
+                font-family: 'Inter', sans-serif !important;
+                font-size: 9px !important;
+                font-weight: 800 !important;
+                min-width: 17px !important;
+                height: 17px !important;
+                border-radius: 9px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0 4px !important;
+                box-shadow: 0 0 10px rgba(255, 75, 43, 0.4) !important;
+                border: 1.5px solid var(--bg-color, #0f0f0f) !important;
+                transition: all 0.3s ease !important;
+                animation: badgeBounce 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+                z-index: 10 !important;
+            }
+
+            @keyframes badgeBounce {
+                0% { transform: scale(0); opacity: 0; }
+                100% { transform: scale(1); opacity: 1; }
+            }
+
+            .admin-badge.hidden {
+                display: none !important;
+            }
         `;
         document.head.appendChild(style);
     }
