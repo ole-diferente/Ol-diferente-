@@ -10,6 +10,7 @@
     grid-template-columns: 1fr 1.2fr;
     gap: 60px;
     box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+    align-items: start;
 }
 
 .product-detail-image-wrapper {
@@ -18,7 +19,17 @@
     overflow: hidden;
     background: rgba(0,0,0,0.03);
     border: 1px solid var(--border-color);
-    position: relative;
+    position: sticky;
+    top: 100px;
+}
+
+.product-detail-image-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
+    pointer-events: none;
+    border-radius: 20px;
 }
 
 .product-detail-image {
