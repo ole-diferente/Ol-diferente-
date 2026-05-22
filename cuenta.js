@@ -369,6 +369,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     async function checkAuthState() {
+        if (window.location.hash && window.location.hash.includes('type=recovery')) {
+            return; // Skip normal auth display, recovery handles this
+        }
         const { data: { session } } = await window.supabase.auth.getSession();
         if (session) {
             const user = session.user;
