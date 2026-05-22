@@ -497,6 +497,22 @@ footer {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
+.preorder-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #f39c12; /* Distinct Gold/Orange Color */
+    color: #000000;
+    font-weight: 800;
+    font-size: 11px;
+    padding: 6px 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
 .add-to-cart-btn:disabled {
     background: var(--border-color);
     color: var(--text-secondary);

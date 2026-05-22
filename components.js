@@ -35,10 +35,15 @@ class WebComponents {
             productCards.forEach(card => {
                 const name = card.getAttribute('data-name');
                 const product = inventory.find(p => p.name === name);
-                if (product && product.stock <= 0) {
+                if (product && product.stock === 0) {
                     this.markAsOutOfStock(card, true);
+                    this.markAsPreorder(card, false);
+                } else if (product && product.stock < 0) {
+                    this.markAsOutOfStock(card, false);
+                    this.markAsPreorder(card, true);
                 } else if (product && product.stock > 0) {
                     this.markAsOutOfStock(card, false);
+                    this.markAsPreorder(card, false);
                 }
             });
 
@@ -48,10 +53,15 @@ class WebComponents {
                 const name = detailTitle.textContent.trim();
                 const product = inventory.find(p => p.name === name);
                 const detailContainer = document.querySelector('.product-detail-container');
-                if (product && product.stock <= 0 && detailContainer) {
+                if (product && product.stock === 0 && detailContainer) {
                     this.markAsOutOfStock(detailContainer, true);
+                    this.markAsPreorder(detailContainer, false);
+                } else if (product && product.stock < 0 && detailContainer) {
+                    this.markAsOutOfStock(detailContainer, false);
+                    this.markAsPreorder(detailContainer, true);
                 } else if (product && product.stock > 0 && detailContainer) {
                     this.markAsOutOfStock(detailContainer, false);
+                    this.markAsPreorder(detailContainer, false);
                 }
             }
             
@@ -87,10 +97,37 @@ class WebComponents {
             buttons.forEach(btn => {
                 btn.disabled = false;
                 if (btn.classList.contains('add-to-cart-btn')) {
-                    // Check if it's mobile to set uppercase or not, or just set it
                     btn.textContent = window.location.pathname.includes('.html') && !window.location.pathname.includes('tienda.html') ? 'AGREGAR AL CARRITO' : 'Agregar al carrito';
                 }
             });
+        }
+    }
+
+    markAsPreorder(container, isPreorder) {
+        if (isPreorder) {
+            container.classList.add('is-preorder');
+            
+            // Add badge if it doesn't exist
+            const imgContainer = container.querySelector('.product-image-container, .product-detail-image-wrapper');
+            if (imgContainer && !imgContainer.querySelector('.preorder-badge')) {
+                imgContainer.insertAdjacentHTML('afterbegin', '<div class="preorder-badge">Por Encargue</div>');
+            }
+            
+            // If it's the detail page, add the preorder warning below the image
+            const isDetailPage = container.classList.contains('product-detail-container');
+            if (isDetailPage && !container.querySelector('.preorder-warning')) {
+                const infoContainer = container.querySelector('.product-detail-info');
+                if (infoContainer) {
+                    infoContainer.insertAdjacentHTML('afterbegin', '<div class="preorder-warning" style="background: rgba(243, 156, 18, 0.1); border: 1px solid #f39c12; color: #f39c12; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; text-align: center;"><strong>Importante:</strong> Este perfume se trae por encargue. Se requiere abonar una seña del 50% del valor total por adelantado para confirmar el pedido.</div>');
+                }
+            }
+        } else {
+            container.classList.remove('is-preorder');
+            const badge = container.querySelector('.preorder-badge');
+            if (badge) badge.remove();
+            
+            const warning = container.querySelector('.preorder-warning');
+            if (warning) warning.remove();
         }
     }
 
