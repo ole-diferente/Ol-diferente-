@@ -152,15 +152,102 @@
 
     <footer></footer>
 
+    <!-- Modal de Éxito Premium (Glassmorphism) -->
+    <div id="success-modal" class="custom-modal">
+        <div class="modal-overlay" onclick="closeSuccessModal()"></div>
+        <div class="modal-card">
+            <button class="modal-close" aria-label="Cerrar modal" onclick="closeSuccessModal()">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="modal-body">
+                <div class="success-icon-wrapper">
+                    <div class="success-icon-circle">
+                        <i data-lucide="check"></i>
+                    </div>
+                </div>
+                <h2>¡Mensaje Enviado!</h2>
+                <p>Tu consulta sobre <strong><span id="modal-asunto-text">el tema</span></strong> fue recibida con éxito.</p>
+                <p class="modal-subtext">Nos pondremos en contacto con vos por correo electrónico a la brevedad. ¡Gracias por elegir a Olé Diferente!</p>
+                <button class="btn-modal-close" onclick="closeSuccessModal()">Entendido</button>
+            </div>
+        </div>
+    </div>
+
     <script src="supabase-config.js"></script>
     <script src="components.js?v=2"></script>
     <script src="cart.js"></script>
     <script>
-        document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = contactForm?.querySelector('.btn-enviar');
+        const successModal = document.getElementById('success-modal');
+        const modalAsuntoText = document.getElementById('modal-asunto-text');
+
+        contactForm?.addEventListener('submit', async (e) => {
             e.preventDefault();
-            alert('¡Gracias por tu mensaje! Nos pondremos en contacto con vos a la brevedad.');
-            e.target.reset();
+            if (!window.supabase) {
+                alert('Error: No se pudo establecer conexión con el servidor.');
+                return;
+            }
+
+            // Establecer estado de carga (loading)
+            const originalBtnContent = submitBtn.innerHTML;
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <div class="spinner"></div>
+                <span>Enviando...</span>
+            `;
+
+            const formData = new FormData(contactForm);
+            const nombre = formData.get('nombre');
+            const email = formData.get('email');
+            const whatsapp = formData.get('whatsapp') || null;
+            const asunto = formData.get('asunto');
+            const mensaje = formData.get('mensaje');
+
+            try {
+                const { error } = await window.supabase
+                    .from('contact_messages')
+                    .insert([{ 
+                        nombre, 
+                        email, 
+                        whatsapp, 
+                        asunto, 
+                        mensaje 
+                    }]);
+
+                if (error) throw error;
+
+                // Éxito: Traducir asunto a texto amigable para el usuario
+                let asuntoAmigable = 'tu consulta';
+                if (asunto === 'perfumes') asuntoAmigable = 'perfumes y fragancias';
+                else if (asunto === 'decants') asuntoAmigable = 'decants';
+                else if (asunto === 'pedido') asuntoAmigable = 'estado de pedido / envíos';
+                else if (asunto === 'mayorista') asuntoAmigable = 'ventas por mayor / otras consultas';
+
+                if (modalAsuntoText) modalAsuntoText.textContent = asuntoAmigable;
+
+                // Mostrar el modal premium
+                successModal?.classList.add('active');
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+
+                // Resetear el formulario
+                contactForm.reset();
+
+            } catch (err) {
+                console.error('Error al enviar el mensaje:', err);
+                alert('Hubo un error al enviar tu mensaje. Por favor, intentalo de nuevo o escribinos directamente por WhatsApp.');
+            } finally {
+                // Restaurar estado original del botón
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnContent;
+            }
         });
+
+        function closeSuccessModal() {
+            successModal?.classList.remove('active');
+        }
     </script>
 </body>
 </html>

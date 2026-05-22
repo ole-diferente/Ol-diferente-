@@ -92,6 +92,187 @@
         .btn-reject:hover {
             background: rgba(235, 87, 87, 0.1);
         }
+
+        /* --- Admin Navigation Tabs --- */
+        .admin-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 15px;
+        }
+        .tab-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-secondary);
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .tab-btn i {
+            width: 18px;
+            height: 18px;
+        }
+        .tab-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .tab-btn.active {
+            color: var(--accent-color);
+            background: rgba(212, 175, 55, 0.08);
+            border-color: rgba(212, 175, 55, 0.2);
+        }
+        
+        /* Sections toggling */
+        .admin-section {
+            display: none;
+        }
+        .admin-section.active {
+            display: block;
+            animation: fadeInSection 0.4s ease forwards;
+        }
+        @keyframes fadeInSection {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Message Cards Styling */
+        .message-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .message-card.unread {
+            border-left: 4px solid var(--accent-color);
+            background: rgba(212, 175, 55, 0.02);
+        }
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
+        }
+        .message-meta h3 {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin: 0 0 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .unread-badge {
+            background: var(--accent-color);
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+        .message-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .message-info a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+        .message-info a:hover {
+            color: var(--accent-color);
+        }
+        .message-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-align: right;
+        }
+        .message-subject {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+        .message-body {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: rgba(0, 0, 0, 0.15);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            white-space: pre-line;
+        }
+        .message-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .btn-action {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        .btn-action:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .btn-action.read-toggle {
+            color: #27ae60;
+            border-color: rgba(39, 174, 96, 0.3);
+        }
+        .btn-action.read-toggle:hover {
+            background: rgba(39, 174, 96, 0.1);
+        }
+        .btn-action.btn-delete {
+            color: #eb5757;
+            border-color: rgba(235, 87, 87, 0.3);
+        }
+        .btn-action.btn-delete:hover {
+            background: rgba(235, 87, 87, 0.1);
+        }
+        .btn-action.btn-reply-wa {
+            background: #27ae60;
+            color: white;
+            border: none;
+        }
+        .btn-action.btn-reply-wa:hover {
+            background: #219653;
+            transform: translateY(-2px);
+        }
     </style>
     <!-- Supabase JS Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -101,11 +282,33 @@
     
     <div class="admin-container">
         <div class="admin-header">
-            <h1 class="admin-title">Pedidos Pendientes</h1>
+            <h1 class="admin-title" id="admin-page-title">Pedidos Recientes</h1>
         </div>
 
-        <div id="orders-container">
-            <p style="text-align: center; color: var(--text-secondary);">Cargando pedidos...</p>
+        <!-- Pestañas de Navegación -->
+        <div class="admin-tabs">
+            <button id="tab-orders" class="tab-btn active" onclick="adminPanel.switchTab('orders', this)">
+                <i data-lucide="shopping-bag"></i>
+                <span>Pedidos Recientes</span>
+            </button>
+            <button id="tab-messages" class="tab-btn" onclick="adminPanel.switchTab('messages', this)">
+                <i data-lucide="mail"></i>
+                <span>Mensajes de Contacto</span>
+            </button>
+        </div>
+
+        <!-- Sección de Pedidos -->
+        <div id="orders-section" class="admin-section active">
+            <div id="orders-container">
+                <p style="text-align: center; color: var(--text-secondary);">Cargando pedidos...</p>
+            </div>
+        </div>
+
+        <!-- Sección de Mensajes de Contacto -->
+        <div id="messages-section" class="admin-section">
+            <div id="messages-container">
+                <p style="text-align: center; color: var(--text-secondary);">Cargando mensajes...</p>
+            </div>
         </div>
     </div>
 
