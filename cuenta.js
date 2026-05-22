@@ -128,10 +128,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // --- Estado de Auth Inicial ---
+    let isRecoveringPassword = false;
+
+    // --- Estado de Auth Inicial ---
     checkAuthState();
 
     window.supabase.auth.onAuthStateChange((event, session) => {
         console.log("Cambio de Auth:", event, session);
+        if (event === 'PASSWORD_RECOVERY') {
+            isRecoveringPassword = true;
+            authSection.style.display = 'block';
+            loginBox.style.display = 'none';
+            if (registerBox) registerBox.style.display = 'none';
+            if (recoveryBox) recoveryBox.style.display = 'none';
+            const profileSec = document.getElementById('profile-section');
+            if (profileSec) profileSec.style.display = 'none';
+            updatePasswordBox.style.display = 'block';
+            return;
+        }
         checkAuthState();
     });
 
@@ -369,9 +383,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     async function checkAuthState() {
-        if (window.location.hash && window.location.hash.includes('type=recovery')) {
-            return; // Skip normal auth display, recovery handles this
-        }
+        if (isRecoveringPassword) return; // Prevent overwriting recovery UI
         const { data: { session } } = await window.supabase.auth.getSession();
         if (session) {
             const user = session.user;
@@ -488,6 +500,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     function checkHashForRecovery() {
         const hash = window.location.hash;
         if (hash && hash.includes('type=recovery')) {
+            isRecoveringPassword = true;
             // User clicked the recovery link in their email
             authSection.style.display = 'block';
             loginBox.style.display = 'none';

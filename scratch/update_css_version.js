@@ -11,10 +11,10 @@ for (const file of files) {
     
     // Check if it has producto.css without version or older version
     if (content.includes('href="producto.css"') || content.match(/href="producto\.css\?v=\d+"/)) {
-        content = content.replace(/href="producto\.css(\?v=\d+)?"/g, 'href="producto.css?v=9"');
-        content = content.replace(/href="tienda\.css(\?v=\d+)?"/g, 'href="tienda.css?v=9"');
-        content = content.replace(/href="cart\.css(\?v=\d+)?"/g, 'href="cart.css?v=9"');
-        content = content.replace(/src="components\.js(\?v=\d+)?"/g, 'src="components.js?v=9"');
+        content = content.replace(/href="producto\.css(\?v=\d+)?"/g, 'href="producto.css?v=10"');
+        content = content.replace(/href="tienda\.css(\?v=\d+)?"/g, 'href="tienda.css?v=10"');
+        content = content.replace(/href="cart\.css(\?v=\d+)?"/g, 'href="cart.css?v=10"');
+        content = content.replace(/src="components\.js(\?v=\d+)?"/g, 'src="components.js?v=10"');
         fs.writeFileSync(filePath, content);
         count++;
     }
