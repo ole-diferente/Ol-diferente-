@@ -3,96 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eclaire Pistache | OLÉ DIFERENTE</title>
-    <!-- Google Fonts -->
+    <title>Eclaire Pistache - OLÉ DIFERENTE</title>
+    <meta name="referrer" content="no-referrer">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Lucide Icons via CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="tienda.css">
     <link rel="stylesheet" href="producto.css">
     <link rel="stylesheet" href="cart.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="page-standard page-product">
+<body>
     <header></header>
-    
-    <main class="product-main">
-        <div class="product-detail-container reveal" data-name="Eclaire Pistache">
-            <!-- Galería de Imágenes -->
-            <div class="product-gallery">
-                <div class="main-image-container">
-                    <img src="img/fragancias/Eclaire Pistache Lattafa.jpg" alt="Eclaire Pistache" class="product-detail-image" id="main-image">
-                </div>
+    <div class="container">
+        <a href="tienda.html" class="back-to-shop">
+            <i data-lucide="arrow-left"></i> VOLVER A LA TIENDA
+        </a>
+        <div class="product-detail-container" data-name="Eclaire Pistache">
+            <div class="product-detail-image-wrapper">
+                <img src="img/fragancias/Eclaire Pistache Lattafa.jpg" alt="Eclaire Pistache" class="product-detail-image">
             </div>
-
-            <!-- Información del Producto -->
-            <div class="product-info-detail">
-                <div class="brand-badge">Lattafa</div>
+            <div class="product-detail-info">
+                <span class="detail-gender">GÉNERO: FEMENINA</span>
                 <h1 class="detail-title">Eclaire Pistache</h1>
-                <div class="detail-gender">Fragancia Femenina</div>
-                <div class="detail-price-container">
-                    <span class="detail-price">$0</span>
-                    <span class="detail-size">/ 100 ml</span>
+                <p class="detail-description">
+                    Un sueño gourmand hecho realidad. Una cremosidad irresistible de pistacho tostado, crema batida y leche avainillada que envuelve los sentidos de pura dulzura.
+                </p>
+                <div class="detail-price-container" style="margin-bottom: 25px;">
+                    <span class="detail-price" style="font-size: 32px; font-weight: 700; color: var(--text-primary);">$0</span>
+                    <span class="detail-size-label" style="font-size: 14px; color: var(--text-secondary); margin-left: 10px;">/ 100 ml</span>
                 </div>
-
+                <div class="visual-notes">
+                    <div class="pyramid-section">
+                        <div class="pyramid-header"><span>NOTAS DE SALIDA</span></div>
+                        <div class="pyramid-grid">
+                            
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="" alt="Crema de Pistacho"></div>
+                                <span class="ingredient-name">Crema de Pistacho</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="" alt="Pistacho Tostado"></div>
+                                <span class="ingredient-name">Pistacho Tostado</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pyramid-section">
+                        <div class="pyramid-header"><span>CORAZÓN</span></div>
+                        <div class="pyramid-grid">
+                            
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="" alt="Coco"></div>
+                                <span class="ingredient-name">Coco</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="" alt="Cacao"></div>
+                                <span class="ingredient-name">Cacao</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="" alt="Crema Batida"></div>
+                                <span class="ingredient-name">Crema Batida</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pyramid-section">
+                        <div class="pyramid-header"><span>BASE</span></div>
+                        <div class="pyramid-grid">
+                            
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="" alt="Vainilla"></div>
+                                <span class="ingredient-name">Vainilla</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="" alt="Leche"></div>
+                                <span class="ingredient-name">Leche</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="" alt="Almizcle"></div>
+                                <span class="ingredient-name">Almizcle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="accords-container">
-                    <span class="accord-badge">Dulce</span><span class="accord-badge">Nuez</span><span class="accord-badge">Lactónico</span><span class="accord-badge">Vainilla</span>
-                </div>
-
-                <div class="pyramid-container">
-                    <h3 class="pyramid-title">Pirámide Olfativa</h3>
+                    <h3 class="accords-title">Acordes Principales</h3>
                     
-                    <div class="pyramid-level top-notes">
-                        <div class="level-label">NOTAS DE SALIDA</div>
-                        <div class="ingredients-grid">
-                            <div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Crema de Pistacho"></div><span class="ingredient-name">Crema de Pistacho</span></div><div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Pistacho Tostado"></div><span class="ingredient-name">Pistacho Tostado</span></div>
-                        </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Dulce</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 100%; background: #ffb366;"></div></div>
                     </div>
-
-                    <div class="pyramid-level middle-notes">
-                        <div class="level-label">CORAZÓN</div>
-                        <div class="ingredients-grid">
-                            <div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Coco"></div><span class="ingredient-name">Coco</span></div><div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Cacao"></div><span class="ingredient-name">Cacao</span></div><div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Crema Batida"></div><span class="ingredient-name">Crema Batida</span></div>
-                        </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Nuez</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 90%; background: #ff9933;"></div></div>
                     </div>
-
-                    <div class="pyramid-level base-notes">
-                        <div class="level-label">BASE</div>
-                        <div class="ingredients-grid">
-                            <div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Vainilla"></div><span class="ingredient-name">Vainilla</span></div><div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Leche"></div><span class="ingredient-name">Leche</span></div><div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Almizcle"></div><span class="ingredient-name">Almizcle</span></div>
-                        </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Lactónico</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 80%; background: #e6ccb3;"></div></div>
+                    </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Vainilla</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 70%; background: #8c4a1b;"></div></div>
                     </div>
                 </div>
-
-                <div class="purchase-actions">
-                    <div class="size-selectors" style="justify-content: flex-start; margin-bottom: 20px;">
-                        <div class="selector-group main-options" style="margin:0;">
-                            <button class="size-btn active" data-type="full" data-price="0">100 ml</button>
-                            <button class="size-btn" data-type="decant">Decant</button>
-                        </div>
-                        <div class="selector-group decant-options" style="margin-left: 15px;">
-                            <button class="size-btn" data-price="0">10 ml</button>
-                            <button class="size-btn active" data-price="0">5 ml</button>
-                        </div>
-                    </div>
-                    <div class="add-cart-row">
-                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
-                        <button class="add-to-cart-btn">AGREGAR AL CARRITO</button>
-                    </div>
+                <div class="purchase-controls" style="margin-top: 30px; display: flex; gap: 15px; align-items: center;">
+                    <input type="number" class="quantity-selector" value="1" min="1" style="width: 70px; padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-primary); text-align: center;">
+                    <button class="add-to-cart-btn" style="flex-grow: 1; padding: 18px 40px; font-size: 16px;">AGREGAR AL CARRITO</button>
                 </div>
             </div>
         </div>
-    </main>
-
+    </div>
     <footer></footer>
-    <!-- Supabase JS Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-config.js"></script>
-    
-    <script src="components.js?v=2"></script>
+    <script src="components.js?v=3"></script>
+    <script src="product_manager.js?v=3"></script>
     <script src="cart.js?v=2"></script>
-    <script src="product_manager.js?v=2"></script>
 </body>
 </html>
