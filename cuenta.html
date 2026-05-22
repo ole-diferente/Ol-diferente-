@@ -37,7 +37,37 @@
                         </div>
                         <p class="error-msg" id="login-error"></p>
                         <button type="submit" class="btn-auth">Ingresar</button>
+                        <p class="switch-form" style="margin-bottom: 5px;"><a href="#" id="to-recovery">¿Olvidaste tu contraseña?</a></p>
                         <p class="switch-form">¿No tienes cuenta? <a href="#" id="to-register">Regístrate aquí</a></p>
+                    </form>
+                </div>
+
+                <!-- Recovery Form -->
+                <div id="recovery-box" class="auth-box" style="display: none;">
+                    <h2>RECUPERAR CONTRASEÑA</h2>
+                    <p style="text-align: center; margin-bottom: 20px; font-size: 14px; opacity: 0.8;">Ingresá tu correo y te enviaremos un enlace para restablecerla.</p>
+                    <form id="recovery-form">
+                        <div class="input-group">
+                            <label for="recovery-email">Correo Electrónico</label>
+                            <input type="email" id="recovery-email" required>
+                        </div>
+                        <p class="error-msg" id="recovery-error"></p>
+                        <p class="success-msg" id="recovery-success"></p>
+                        <button type="submit" class="btn-auth">Enviar Enlace</button>
+                        <p class="switch-form"><a href="#" id="back-to-login">Volver a Iniciar Sesión</a></p>
+                    </form>
+                </div>
+
+                <!-- Update Password Form (After Recovery) -->
+                <div id="update-password-box" class="auth-box" style="display: none;">
+                    <h2>NUEVA CONTRASEÑA</h2>
+                    <form id="update-password-form">
+                        <div class="input-group">
+                            <label for="new-password">Nueva Contraseña</label>
+                            <input type="password" id="new-password" required>
+                        </div>
+                        <p class="error-msg" id="update-pwd-error"></p>
+                        <button type="submit" class="btn-auth">Guardar Contraseña</button>
                     </form>
                 </div>
 
