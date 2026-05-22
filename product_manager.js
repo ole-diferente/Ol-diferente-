@@ -67,6 +67,25 @@ const NOTAS_OLFATIVAS = {
  * Si no está en la lista, se mostrará un valor predeterminado equilibrado.
  */
 const SEASONS_DATA = {
+    "philos-pura.html": { winter: 50, autumn: 70, spring: 90, summer: 80 },
+    "khamrah-lattafa.html": { winter: 100, autumn: 90, spring: 30, summer: 10 },
+    "khamrah-qahwa.html": { winter: 100, autumn: 90, spring: 20, summer: 10 },
+    "fakhar-gold.html": { winter: 60, autumn: 70, spring: 80, summer: 60 },
+    "mandarin-sky.html": { winter: 80, autumn: 80, spring: 60, summer: 40 },
+    "yara-lattafa.html": { winter: 60, autumn: 70, spring: 80, summer: 50 },
+    "yara-candy.html": { winter: 50, autumn: 70, spring: 80, summer: 60 },
+    "salvo-intense.html": { winter: 60, autumn: 80, spring: 90, summer: 80 },
+    "9-pm-rebel.html": { winter: 70, autumn: 80, spring: 80, summer: 60 },
+    "9-am-dive.html": { winter: 30, autumn: 50, spring: 90, summer: 100 },
+    "hayaati-black.html": { winter: 50, autumn: 70, spring: 90, summer: 80 },
+    "hawas-fire.html": { winter: 50, autumn: 70, spring: 90, summer: 90 },
+    "fakhar-preto.html": { winter: 60, autumn: 80, spring: 100, summer: 80 },
+    "haya-pink.html": { winter: 40, autumn: 60, spring: 90, summer: 80 },
+    "art-of-universe.html": { winter: 40, autumn: 60, spring: 90, summer: 100 },
+    "tropical-vibe.html": { winter: 20, autumn: 40, spring: 80, summer: 100 },
+    "eclaire-pistacho.html": { winter: 90, autumn: 90, spring: 60, summer: 30 },
+    "opulent-blanco.html": { winter: 60, autumn: 70, spring: 90, summer: 80 },
+    "fakhar-rosa.html": { winter: 60, autumn: 80, spring: 90, summer: 70 },
     // Masculinas
     "hawas-for-him.html": { winter: 30, autumn: 70, spring: 95, summer: 100 },
     "afnan-9pm.html": { winter: 95, autumn: 90, spring: 65, summer: 30 },

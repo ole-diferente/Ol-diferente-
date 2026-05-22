@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hawas Fire | OLÉ DIFERENTE</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="tienda.css">
+    <link rel="stylesheet" href="producto.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body class="page-standard page-product">
+    <header></header>
+    
+    <main class="product-main">
+        <div class="product-detail-container reveal" data-name="Hawas Fire">
+            <!-- Galería de Imágenes -->
+            <div class="product-gallery">
+                <div class="main-image-container">
+                    <img src="img/fragancias/HAWAS FIRE.jpg" alt="Hawas Fire" class="product-detail-image" id="main-image">
+                </div>
+            </div>
+
+            <!-- Información del Producto -->
+            <div class="product-info-detail">
+                <div class="brand-badge">Rasasi</div>
+                <h1 class="detail-title">Hawas Fire</h1>
+                <div class="detail-gender">Fragancia Unisex</div>
+                <div class="detail-price-container">
+                    <span class="detail-price">$0</span>
+                    <span class="detail-size">/ 100 ml</span>
+                </div>
+
+                <div class="accords-container">
+                    <span class="accord-badge">Aromático</span><span class="accord-badge">Acuático</span><span class="accord-badge">Ámbar</span>
+                </div>
+
+                <div class="pyramid-container">
+                    <h3 class="pyramid-title">Pirámide Olfativa</h3>
+                    
+                    <div class="pyramid-level top-notes">
+                        <div class="level-label">NOTAS DE SALIDA</div>
+                        <div class="ingredients-grid">
+                            <div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Esclarea"></div><span class="ingredient-name">Esclarea</span></div>
+                        </div>
+                    </div>
+
+                    <div class="pyramid-level middle-notes">
+                        <div class="level-label">CORAZÓN</div>
+                        <div class="ingredients-grid">
+                            <div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Notas Marinas"></div><span class="ingredient-name">Notas Marinas</span></div><div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Jazmín"></div><span class="ingredient-name">Jazmín</span></div>
+                        </div>
+                    </div>
+
+                    <div class="pyramid-level base-notes">
+                        <div class="level-label">BASE</div>
+                        <div class="ingredients-grid">
+                            <div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Ámbar"></div><span class="ingredient-name">Ámbar</span></div><div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Notas Minerales"></div><span class="ingredient-name">Notas Minerales</span></div><div class="ingredient-item"><div class="ingredient-icon"><img src="" alt="Ámbar Gris"></div><span class="ingredient-name">Ámbar Gris</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="purchase-actions">
+                    <div class="size-selectors" style="justify-content: flex-start; margin-bottom: 20px;">
+                        <div class="selector-group main-options" style="margin:0;">
+                            <button class="size-btn active" data-type="full" data-price="0">100 ml</button>
+                            <button class="size-btn" data-type="decant">Decant</button>
+                        </div>
+                        <div class="selector-group decant-options" style="margin-left: 15px;">
+                            <button class="size-btn" data-price="0">10 ml</button>
+                            <button class="size-btn active" data-price="0">5 ml</button>
+                        </div>
+                    </div>
+                    <div class="add-cart-row">
+                        <input type="number" class="quantity-selector" value="1" min="1" aria-label="Cantidad">
+                        <button class="add-to-cart-btn">AGREGAR AL CARRITO</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer></footer>
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    
+    <script src="components.js?v=2"></script>
+    <script src="cart.js?v=2"></script>
+    <script src="product_manager.js?v=2"></script>
+</body>
+</html>
