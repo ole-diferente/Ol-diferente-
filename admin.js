@@ -45,15 +45,22 @@ class AdminPanel {
 
     async loadOrders() {
         try {
+            // Fetch pending and up to 10 processed orders
             const { data: orders, error } = await window.supabase
                 .from('orders')
                 .select('*')
-                .eq('status', 'pendiente')
-                .order('created_at', { ascending: false });
+                .order('created_at', { ascending: false })
+                .limit(50); // Get recent 50 to ensure we have pending ones + some history
 
             if (error) throw error;
+            
+            // Filter: keep all 'pendiente', and only max 10 of others
+            const pending = orders.filter(o => o.status === 'pendiente');
+            const processed = orders.filter(o => o.status !== 'pendiente').slice(0, 10);
+            
+            const displayOrders = [...pending, ...processed].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-            this.renderOrders(orders);
+            this.renderOrders(displayOrders);
         } catch (err) {
             console.error('Error loading orders:', err);
             this.container.innerHTML = '<p style="text-align: center; color: #eb5757;">Error al cargar pedidos.</p>';
@@ -65,7 +72,7 @@ class AdminPanel {
             this.container.innerHTML = `
                 <div style="text-align: center; padding: 50px; color: var(--text-secondary);">
                     <i data-lucide="check-circle" style="width: 48px; height: 48px; margin-bottom: 15px; opacity: 0.3;"></i>
-                    <p>No hay pedidos pendientes.</p>
+                    <p>No hay pedidos recientes.</p>
                 </div>
             `;
             if (typeof lucide !== 'undefined') lucide.createIcons();
@@ -87,8 +94,26 @@ class AdminPanel {
                 `;
             });
 
+            const isPending = order.status === 'pendiente';
+            const opacityStyle = isPending ? '' : 'opacity: 0.5; filter: grayscale(100%); pointer-events: none;';
+            
+            let actionButtons = '';
+            if (isPending) {
+                actionButtons = `
+                    <button class="btn-approve" onclick="adminPanel.approveOrder('${order.id}')">Aprobar y Descontar Stock</button>
+                    <button class="btn-reject" onclick="adminPanel.rejectOrder('${order.id}')">Rechazar</button>
+                `;
+            } else {
+                const statusColor = order.status === 'aprobado' ? '#27ae60' : '#eb5757';
+                actionButtons = `
+                    <span style="color: ${statusColor}; font-weight: bold; border: 1px solid ${statusColor}; padding: 5px 15px; border-radius: 8px;">
+                        ${order.status.toUpperCase()}
+                    </span>
+                `;
+            }
+
             const cardHTML = `
-                <div class="order-card" id="order-${order.id}">
+                <div class="order-card" id="order-${order.id}" style="${opacityStyle}">
                     <div class="order-header">
                         <div>
                             <span class="order-id">Pedido #${order.id.slice(0,8)}</span>
@@ -100,8 +125,7 @@ class AdminPanel {
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
                         <div>
-                            <button class="btn-approve" onclick="adminPanel.approveOrder('${order.id}')">Aprobar y Descontar Stock</button>
-                            <button class="btn-reject" onclick="adminPanel.rejectOrder('${order.id}')">Rechazar</button>
+                            ${actionButtons}
                         </div>
                         <div class="order-total">
                             Total: $${order.total.toLocaleString('es-AR')}
@@ -164,12 +188,7 @@ class AdminPanel {
             if (statusError) throw statusError;
 
             alert('Pedido aprobado y stock descontado exitosamente.');
-            document.getElementById(`order-${orderId}`).remove();
-            
-            // Check if empty
-            if (this.container.children.length === 0) {
-                this.loadOrders();
-            }
+            this.loadOrders();
 
         } catch (err) {
             console.error('Error approving order:', err);
@@ -188,12 +207,7 @@ class AdminPanel {
 
             if (error) throw error;
             
-            document.getElementById(`order-${orderId}`).remove();
-            
-            // Check if empty
-            if (this.container.children.length === 0) {
-                this.loadOrders();
-            }
+            this.loadOrders();
         } catch (err) {
             console.error('Error rejecting order:', err);
             alert('Error al rechazar el pedido.');
