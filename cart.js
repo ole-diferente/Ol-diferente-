@@ -248,7 +248,7 @@ class ShoppingCart {
         document.body.style.overflow = '';
     }
 
-    calculateShippingCost(cpStr) {
+    calculateShippingCost(cpStr, subtotal = 0) {
         if (!cpStr || cpStr.length < 4) return 0;
         const cp = parseInt(cpStr.replace(/D/g, ''), 10);
         if (isNaN(cp)) return 0;
@@ -277,11 +277,15 @@ class ShoppingCart {
         
         if (method === 'envio') {
             const cp = document.querySelector('#shipping-cp').value;
-            shipping = this.calculateShippingCost(cp);
+            shipping = this.calculateShippingCost(cp, subtotal);
             document.querySelector('#shipping-cost-row').style.display = 'flex';
             const quoteText = document.querySelector('.shipping-quote-text');
-            if (shipping > 0) {
-                quoteText.innerText = "Costo de envío: $" + this.formatPrice(shipping);
+            if (subtotal >= 150000) {
+                quoteText.innerText = "¡Ya tienes envío gratis!";
+                quoteText.style.color = "#27ae60";
+            } else if (shipping > 0) {
+                quoteText.innerText = "Costo de envío: $" + this.formatPrice(shipping) + "\n(Te faltan $" + this.formatPrice(150000 - subtotal) + " para envío gratis)";
+                quoteText.style.color = "var(--text-secondary)";
             } else {
                 quoteText.innerText = "";
             }
@@ -318,7 +322,7 @@ class ShoppingCart {
                 return;
             }
 
-            shippingCost = this.calculateShippingCost(cp);
+            shippingCost = this.calculateShippingCost(cp, subtotal);
             shippingData = { cp, name, dni, prov, loc, calle, depto };
         }
 
