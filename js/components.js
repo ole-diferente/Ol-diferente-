@@ -203,6 +203,7 @@ class WebComponents {
                 <a href="${this.basePath}tienda.html" class="${currentPage === 'tienda.html' ? 'active' : ''}">TIENDA</a>
                 <a href="${this.basePath}index.html#quiz-perfume">TU PERFUME IDEAL</a>
                 <a href="${this.basePath}famosos.html" class="${currentPage === 'famosos.html' ? 'active' : ''}">FAMOSOS</a>
+                <a href="${this.basePath}resenas.html" class="${currentPage === 'resenas.html' ? 'active' : ''}">RESEÑAS</a>
                 <a href="${this.basePath}contacto.html" class="${currentPage === 'contacto.html' ? 'active' : ''}">CONTACTO</a>
             </nav>
             <div class="actions">

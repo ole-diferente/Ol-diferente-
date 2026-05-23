@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reseñas de Expertos - OLÉ DIFERENTE</title>
+    <meta name="referrer" content="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/tienda.css?v=11">
+    <link rel="stylesheet" href="css/producto.css?v=11">
+    <link rel="stylesheet" href="css/resenas.css?v=1">
+    <link rel="stylesheet" href="css/cart.css?v=11">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <header></header>
+    
+    <main class="reviews-section">
+        <div class="reviews-header">
+            <h1 class="reviews-title reveal">Olé TV</h1>
+            <p class="reviews-subtitle reveal">Las reseñas y recomendaciones de los expertos más influyentes de la perfumería sobre nuestro catálogo.</p>
+        </div>
+
+        <!-- Barra de Filtros (Glassmorphism) -->
+        <div class="filters-bar reveal">
+            <button class="filter-btn active" data-filter="all">TODOS</button>
+            <button class="filter-btn" data-filter="huelepetacular">Huelepetacular</button>
+            <button class="filter-btn" data-filter="facusierra">Facu Sierra</button>
+            <button class="filter-btn" data-filter="matias">Matias Mr. Elixir</button>
+            <button class="filter-btn" data-filter="rincon">Rincón Perfumado</button>
+            <button class="filter-btn" data-filter="fragaby">Fragaby</button>
+        </div>
+
+        <!-- Cuadrícula de Reseñas -->
+        <div class="reviews-grid">
+            
+            <!-- Reseña 1: Huelepetacular - Afnan 9 PM -->
+            <div class="review-card reveal" data-reviewer="huelepetacular">
+                <div class="review-video-wrapper">
+                    <!-- YouTube Short Real Embed -->
+                    <iframe src="https://www.youtube.com/embed/5yB1LwMizG4" title="Huelepetacular review" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="review-body">
+                    <div class="reviewer-profile">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100" alt="Huelepetacular" class="reviewer-avatar">
+                        <div class="reviewer-info">
+                            <span class="reviewer-name">Huelepetacular</span>
+                            <span class="review-platform"><i data-lucide="youtube" style="color: #ff0000;"></i> YouTube Shorts</span>
+                        </div>
+                    </div>
+                    <blockquote class="review-quote">"El mejor perfume para salir de fiesta. Una manzana dulce y canela con una duración de bestia."</blockquote>
+                    
+                    <div class="linked-product">
+                        <div class="product-mini-info">
+                            <span class="product-mini-name">Afnan 9 PM</span>
+                            <span class="product-mini-price">$78.000</span>
+                        </div>
+                        <a href="productos/afnan-9pm.html" class="btn-view-product">Ver Perfume <i data-lucide="arrow-right" style="width:10px; height:10px;"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reseña 2: Facu Sierra - Lattafa Asad -->
+            <div class="review-card reveal" data-reviewer="facusierra">
+                <div class="review-video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/j_8j4R4TkiM" title="Facu Sierra review" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="review-body">
+                    <div class="reviewer-profile">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100" alt="Facu Sierra" class="reviewer-avatar">
+                        <div class="reviewer-info">
+                            <span class="reviewer-name">Facu Sierra</span>
+                            <span class="review-platform"><i data-lucide="youtube" style="color: #ff0000;"></i> YouTube Shorts</span>
+                        </div>
+                    </div>
+                    <blockquote class="review-quote">"Especias potentes, pimienta y una vainilla oscura exquisita. Un clon digno de Sauvage Elixir."</blockquote>
+                    
+                    <div class="linked-product">
+                        <div class="product-mini-info">
+                            <span class="product-mini-name">Lattafa Asad</span>
+                            <span class="product-mini-price">$82.000</span>
+                        </div>
+                        <a href="productos/lattafa-asad.html" class="btn-view-product">Ver Perfume <i data-lucide="arrow-right" style="width:10px; height:10px;"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reseña 3: Matias Mr. Elixir - Club de Nuit -->
+            <div class="review-card reveal" data-reviewer="matias">
+                <div class="review-video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/k-pTzGjK7Ew" title="Matias review" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="review-body">
+                    <div class="reviewer-profile">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=100" alt="Matias Mr. Elixir" class="reviewer-avatar">
+                        <div class="reviewer-info">
+                            <span class="reviewer-name">Matias Mr. Elixir</span>
+                            <span class="review-platform"><i data-lucide="youtube" style="color: #ff0000;"></i> YouTube Shorts</span>
+                        </div>
+                    </div>
+                    <blockquote class="review-quote">"El rey indiscutible de los cumplidos. Cítricos ahumados que duran todo el santo día."</blockquote>
+                    
+                    <div class="linked-product">
+                        <div class="product-mini-info">
+                            <span class="product-mini-name">Club de Nuit Intense</span>
+                            <span class="product-mini-price">$89.000</span>
+                        </div>
+                        <a href="productos/club-de-nuit.html" class="btn-view-product">Ver Perfume <i data-lucide="arrow-right" style="width:10px; height:10px;"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reseña 4: Rincón Perfumado - Lattafa Khamrah -->
+            <div class="review-card reveal" data-reviewer="rincon">
+                <div class="review-video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/tS41FpPuy1E" title="Rincon review" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="review-body">
+                    <div class="reviewer-profile">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100" alt="Rincón Perfumado" class="reviewer-avatar">
+                        <div class="reviewer-info">
+                            <span class="reviewer-name">Rincón Perfumado</span>
+                            <span class="review-platform"><i data-lucide="youtube" style="color: #ff0000;"></i> YouTube Shorts</span>
+                        </div>
+                    </div>
+                    <blockquote class="review-quote">"Un postre embotellado. Canela, dátiles y un dulzor alicorado insuperable para el invierno."</blockquote>
+                    
+                    <div class="linked-product">
+                        <div class="product-mini-info">
+                            <span class="product-mini-name">Khamrah Lattafa</span>
+                            <span class="product-mini-price">$92.000</span>
+                        </div>
+                        <a href="productos/khamrah-lattafa.html" class="btn-view-product">Ver Perfume <i data-lucide="arrow-right" style="width:10px; height:10px;"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reseña 5: Fragaby - Yara Lattafa -->
+            <div class="review-card reveal" data-reviewer="fragaby">
+                <div class="review-video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/pQeI9bZ5mks" title="Fragaby review" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="review-body">
+                    <div class="reviewer-profile">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=100" alt="Fragaby" class="reviewer-avatar">
+                        <div class="reviewer-info">
+                            <span class="reviewer-name">Fragaby</span>
+                            <span class="review-platform"><i data-lucide="youtube" style="color: #ff0000;"></i> YouTube Shorts</span>
+                        </div>
+                    </div>
+                    <blockquote class="review-quote">"Huele a batido de fresas con vainilla. Femenino, acogedor, juvenil y súper adictivo."</blockquote>
+                    
+                    <div class="linked-product">
+                        <div class="product-mini-info">
+                            <span class="product-mini-name">Yara Lattafa</span>
+                            <span class="product-mini-price">$74.000</span>
+                        </div>
+                        <a href="productos/yara-lattafa.html" class="btn-view-product">Ver Perfume <i data-lucide="arrow-right" style="width:10px; height:10px;"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer></footer>
+
+    <script src="js/supabase-config.js"></script>
+    <script src="js/components.js?v=20"></script>
+    <script src="js/cart.js?v=11"></script>
+    
+    <!-- Lógica de Filtros Interactiva -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const reviewCards = document.querySelectorAll('.review-card');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remover clase active de todos los botones y añadirla al actual
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filterValue = button.getAttribute('data-filter');
+
+                    reviewCards.forEach(card => {
+                        const cardReviewer = card.getAttribute('data-reviewer');
+
+                        if (filterValue === 'all' || cardReviewer === filterValue) {
+                            // Mostrar tarjeta con pequeña animación
+                            card.style.display = 'flex';
+                            card.style.opacity = '0';
+                            setTimeout(() => {
+                                card.style.transition = 'opacity 0.4s ease';
+                                card.style.opacity = '1';
+                            }, 50);
+                        } else {
+                            // Ocultar tarjeta
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

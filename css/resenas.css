@@ -1,0 +1,318 @@
+/* ==========================================================================
+   OLÉ DIFERENTE - Estilos de la Sección de Reseñas (Olé TV)
+   ========================================================================== */
+
+/* Variables y Configuración de Página */
+.reviews-section {
+    padding: 120px 40px 80px;
+    max-width: 1300px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+    z-index: 2;
+}
+
+/* Encabezado */
+.reviews-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.reviews-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--text-primary);
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.reviews-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    letter-spacing: 2px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Barra de Filtros (Glassmorphism) */
+.filters-bar {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    padding: 15px 30px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    max-width: 900px;
+    margin: 0 auto 50px;
+    flex-wrap: wrap;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .filters-bar {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+}
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-primary);
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.filter-btn:hover {
+    background: rgba(212, 175, 55, 0.08);
+    border-color: rgba(212, 175, 55, 0.3);
+    color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: var(--accent-color, #D4AF37);
+    color: #121212 !important;
+    border-color: var(--accent-color);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Cuadrícula de Reseñas */
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Tarjeta de Reseña */
+.review-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.4s ease, 
+                border-color 0.4s ease;
+    position: relative;
+}
+
+.review-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.12);
+    border-color: rgba(212, 175, 55, 0.35);
+}
+
+/* Video Wrapper (Relación de Aspecto 9:16) */
+.review-video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 177.78%; /* Proporción exacta 9:16 */
+    background: #050505;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.review-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Cuerpo / Detalles de la Reseña */
+.review-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-grow: 1;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.05));
+}
+
+[data-theme="dark"] .review-body {
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
+}
+
+/* Perfil del Reseñador */
+.reviewer-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.reviewer-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.25);
+}
+
+.reviewer-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.reviewer-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.5px;
+}
+
+.review-platform {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.review-platform i {
+    width: 12px;
+    height: 12px;
+}
+
+/* Frase Destacada (Cita) */
+.review-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text-primary);
+    border-left: 2px solid var(--accent-color);
+    padding-left: 12px;
+    margin: 5px 0;
+}
+
+/* Tarjeta del Perfume Enlazado (Glassmorphic) */
+.linked-product {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+    transition: background 0.3s ease;
+}
+
+[data-theme="light"] .linked-product {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.linked-product:hover {
+    background: rgba(212, 175, 55, 0.05);
+}
+
+.product-mini-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.product-mini-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 130px;
+}
+
+.product-mini-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.btn-view-product {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-color, #D4AF37);
+    color: #121212 !important;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: opacity 0.3s;
+}
+
+.btn-view-product:hover {
+    opacity: 0.9;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Adaptación Responsiva */
+@media (max-width: 1024px) {
+    .reviews-section {
+        padding: 100px 20px 60px;
+    }
+    .reviews-title {
+        font-size: 2.2rem;
+    }
+    .filters-bar {
+        padding: 10px 20px;
+        border-radius: 30px;
+    }
+    .filter-btn {
+        padding: 8px 18px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .reviews-title {
+        font-size: 1.8rem;
+    }
+    .reviews-subtitle {
+        font-size: 0.9rem;
+    }
+    .filter-btn {
+        padding: 6px 14px;
+        font-size: 11px;
+    }
+}
