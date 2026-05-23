@@ -70,10 +70,14 @@
 }
 
 .search-input {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--text-primary);
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    color: var(--text-primary) !important;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     font-weight: 400;
