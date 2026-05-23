@@ -23,21 +23,15 @@
             <p class="reviews-subtitle reveal">Las reseñas y recomendaciones de los expertos más influyentes de la perfumería sobre nuestro catálogo.</p>
         </div>
 
-        <!-- Barra de Filtros (Glassmorphism) -->
-        <div class="filters-bar reveal">
-            <button class="filter-btn active" data-filter="all">TODOS</button>
-            <button class="filter-btn" data-filter="huelepetacular">Huelepetacular</button>
-            <button class="filter-btn" data-filter="facusierra">Facu Sierra</button>
-            <button class="filter-btn" data-filter="matias">Matias Mr. Elixir</button>
-            <button class="filter-btn" data-filter="rincon">Rincón Perfumado</button>
-            <button class="filter-btn" data-filter="fragaby">Fragaby</button>
-            <button class="filter-btn" data-filter="aguscorreas">Agus Correas</button>
-            <button class="filter-btn" data-filter="samyandraus">Samy Andraus</button>
-            <button class="filter-btn" data-filter="sendaolfativa">Senda Olfativa</button>
-            <button class="filter-btn" data-filter="alessandra">Alessandra Anguiano</button>
-            <button class="filter-btn" data-filter="marcel">Marcel Perfumes</button>
-            <button class="filter-btn" data-filter="chicavainilla">Chica Vainilla</button>
-            <button class="filter-btn" data-filter="julianoriental">Julián Oriental</button>
+        <!-- Barra de Búsqueda Premium (Glassmorphism) -->
+        <div class="search-bar-container reveal">
+            <div class="search-bar-wrapper">
+                <div class="search-icon">
+                    <i data-lucide="search" style="width: 20px; height: 20px;"></i>
+                </div>
+                <input type="text" id="perfume-search" class="search-input" placeholder="Buscar por perfume (ej. Eclaire, Asad, Yara...)" autocomplete="off">
+            </div>
+            <div class="search-helper-text">Escribe al menos 3 letras para buscar de forma interactiva</div>
         </div>
 
         <!-- Cuadrícula de Reseñas -->
@@ -892,36 +886,48 @@
     <script src="js/components.js?v=20"></script>
     <script src="js/cart.js?v=11"></script>
     
-    <!-- Lógica de Filtros Interactiva -->
+    <!-- Lógica de Búsqueda de Perfumes Interactiva -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const filterButtons = document.querySelectorAll('.filter-btn');
+            const searchInput = document.getElementById('perfume-search');
             const reviewCards = document.querySelectorAll('.review-card');
 
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Remover clase active de todos los botones y añadirla al actual
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
+            // Pre-mapear los perfumes enlazados en cada tarjeta para una búsqueda instantánea
+            const cardsData = Array.from(reviewCards).map(card => {
+                const miniNames = card.querySelectorAll('.product-mini-name');
+                const perfumeNames = Array.from(miniNames).map(el => el.textContent.trim().toLowerCase());
+                return {
+                    element: card,
+                    perfumes: perfumeNames
+                };
+            });
 
-                    const filterValue = button.getAttribute('data-filter');
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.trim().toLowerCase();
 
-                    reviewCards.forEach(card => {
-                        const cardReviewer = card.getAttribute('data-reviewer');
-
-                        if (filterValue === 'all' || cardReviewer === filterValue) {
-                            // Mostrar tarjeta con pequeña animación
-                            card.style.display = 'flex';
-                            card.style.opacity = '0';
-                            setTimeout(() => {
-                                card.style.transition = 'opacity 0.4s ease';
-                                card.style.opacity = '1';
-                            }, 50);
-                        } else {
-                            // Ocultar tarjeta
-                            card.style.display = 'none';
-                        }
+                if (query.length < 3) {
+                    // Mostrar todas las tarjetas si hay menos de 3 letras escritas
+                    cardsData.forEach(data => {
+                        data.element.style.display = 'flex';
+                        data.element.style.opacity = '1';
                     });
+                    return;
+                }
+
+                cardsData.forEach(data => {
+                    // Verificar si alguno de los perfumes enlazados contiene el texto buscado
+                    const isMatch = data.perfumes.some(name => name.includes(query));
+
+                    if (isMatch) {
+                        data.element.style.display = 'flex';
+                        data.element.style.opacity = '0';
+                        setTimeout(() => {
+                            data.element.style.transition = 'opacity 0.3s ease';
+                            data.element.style.opacity = '1';
+                        }, 50);
+                    } else {
+                        data.element.style.display = 'none';
+                    }
                 });
             });
         });
