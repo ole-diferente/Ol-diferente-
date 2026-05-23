@@ -930,6 +930,52 @@
                     }
                 });
             });
+
+            // Activar la API de JS de YouTube en todos los iframes para controlarlos
+            const iframes = document.querySelectorAll('.review-video-wrapper iframe');
+            iframes.forEach(iframe => {
+                const src = iframe.src;
+                if (!src.includes('enablejsapi=1')) {
+                    iframe.src = src + (src.includes('?') ? '&' : '?') + 'enablejsapi=1';
+                }
+            });
+
+            // Escuchar cuando un video empieza a reproducirse para pausar los demás
+            window.addEventListener('message', (event) => {
+                if (!event.origin.includes('youtube.com')) return;
+
+                try {
+                    let data = event.data;
+                    if (typeof data === 'string') {
+                        data = JSON.parse(data);
+                    }
+
+                    // Identificar si el estado cambió a reproducción (playing = 1)
+                    if (data && (data.event === 'onStateChange' || data.event === 'infoDelivery') &&
+                        (data.info === 1 || (data.info && data.info.playerState === 1))) {
+                        
+                        // Buscar cuál es el iframe activo que envió el mensaje
+                        const activeIframe = Array.from(iframes).find(
+                            iframe => iframe.contentWindow === event.source
+                        );
+
+                        if (activeIframe) {
+                            // Pausar todos los demás iframes
+                            iframes.forEach(iframe => {
+                                if (iframe !== activeIframe && iframe.contentWindow) {
+                                    iframe.contentWindow.postMessage(JSON.stringify({
+                                        event: 'command',
+                                        func: 'pauseVideo',
+                                        args: ''
+                                    }), '*');
+                                }
+                            });
+                        }
+                    }
+                } catch (e) {
+                    // Ignorar mensajes con formatos de datos no válidos de otras fuentes
+                }
+            });
         });
     </script>
 </body>
