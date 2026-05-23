@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eclaire - OLÉ DIFERENTE</title>
+    <meta name="referrer" content="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../css/tienda.css?v=10">
+    <link rel="stylesheet" href="../css/producto.css?v=10">
+    <link rel="stylesheet" href="../css/cart.css?v=10">
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <header></header>
+    <div class="container">
+        <a href="../tienda.html" class="back-to-shop">
+            <i data-lucide="arrow-left"></i> VOLVER A LA TIENDA
+        </a>
+        <div class="product-detail-container">
+            <div class="product-detail-image-wrapper">
+                <img src="../img/fragancias/Parfum éclaire de lattafa.jpg" alt="Lattafa Eclaire" class="product-detail-image">
+            </div>
+            <div class="product-detail-info">
+                <span class="detail-gender">GÉNERO: FEMENINO / GOURMAND</span>
+                <h1 class="detail-title">Lattafa Eclaire</h1>
+                <p class="detail-description">
+                    Un exquisito perfume gourmand que evoca la dulzura seductora del caramelo y la leche. Con un corazón profundamente dulce sobre un fondo reconfortante de vainilla y miel, es la elección ideal para quienes buscan un aroma cálido, suave y sumamente acogedor.
+                </p>
+                <div class="detail-price-container" style="margin-bottom: 25px;">
+                    <span class="detail-price" style="font-size: 32px; font-weight: 700; color: var(--text-primary);">$72.000</span>
+                    <span class="detail-size-label" style="font-size: 14px; color: var(--text-secondary); margin-left: 10px;">/ 100 ml</span>
+                </div>
+                <div class="visual-notes">
+                    <div class="pyramid-section">
+                        <div class="pyramid-header"><span>NOTAS DE SALIDA</span></div>
+                        <div class="pyramid-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Caramelo.jpg" alt="Caramelo"></div>
+                                <span class="ingredient-name">Caramelo</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Leche.jpg" alt="Leche"></div>
+                                <span class="ingredient-name">Leche</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Azúcar.jpg" alt="Azúcar"></div>
+                                <span class="ingredient-name">Azúcar</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pyramid-section">
+                        <div class="pyramid-header"><span>CORAZÓN</span></div>
+                        <div class="pyramid-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Miel.jpg" alt="Miel"></div>
+                                <span class="ingredient-name">Miel</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Flores Blancas.jpg" alt="Flores Blancas"></div>
+                                <span class="ingredient-name">Flores Blancas</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pyramid-section">
+                        <div class="pyramid-header"><span>BASE</span></div>
+                        <div class="pyramid-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Vainilla.jpg" alt="Vainilla"></div>
+                                <span class="ingredient-name">Vainilla</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/praliné.jpg" alt="Praliné"></div>
+                                <span class="ingredient-name">Praliné</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Almizcle.jpg" alt="Almizcle"></div>
+                                <span class="ingredient-name">Almizcle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accords-container">
+                    <h3 class="accords-title">Acordes Principales</h3>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Caramelo</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 100%; background: #d2a679;"></div></div>
+                    </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Avainillado</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 95%; background: #ffe680;"></div></div>
+                    </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Dulce</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 90%; background: #ff99cc;"></div></div>
+                    </div>
+                </div>
+                <div class="purchase-controls" style="margin-top: 30px; display: flex; gap: 15px; align-items: center;">
+                    <input type="number" class="quantity-selector" value="1" min="1" style="width: 70px; padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-primary); text-align: center;">
+                    <button class="add-to-cart-btn" style="flex-grow: 1; padding: 18px 40px; font-size: 16px;">AGREGAR AL CARRITO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/components.js?v=10"></script>
+    <script src="../js/product_manager.js"></script>
+    <script src="../js/cart.js"></script>
+</body>
+</html>

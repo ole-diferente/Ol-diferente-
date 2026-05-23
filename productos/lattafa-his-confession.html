@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lattafa His Confession - OLÉ DIFERENTE</title>
+    <meta name="referrer" content="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../css/tienda.css?v=10">
+    <link rel="stylesheet" href="../css/producto.css?v=10">
+    <link rel="stylesheet" href="../css/cart.css?v=10">
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <header></header>
+    <div class="container">
+        <a href="../tienda.html" class="back-to-shop">
+            <i data-lucide="arrow-left"></i> VOLVER A LA TIENDA
+        </a>
+        <div class="product-detail-container">
+            <div class="product-detail-image-wrapper">
+                <div class="out-of-stock-badge" style="top: 25px; right: 25px; padding: 10px 18px; font-size: 14px;">Sin Stock</div>
+                <img src="../img/fragancias/Lattafa His Confession – A Bold Tale of Passion & Power.jpg" alt="Lattafa His Confession" class="product-detail-image">
+            </div>
+            <div class="product-detail-info">
+                <span class="detail-gender">GÉNERO: MASCULINO</span>
+                <h1 class="detail-title">Lattafa His Confession</h1>
+                <p class="detail-description">
+                    Una fragancia audaz, profunda y sumamente adictiva. His Confession despliega un corazón elegante de Iris abrazado por ricas especias como la canela, para luego fundirse en un fondo cálido y misterioso de vainilla, ámbar e incienso. Un relato audaz de pasión y poder.
+                </p>
+                <div class="detail-price-container" style="margin-bottom: 25px;">
+                    <span class="detail-price" style="font-size: 32px; font-weight: 700; color: var(--text-primary);">$74.000</span>
+                    <span class="detail-size-label" style="font-size: 14px; color: var(--text-secondary); margin-left: 10px;">/ 100 ml</span>
+                </div>
+                
+                <div class="size-selectors" style="margin-bottom: 30px;">
+                    <h3 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; color: var(--text-secondary);">Selecciona un formato</h3>
+                    <div class="selector-group main-options" style="display: flex; gap: 10px; margin-bottom: 15px;">
+                        <button class="size-btn active" data-type="full" data-price="49.500" disabled>Botella Completa (100ml)</button>
+                        <button class="size-btn" data-type="decant" disabled>Probar en Decant</button>
+                    </div>
+                    <div class="selector-group decant-options" style="display: none; gap: 10px;">
+                        <button class="size-btn" data-price="13.000" disabled>Decant 10 ml</button>
+                        <button class="size-btn active" data-price="8.500" disabled>Decant 5 ml</button>
+                    </div>
+                </div>
+
+                <div class="visual-notes">
+                    <!-- Notas de Salida -->
+                    <div class="pyramid-section">
+                        <div class="pyramid-header"><span>NOTAS DE SALIDA</span></div>
+                        <div class="pyramid-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Lavanda.jpg" alt="Lavanda"></div>
+                                <span class="ingredient-name">lavanda</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Canela.jpg" alt="Canela"></div>
+                                <span class="ingredient-name">canela</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Mandarina.jpg" alt="Mandarina"></div>
+                                <span class="ingredient-name">mandarina</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notas de Corazón -->
+                    <div class="pyramid-section">
+                        <div class="pyramid-header"><span>CORAZÓN</span></div>
+                        <div class="pyramid-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Lirios azules.jpg" alt="Iris"></div>
+                                <span class="ingredient-name">iris</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Benjuí.jpg" alt="Benjuí"></div>
+                                <span class="ingredient-name">benjuí</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Ciprés.jpg" alt="Ciprés"></div>
+                                <span class="ingredient-name">ciprés</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Mahonial.jpg" alt="Mahonial"></div>
+                                <span class="ingredient-name">Mahonial</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notas de Base -->
+                    <div class="pyramid-section">
+                        <div class="pyramid-header"><span>BASE</span></div>
+                        <div class="pyramid-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Vainilla.jpg" alt="Vainilla"></div>
+                                <span class="ingredient-name">vainilla</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Haba Tonka.jpg" alt="Haba Tonka"></div>
+                                <span class="ingredient-name">haba tonka</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Ámbar.jpg" alt="Ámbar"></div>
+                                <span class="ingredient-name">ámbar</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Incienso.jpg" alt="Incienso"></div>
+                                <span class="ingredient-name">incienso</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Cedro.jpg" alt="Cedro"></div>
+                                <span class="ingredient-name">cedro</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Pachulí.jpg" alt="Pachulí"></div>
+                                <span class="ingredient-name">pachulí</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accords-container">
+                    <h3 class="accords-title">Acordes Principales</h3>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Amaderado</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 100%; background: #8b5a2b;"></div></div>
+                    </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Atalcado (Iris)</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 85%; background: #a29bfe;"></div></div>
+                    </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Especiado Cálido</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 70%; background: #d35400;"></div></div>
+                    </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Ambarado Dulce</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 65%; background: #f1c40f;"></div></div>
+                    </div>
+                </div>
+                <div class="purchase-controls" style="margin-top: 30px; display: flex; gap: 15px; align-items: center;">
+                    <input type="number" class="quantity-selector" value="1" min="1" style="width: 70px; padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-primary); text-align: center;" disabled>
+                    <button class="add-to-cart-btn" style="flex-grow: 1; padding: 18px 40px; font-size: 16px;" disabled>SIN STOCK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/components.js?v=10"></script>
+    <script src="../js/producto.js"></script>
+    <script src="../js/product_manager.js"></script>
+    <script src="../js/cart.js"></script>
+</body>
+</html>

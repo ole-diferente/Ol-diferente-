@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uniq Oud Forever - OLÉ DIFERENTE</title>
+    <meta name="referrer" content="no-referrer">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../css/tienda.css?v=10">
+    <link rel="stylesheet" href="../css/producto.css?v=10">
+    <link rel="stylesheet" href="../css/cart.css?v=10">
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <header></header>
+    <div class="container">
+        <a href="../tienda.html" class="back-to-shop">
+            <i data-lucide="arrow-left"></i> VOLVER A LA TIENDA
+        </a>
+        <div class="product-detail-container">
+            <div class="product-detail-image-wrapper">
+                <img src="../img/fragancias/Uniq Oud Forever.jpeg" alt="Armaf Uniq Oud Forever" class="product-detail-image">
+            </div>
+            <div class="product-detail-info">
+                <span class="detail-gender">GÉNERO: UNISEX</span>
+                <h1 class="detail-title">Armaf Uniq Oud Forever</h1>
+                <p class="detail-description">
+                    Una fragancia floral oriental contemporánea y sofisticada. Destaca por una salida especiada de azafrán y cardamomo, evolucionando a un corazón de cypriol y jazmín. Su fondo de pachulí y ambroxan le otorga una estela misteriosa, moderna e inmensamente duradera.
+                </p>
+                <div class="detail-price-container" style="margin-bottom: 25px;">
+                    <span class="detail-price" style="font-size: 32px; font-weight: 700; color: var(--text-primary);">$79.000</span>
+                    <span class="detail-size-label" style="font-size: 14px; color: var(--text-secondary); margin-left: 10px;">/ 100 ml</span>
+                </div>
+                <div class="visual-notes">
+                    <div class="pyramid-section">
+                        <div class="pyramid-header"><span>NOTAS DE SALIDA</span></div>
+                        <div class="pyramid-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Azafrán.jpg" alt="Azafrán"></div>
+                                <span class="ingredient-name">Azafrán</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Cardamomo.jpg" alt="Cardamomo"></div>
+                                <span class="ingredient-name">Cardamomo</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Pimienta rosa.jpg" alt="Pimienta Rosa"></div>
+                                <span class="ingredient-name">Pimienta Rosa</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Bergamota.jpg" alt="Bergamota"></div>
+                                <span class="ingredient-name">Bergamota</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pyramid-section">
+                        <div class="pyramid-header"><span>CORAZÓN</span></div>
+                        <div class="pyramid-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Cipriol (Nagarmotha).jpg" alt="Cypriol"></div>
+                                <span class="ingredient-name">Cypriol</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/osmanto (olivo oloroso).jpg" alt="Osmanto"></div>
+                                <span class="ingredient-name">Osmanto</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Jazmín.jpg" alt="Jazmín"></div>
+                                <span class="ingredient-name">Jazmín</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pyramid-section">
+                        <div class="pyramid-header"><span>BASE</span></div>
+                        <div class="pyramid-grid">
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Ambroxan.jpg" alt="Ambroxan"></div>
+                                <span class="ingredient-name">Ambroxan</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Pachulí.jpg" alt="Pachulí"></div>
+                                <span class="ingredient-name">Pachulí</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Madera de cachemira.jpg" alt="Cachemira"></div>
+                                <span class="ingredient-name">Cachemira</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accords-container">
+                    <h3 class="accords-title">Acordes Principales</h3>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Cálido Especiado</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 100%; background: #a64dff;"></div></div>
+                    </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Amaderado</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 85%; background: #734d26;"></div></div>
+                    </div>
+                    <div class="accord-bar-wrapper">
+                        <span class="accord-label">Ambarado</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 75%; background: #e67300;"></div></div>
+                    </div>
+                </div>
+                <div class="purchase-controls" style="margin-top: 30px; display: flex; gap: 15px; align-items: center;">
+                    <input type="number" class="quantity-selector" value="1" min="1" style="width: 70px; padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-primary); text-align: center;">
+                    <button class="add-to-cart-btn" style="flex-grow: 1; padding: 18px 40px; font-size: 16px;">AGREGAR AL CARRITO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer></footer>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/components.js?v=10"></script>
+    <script src="../js/product_manager.js"></script>
+    <script src="../js/cart.js"></script>
+</body>
+</html>
