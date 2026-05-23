@@ -623,90 +623,238 @@ class WebComponents {
             a, button, input, select, textarea, .product-card, .btn-saber-mas, .avatar-option, .avatar-option-dash, .size-btn, .add-to-cart-btn {
                 cursor: none !important;
             }
-            #cursor-punto, #cursor-aura {
+            #cursor-punto {
                 position: fixed;
                 top: 0; left: 0;
                 pointer-events: none; 
-                transform: translate(-50%, -50%);
-                border-radius: 50%;
                 z-index: 999999;
-                transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                            height 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                            background-color 0.3s ease, 
-                            border-color 0.3s ease, 
-                            opacity 0.3s ease;
+                width: 24px;
+                height: 24px;
+                background: transparent;
+                transform: translate(0, 0); /* La punta del cursor coincide exactamente con la posición */
+                transition: opacity 0.3s ease, transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                will-change: transform, opacity;
             }
-            #cursor-punto {
-                width: 8px; height: 8px;
-                background-color: var(--accent-color, #D4AF37);
-                box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            
+            /* Partículas de fragancia/estela */
+            .fragrance-particle {
+                position: fixed;
+                pointer-events: none;
+                z-index: 999998;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(255, 240, 165, 0.95) 0%, rgba(212, 175, 55, 0.6) 40%, rgba(212, 175, 55, 0) 80%);
+                transform: translate(-50%, -50%);
+                will-change: transform, opacity, width, height;
             }
-            #cursor-aura {
-                width: 40px; height: 40px;
-                border: 1px solid var(--accent-color, #D4AF37);
-                opacity: 0.6;
-            }
-            .aura-expandida {
-                width: 70px !important;
-                height: 70px !important;
-                background-color: rgba(212, 175, 55, 0.15);
-                border-color: rgba(212, 175, 55, 0.3) !important;
-                opacity: 1 !important;
+            
+            /* Partícula destello brillante */
+            .sparkle-particle {
+                position: fixed;
+                pointer-events: none;
+                z-index: 999998;
+                width: 6px;
+                height: 6px;
+                background: #FFF;
+                transform: translate(-50%, -50%) rotate(45deg);
+                box-shadow: 0 0 4px #D4AF37, 0 0 8px #FFF;
+                will-change: transform, opacity;
             }
         `;
         document.head.appendChild(style);
 
-        // Inyectar elementos del cursor
+        // Inyectar elemento del cursor (solo la flecha dorada)
         const punto = document.createElement('div');
         punto.id = 'cursor-punto';
-        const aura = document.createElement('div');
-        aura.id = 'cursor-aura';
+        
+        // Flecha vectorial de lujo SVG con degradado dorado
+        punto.innerHTML = `
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block; width: 100%; height: 100%;">
+                <path d="M0 0L16 11.5L8.5 13L12.5 20L10 21.5L6 14.5L2 18.5L0 0Z" fill="url(#goldGrad)" stroke="rgba(0,0,0,0.5)" stroke-width="0.5" stroke-linejoin="round"/>
+                <defs>
+                    <linearGradient id="goldGrad" x1="0" y1="0" x2="12" y2="18" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#FFEFA6" />
+                        <stop offset="60%" stop-color="#D4AF37" />
+                        <stop offset="100%" stop-color="#997510" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        `;
+
         document.body.appendChild(punto);
-        document.body.appendChild(aura);
+
+        // Variables de estado
+        let mouseX = 0;
+        let mouseY = 0;
+        let currentX = 0;
+        let currentY = 0;
+        let isHovered = false;
+        const particles = [];
+        const maxParticles = 60; // Límite de seguridad para FPS estables
 
         // Movimiento del cursor
         window.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
             
-            // El punto sigue al mouse al instante
-            punto.style.left = `${clientX}px`;
-            punto.style.top = `${clientY}px`;
-
-            // El aura sigue con un retraso de 40ms para el efecto fluido
-            setTimeout(() => {
-                aura.style.left = `${clientX}px`;
-                aura.style.top = `${clientY}px`;
-            }, 40);
+            // Puntero de flecha sigue al instante
+            punto.style.left = `${mouseX}px`;
+            punto.style.top = `${mouseY}px`;
+            
+            // Mostrar si estaba oculto
+            if (punto.style.opacity === '0') {
+                punto.style.opacity = '1';
+            }
         });
 
-        // Efecto de expansión en elementos interactivos
+        // Animación suave con requestAnimationFrame
+        const tick = () => {
+            // Movimiento suavizado de referencia elástica para el cálculo de estela
+            currentX += (mouseX - currentX) * 0.15;
+            currentY += (mouseY - currentY) * 0.15;
+
+            // Generar partículas de estela en movimiento
+            const speed = Math.hypot(mouseX - currentX, mouseY - currentY);
+            if (speed > 1.2 && particles.length < maxParticles) {
+                if (Math.random() < 0.35) {
+                    createParticle(mouseX, mouseY, false);
+                }
+            }
+
+            // Actualizar posiciones y opacidad
+            updateParticles();
+
+            requestAnimationFrame(tick);
+        };
+
+        // Crear partícula individual
+        const createParticle = (x, y, isClick = false) => {
+            const p = document.createElement('div');
+            const isSparkle = !isClick && Math.random() < 0.25; // 25% son destellos dorados
+            
+            p.className = isSparkle ? 'sparkle-particle' : 'fragrance-particle';
+            
+            // Tamaño inicial aleatorio
+            let size = isSparkle ? 4 : (Math.random() * 6 + 4);
+            if (isClick) {
+                size = Math.random() * 7 + 5; // Más variadas en clic
+            }
+            
+            p.style.width = `${size}px`;
+            p.style.height = `${size}px`;
+            p.style.left = `${x}px`;
+            p.style.top = `${y}px`;
+            
+            // Física del rocío / estela
+            const angle = isClick ? (Math.random() * Math.PI * 2) : (Math.random() * Math.PI * 2);
+            let speed = isClick ? (Math.random() * 2.8 + 1.2) : (Math.random() * 0.6 + 0.2);
+            
+            const vx = Math.cos(angle) * speed;
+            // Elevación suave de partículas normales (efecto calor/evaporación)
+            const vy = isClick ? (Math.sin(angle) * speed) : (Math.sin(angle) * speed - 0.35); 
+
+            const particleObj = {
+                element: p,
+                x: x,
+                y: y,
+                vx: vx,
+                vy: vy,
+                alpha: 1.0,
+                size: size,
+                decay: isClick ? (Math.random() * 0.025 + 0.015) : (Math.random() * 0.018 + 0.008),
+                isSparkle: isSparkle,
+                isClick: isClick
+            };
+
+            document.body.appendChild(p);
+            particles.push(particleObj);
+        };
+
+        // Renderizar y limpiar partículas
+        const updateParticles = () => {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= p.decay;
+                
+                // Las burbujas de fragancia se expanden ligeramente al evaporarse
+                if (!p.isSparkle) {
+                    p.size += p.isClick ? 0.12 : 0.06;
+                    p.element.style.width = `${p.size}px`;
+                    p.element.style.height = `${p.size}px`;
+                }
+                
+                p.element.style.left = `${p.x}px`;
+                p.element.style.top = `${p.y}px`;
+                p.element.style.opacity = p.alpha;
+                
+                if (p.isSparkle) {
+                    p.element.style.transform = `translate(-50%, -50%) rotate(${p.x * 1.5}deg)`;
+                }
+
+                if (p.alpha <= 0) {
+                    p.element.remove();
+                    particles.splice(i, 1);
+                }
+            }
+        };
+
+        // Efecto de Pulverización/Atomización al hacer clic
+        window.addEventListener('mousedown', (e) => {
+            if (e.button !== 0) return; // Sólo clic izquierdo
+            
+            // Feedback físico en la flecha
+            punto.style.transform = 'scale(0.82)';
+            
+            // Generar ráfaga circular de micropartículas
+            const burstCount = Math.floor(Math.random() * 6 + 12);
+            for (let i = 0; i < burstCount; i++) {
+                createParticle(e.clientX, e.clientY, true);
+            }
+        });
+
+        window.addEventListener('mouseup', () => {
+            punto.style.transform = 'scale(1)';
+        });
+
+        // Efecto de escala leve al pasar por encima de elementos interactivos
         const setupInteractions = () => {
-            const targets = document.querySelectorAll('a, button, .product-card, .btn-saber-mas, .avatar-option, .avatar-option-dash, input, select, .size-btn, .add-to-cart-btn, .ingredient-item');
+            const targets = document.querySelectorAll('a, button, .product-card, .btn-saber-mas, .avatar-option, .avatar-option-dash, input, select, textarea, .size-btn, .add-to-cart-btn, .ingredient-item, .footer-social a');
             targets.forEach(el => {
-                // Evitar duplicar listeners
                 if (el.dataset.cursorBound) return;
                 el.dataset.cursorBound = "true";
 
-                el.addEventListener('mouseenter', () => aura.classList.add('aura-expandida'));
-                el.addEventListener('mouseleave', () => aura.classList.remove('aura-expandida'));
+                el.addEventListener('mouseenter', () => {
+                    isHovered = true;
+                    punto.style.transform = 'scale(1.15)';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    isHovered = false;
+                    punto.style.transform = 'scale(1)';
+                });
             });
         };
 
         setupInteractions();
 
-        // Observar cambios en el DOM para nuevos elementos (como productos cargados dinámicamente)
+        // Observador DOM para manejar elementos inyectados dinámicamente
         const domObserver = new MutationObserver(() => setupInteractions());
         domObserver.observe(document.body, { childList: true, subtree: true });
 
-        // Ocultar cursor al salir de la ventana
+        // Controlar cuando el mouse sale de la ventana del navegador
         document.addEventListener('mouseleave', () => {
             punto.style.opacity = '0';
-            aura.style.opacity = '0';
+            particles.forEach(p => p.element.remove());
+            particles.length = 0;
         });
+        
         document.addEventListener('mouseenter', () => {
             punto.style.opacity = '1';
-            aura.style.opacity = '1';
         });
+
+        // Iniciar bucle de animación
+        tick();
     }
 }
 
