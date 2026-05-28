@@ -1,4 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Purga de videos invisibles según el dispositivo para bajos recursos ---
+    const isDesktop = window.innerWidth > 1024;
+    if (isDesktop) {
+        // Eliminar todos los videos de móvil del DOM para evitar descargas innecesarias
+        document.querySelectorAll('video.video-mobile').forEach(el => el.remove());
+    } else {
+        // Eliminar todos los videos de escritorio
+        document.querySelectorAll('video.video-desktop').forEach(el => el.remove());
+    }
+
+    // Helper para cargar dinámicamente el video a demanda leyendo el data-src
+    const lazyLoadVideo = (video) => {
+        const source = video.querySelector('source');
+        if (source && source.dataset.src && !source.src) {
+            source.src = source.dataset.src;
+            video.load(); // Indicar al navegador que cargue el recurso multimedia
+        }
+    };
+
     // We'll define a function to get only visible elements to handle desktop vs mobile differences
     const getVisibleElements = () => {
         const allSlides = Array.from(document.querySelectorAll('.slide'));
@@ -47,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const newVideos = slides[currentIndex].querySelectorAll('video');
         newVideos.forEach(v => {
             if (window.getComputedStyle(v).display !== 'none') {
+                lazyLoadVideo(v); // Cargar a demanda al activar el slide
                 v.currentTime = 0;
                 v.play().catch(e => console.log('Auto-play prevented:', e));
             }
@@ -87,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (index !== currentIndex) {
                     video.pause();
                 } else if (window.getComputedStyle(video).display !== 'none') {
+                    lazyLoadVideo(video); // Cargar primer video inmediatamente
                     video.play().catch(e => console.log('Initial play prevented:', e));
                 }
 

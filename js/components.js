@@ -19,7 +19,7 @@ class WebComponents {
         this.setupAuthListener();
         this.updateUserAuthStatus();
         this.initScrollEffects();
-        this.setupCustomCursor();
+        // this.setupCustomCursor(); // Desactivado para PC de bajos recursos para evitar lag y repintados del cursor
         this.checkInventory();
     }
 
