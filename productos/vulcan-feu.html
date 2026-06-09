@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Opulent Musk - OLÉ DIFERENTE</title>
+    <title>Vulcan Feu - OLÉ DIFERENTE</title>
     <meta name="referrer" content="no-referrer">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/tienda.css?v=10">
     <link rel="stylesheet" href="../css/producto.css?v=10">
     <link rel="stylesheet" href="../css/cart.css?v=10">
+    <!-- Supabase JS Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -20,15 +21,15 @@
         <a href="../tienda.html" class="back-to-shop">
             <i data-lucide="arrow-left"></i> VOLVER A LA TIENDA
         </a>
-        <div class="product-detail-container" data-name="Opulent Musk">
+        <div class="product-detail-container" data-name="Armaf Vulcan Feu">
             <div class="product-detail-image-wrapper">
-                <img src="../img/fragancias/Opulent Musk Lattafa.jpg" alt="Opulent Musk" class="product-detail-image">
+                <img src="../img/fragancias/Vulcan Feu.jpeg" alt="Armaf Vulcan Feu" class="product-detail-image">
             </div>
             <div class="product-detail-info">
                 <span class="detail-gender">GÉNERO: UNISEX</span>
-                <h1 class="detail-title">Opulent Musk</h1>
+                <h1 class="detail-title">Armaf Vulcan Feu</h1>
                 <p class="detail-description">
-                    Puro, limpio y majestuoso. Un almizcle blanco etéreo se mezcla con azafrán resinoso y maderas, creando una fragancia suave pero con una presencia regia.
+                    Una fragancia unisex exótica, vibrante y llena de energía. Su salida despliega un jugo tropical de mango maduro, limón chispeante, jengibre picante y ruibarbo, fluyendo hacia un corazón sofisticado y dulce de pimienta rosa, jazmín, violeta y praliné, para descansar sobre una base sumamente sensual de haba tonka, cedro, ámbar gris y musgo de roble.
                 </p>
                 <div class="detail-price-container" style="margin-bottom: 25px;">
                     <span class="detail-price" style="font-size: 32px; font-weight: 700; color: var(--text-primary);">$0</span>
@@ -39,16 +40,20 @@
                         <div class="pyramid-header"><span>NOTAS DE SALIDA</span></div>
                         <div class="pyramid-grid">
                             <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Almizcle.jpg" alt="Almizcle Blanco"></div>
-                                <span class="ingredient-name">Almizcle Blanco</span>
-                            </div>
-                            <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Azafrán.jpg" alt="Azafrán"></div>
-                                <span class="ingredient-name">Azafrán</span>
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Mango.jpg" alt="Mango"></div>
+                                <span class="ingredient-name">Mango</span>
                             </div>
                             <div class="ingredient-item">
                                 <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Limón.jpg" alt="Limón"></div>
                                 <span class="ingredient-name">Limón</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Jengibre.jpg" alt="Jengibre"></div>
+                                <span class="ingredient-name">Jengibre</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Ruibarbo.jpg" alt="Ruibarbo"></div>
+                                <span class="ingredient-name">Ruibarbo</span>
                             </div>
                         </div>
                     </div>
@@ -56,12 +61,20 @@
                         <div class="pyramid-header"><span>CORAZÓN</span></div>
                         <div class="pyramid-grid">
                             <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Flores Blancas.jpg" alt="Flores Blancas"></div>
-                                <span class="ingredient-name">Flores Blancas</span>
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Pimienta rosa.jpg" alt="Pimienta Rosa"></div>
+                                <span class="ingredient-name">Pimienta Rosa</span>
                             </div>
                             <div class="ingredient-item">
                                 <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Jazmín.jpg" alt="Jazmín"></div>
                                 <span class="ingredient-name">Jazmín</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Violeta.jpg" alt="Violeta"></div>
+                                <span class="ingredient-name">Violeta</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/praliné.jpg" alt="Praliné"></div>
+                                <span class="ingredient-name">Praliné</span>
                             </div>
                         </div>
                     </div>
@@ -69,38 +82,37 @@
                         <div class="pyramid-header"><span>BASE</span></div>
                         <div class="pyramid-grid">
                             <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Almizcle.jpg" alt="Almizcle Blanco"></div>
-                                <span class="ingredient-name">Almizcle Blanco</span>
-                            </div>
-                            <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Abeto.jpg" alt="Resina de Abeto"></div>
-                                <span class="ingredient-name">Resina de Abeto</span>
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Haba Tonka.jpg" alt="Haba Tonka"></div>
+                                <span class="ingredient-name">Haba Tonka</span>
                             </div>
                             <div class="ingredient-item">
                                 <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Cedro.jpg" alt="Cedro"></div>
                                 <span class="ingredient-name">Cedro</span>
                             </div>
                             <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Ámbar.jpg" alt="Ámbar"></div>
-                                <span class="ingredient-name">Ámbar</span>
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Ámbar gris.jpg" alt="Ámbar Gris"></div>
+                                <span class="ingredient-name">Ámbar Gris</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Musgo de roble.jpg" alt="Musgo de Roble"></div>
+                                <span class="ingredient-name">Musgo de Roble</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="accords-container">
                     <h3 class="accords-title">Acordes Principales</h3>
-                    
                     <div class="accord-bar-wrapper">
-                        <span class="accord-label">Almizclado</span>
-                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 100%; background: #ffb366;"></div></div>
+                        <span class="accord-label">Afrutado / Tropical</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 100%; background: #ff9933;"></div></div>
                     </div>
                     <div class="accord-bar-wrapper">
-                        <span class="accord-label">Blanco Floral</span>
-                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 90%; background: #ff9933;"></div></div>
+                        <span class="accord-label">Cítrico / Fresco</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 85%; background: #ffcc00;"></div></div>
                     </div>
                     <div class="accord-bar-wrapper">
-                        <span class="accord-label">Amaderado</span>
-                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 80%; background: #e6ccb3;"></div></div>
+                        <span class="accord-label">Especiado Suave</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 75%; background: #a64d2e;"></div></div>
                     </div>
                 </div>
                 <div class="purchase-controls" style="margin-top: 30px; display: flex; gap: 15px; align-items: center;">
