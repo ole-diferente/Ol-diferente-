@@ -109,6 +109,12 @@ const priceUpdates = [
     priceNum: 73200,
     priceStr: "73.200",
     file: "fakhar-gold.html"
+  },
+  {
+    name: "9 PM Rebel",
+    priceNum: 91500,
+    priceStr: "91.500",
+    file: "9-pm-rebel.html"
   }
 ];
 
