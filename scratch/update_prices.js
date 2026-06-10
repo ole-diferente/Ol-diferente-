@@ -1,93 +1,154 @@
 const fs = require('fs');
 const path = require('path');
 
-const prices = {
-    "club-de-nuit.html": 78000,
-    "club-de-nuit-women.html": 78000,
-    "salvo-elixir.html": 63000,
-    "liquid-brun.html": 98000,
-    "dark-door-sport.html": 59000,
-    "hawas-for-him.html": 67000,
-    "badee-al-oud-for-glory.html": 68000,
-    "honor-and-glory.html": 68000,
-    "khamrah-dukhan.html": 68000,
-    "eclaire.html": 72000,
-    "lattafa-his-confession.html": 74000,
-    "oud-forever.html": 79000,
-    "sceptre-malachite.html": 69900,
-    "afnan-9pm.html": 78000,
-    "turathi-blue.html": 84000,
-    "vintage-radio.html": 69000,
-    "shaheen-gold.html": 72000,
-    "aqua-kiss.html": 49000,
-    "bare-vanilla.html": 49000,
-    "coconut-passion.html": 49000,
-    "pure-seduction.html": 49000,
-    "vs-rush.html": 49000
-};
+const priceUpdates = [
+  {
+    name: "Lattafa Teriaq",
+    priceNum: 72000,
+    priceStr: "72.000",
+    file: "lattafa-teriaq.html"
+  },
+  {
+    name: "Mandarin Sky",
+    priceNum: 73000,
+    priceStr: "73.000",
+    file: "mandarin-sky.html"
+  },
+  {
+    name: "Salvo Intense",
+    priceNum: 64500,
+    priceStr: "64.500",
+    file: "salvo-intense.html"
+  },
+  {
+    name: "Art of Universe",
+    priceNum: 84300,
+    priceStr: "84.300",
+    file: "art-of-universe.html"
+  },
+  {
+    name: "Philos Pura",
+    priceNum: 67400,
+    priceStr: "67.400",
+    file: "philos-pura.html"
+  },
+  {
+    name: "Lattafa Khamrah Dukhan",
+    priceNum: 68000,
+    priceStr: "68.000",
+    file: "khamrah-dukhan.html"
+  },
+  {
+    name: "Khamrah",
+    priceNum: 68000,
+    priceStr: "68.000",
+    file: "khamrah-lattafa.html"
+  },
+  {
+    name: "Khamrah Qahwa",
+    priceNum: 68000,
+    priceStr: "68.000",
+    file: "khamrah-qahwa.html"
+  },
+  {
+    name: "Fakhar Black",
+    priceNum: 74000,
+    priceStr: "74.000",
+    file: "fakhar-preto.html"
+  },
+  {
+    name: "Hawas Fire",
+    priceNum: 94800,
+    priceStr: "94.800",
+    file: "hawas-fire.html"
+  },
+  {
+    name: "9 AM Dive",
+    priceNum: 77500,
+    priceStr: "77.500",
+    file: "9-am-dive.html"
+  },
+  {
+    name: "Lattafa Atlas",
+    priceNum: 77500,
+    priceStr: "77.500",
+    file: "lattafa-atlas.html"
+  },
+  {
+    name: "Yara",
+    priceNum: 65900,
+    priceStr: "65.900",
+    file: "yara-lattafa.html"
+  },
+  {
+    name: "Yara Candy",
+    priceNum: 65900,
+    priceStr: "65.900",
+    file: "yara-candy.html"
+  },
+  {
+    name: "Haya Pink",
+    priceNum: 71700,
+    priceStr: "71.700",
+    file: "haya-pink.html"
+  },
+  {
+    name: "Eclaire Pistache",
+    priceNum: 72000,
+    priceStr: "72.000",
+    file: "eclaire-pistacho.html"
+  },
+  {
+    name: "Tropical Vibe",
+    priceNum: 82000,
+    priceStr: "82.000",
+    file: "tropical-vibe.html"
+  },
+  {
+    name: "Fakhar Gold",
+    priceNum: 73200,
+    priceStr: "73.200",
+    file: "fakhar-gold.html"
+  }
+];
 
-function formatPrice(p) {
-    return p.toLocaleString('es-AR');
-}
+// 1. Update tienda.html
+const tiendaPath = path.join(__dirname, '..', 'tienda.html');
+let tiendaContent = fs.readFileSync(tiendaPath, 'utf8');
 
-function updateTienda() {
-    const filePath = 'tienda.html';
-    let content = fs.readFileSync(filePath, 'utf-8');
+priceUpdates.forEach(update => {
+    const escapedName = update.name.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    const cardRegex = new RegExp(`(<div class="product-card[^"]*"[^>]*data-name="${escapedName}"[\\s\\S]*?<div class="product-price">)([^<]*)(</div>[\\s\\S]*?</div>\\s*</div>)`, 'i');
     
-    // Using regex to carefully replace
-    const cards = content.split(/(<div class="product-card[^>]*>)/g);
-    let newContent = "";
+    if (tiendaContent.match(cardRegex)) {
+        console.log(`Encontrado ${update.name} en tienda.html`);
+        tiendaContent = tiendaContent.replace(cardRegex, (match, prefix, oldPrice, suffix) => {
+            let newPrefix = prefix.replace(/data-price="[^"]*"/, `data-price="${update.priceNum}"`);
+            newPrefix = newPrefix.replace(/(data-type="full"[^>]*data-price=")[^"]*"/, `$1${update.priceStr}"`);
+            newPrefix = newPrefix.replace(/(data-price="[^"]*"[^>]*data-type="full")/, `data-price="${update.priceStr}" data-type="full"`);
+            const newPrice = `$${update.priceStr}`;
+            return `${newPrefix}${newPrice}${suffix}`;
+        });
+    } else {
+        console.warn(`No se pudo encontrar la tarjeta para ${update.name} en tienda.html`);
+    }
     
-    for (let i = 0; i < cards.length; i++) {
-        let chunk = cards[i];
-        if (chunk.startsWith('<div class="product-card')) {
-            let cardStart = chunk;
-            let cardBody = cards[i + 1] || "";
-            
-            const match = cardBody.match(/href="(.*?\.html)"/);
-            if (match) {
-                const filename = match[1];
-                if (prices[filename]) {
-                    const newPrice = prices[filename];
-                    const formatted = formatPrice(newPrice);
-                    
-                    cardStart = cardStart.replace(/data-price="\d+"/, `data-price="${newPrice}"`);
-                    
-                    // Update full size button
-                    // Matches data-type="full" data-price="anything"
-                    cardBody = cardBody.replace(/(data-type="full" data-price=")[^"]+(".*?disabled>.*?ml<\/button>)/s, `$1${formatted}$2`);
-                    cardBody = cardBody.replace(/(data-type="full" data-price=")[^"]+(">[^<]*?ml<\/button>)/s, `$1${formatted}$2`);
-                    cardBody = cardBody.replace(/(data-type="full"\s+disabled\s+data-price=")[^"]+(")/, `$1${formatted}$2`);
-                    
-                    // Also if we have other forms
-                    cardBody = cardBody.replace(/<div class="product-price">.*?<\/div>/, `<div class="product-price">$${formatted}</div>`);
-                }
-            }
-            newContent += cardStart + cardBody;
-            i++; // skip cardBody in loop
+    // 2. Update individual HTML files in productos/
+    const filePath = path.join(__dirname, '..', 'productos', update.file);
+    if (fs.existsSync(filePath)) {
+        let fileContent = fs.readFileSync(filePath, 'utf8');
+        const priceRegex = /(<span class="detail-price"[^>]*>)([^<]*)(<\/span>)/i;
+        if (fileContent.match(priceRegex)) {
+            fileContent = fileContent.replace(priceRegex, `$1$${update.priceStr}$3`);
+            fs.writeFileSync(filePath, fileContent, 'utf8');
+            console.log(`Actualizado precio en ${update.file} a $${update.priceStr}`);
         } else {
-            newContent += chunk;
+            console.warn(`No se encontró span de precio en ${update.file}`);
         }
+    } else {
+        console.warn(`El archivo ${update.file} no existe en la carpeta productos/`);
     }
-    
-    fs.writeFileSync(filePath, newContent, 'utf-8');
-    console.log("tienda.html updated");
-}
+});
 
-function updateProductPages() {
-    for (const [filename, newPrice] of Object.entries(prices)) {
-        if (fs.existsSync(filename)) {
-            let content = fs.readFileSync(filename, 'utf-8');
-            const formatted = formatPrice(newPrice);
-            
-            content = content.replace(/(<span class="detail-price"[^>]*>)\$?[0-9\.]+(<\/span>)/g, `$1$${formatted}$2`);
-            content = content.replace(/(<span class="detail-price"[^>]*>)Por definir(<\/span>)/g, `$1$${formatted}$2`);
-            
-            fs.writeFileSync(filename, content, 'utf-8');
-            console.log(`${filename} updated`);
-        }
-    }
-}
-
-updateTienda();
-updateProductPages();
+fs.writeFileSync(tiendaPath, tiendaContent, 'utf8');
+console.log('Actualización de precios completada en tienda.html.');
