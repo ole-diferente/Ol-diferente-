@@ -115,6 +115,18 @@ const priceUpdates = [
     priceNum: 91500,
     priceStr: "91.500",
     file: "9-pm-rebel.html"
+  },
+  {
+    name: "Fakhar Rose",
+    priceNum: 73200,
+    priceStr: "73.200",
+    file: "fakhar-rosa.html"
+  },
+  {
+    name: "Zakat World Cup",
+    priceNum: 205000,
+    priceStr: "205.000",
+    file: "zakat-world-cup.html"
   }
 ];
 
