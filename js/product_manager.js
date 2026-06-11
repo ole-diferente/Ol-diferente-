@@ -166,6 +166,7 @@ const SEASONS_DATA = {
     "eclaire-pistacho.html": { winter: 90, autumn: 90, spring: 60, summer: 30 },
     "opulent-blanco.html": { winter: 60, autumn: 70, spring: 90, summer: 80 },
     "fakhar-rosa.html": { winter: 60, autumn: 80, spring: 90, summer: 70 },
+    "zakat-world-cup.html": { winter: 30, autumn: 50, spring: 85, summer: 100 },
     // Masculinas
     "hawas-for-him.html": { winter: 30, autumn: 70, spring: 95, summer: 100 },
     "afnan-9pm.html": { winter: 95, autumn: 90, spring: 65, summer: 30 },
