@@ -1,6 +1,10 @@
+.container {
+    margin-top: 160px !important; /* Force margin-top to clear the fixed header and give space */
+}
+
 .product-detail-container {
     max-width: 1100px;
-    margin: 140px auto 60px;
+    margin: 25px auto 60px; /* Reduced from 140px to sit nicely below the back button */
     padding: 40px;
     background: var(--card-bg);
     backdrop-filter: blur(20px);
@@ -284,25 +288,48 @@
     gap: 10px;
     text-decoration: none;
     color: var(--text-primary);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
-    margin-bottom: 30px;
-    transition: color 0.3s ease;
+    letter-spacing: 1.5px;
+    padding: 11px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.back-to-shop i {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .back-to-shop:hover {
     color: var(--accent-color);
+    background: rgba(212, 175, 55, 0.08);
+    border-color: var(--accent-color);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25);
+    transform: translateY(-2px);
+}
+
+.back-to-shop:hover i {
+    transform: translateX(-6px);
 }
 
 @media (max-width: 768px) {
     .container {
-        padding: 100px 15px 40px;
+        margin-top: 130px !important;
+        padding: 0 15px 40px;
     }
 
     .product-detail-container {
         grid-template-columns: 1fr;
         padding: 20px;
-        margin-top: 20px;
+        margin-top: 15px;
         gap: 30px;
         border-radius: 20px;
     }
