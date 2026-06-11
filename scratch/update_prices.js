@@ -157,7 +157,7 @@ priceUpdates.forEach(update => {
         let fileContent = fs.readFileSync(filePath, 'utf8');
         const priceRegex = /(<span class="detail-price"[^>]*>)([^<]*)(<\/span>)/i;
         if (fileContent.match(priceRegex)) {
-            fileContent = fileContent.replace(priceRegex, `$1$${update.priceStr}$3`);
+            fileContent = fileContent.replace(priceRegex, (match, g1, g2, g3) => `${g1}$${update.priceStr}${g3}`);
             fs.writeFileSync(filePath, fileContent, 'utf8');
             console.log(`Actualizado precio en ${update.file} a $${update.priceStr}`);
         } else {
