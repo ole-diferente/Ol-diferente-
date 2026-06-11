@@ -17,5 +17,6 @@ UPDATE inventory SET stock = -1 WHERE name IN (
     'Tropical Vibe',
     'Eclaire Pistache',
     'Opulent Musk',
-    'Fakhar Rose'
+    'Fakhar Rose',
+    'Zakat World Cup'
 );

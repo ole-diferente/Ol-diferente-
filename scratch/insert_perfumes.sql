@@ -17,3 +17,4 @@ INSERT INTO inventory (name, stock) VALUES ('Tropical Vibe', 1);
 INSERT INTO inventory (name, stock) VALUES ('Eclaire Pistache', 1);
 INSERT INTO inventory (name, stock) VALUES ('Opulent Musk', 1);
 INSERT INTO inventory (name, stock) VALUES ('Fakhar Rose', 1);
+INSERT INTO inventory (name, stock) VALUES ('Zakat World Cup', -1);
