@@ -1,6 +1,6 @@
 /**
  * OLÉ DIFERENTE - Tienda Logic
- * Maneja el filtrado, ordenamiento y selectores de tamaño en la página de la tienda.
+ * Maneja el filtrado, ordenamiento, buscador y selectores de tamaño en la página de la tienda.
  */
 
 class StoreManager {
@@ -9,6 +9,13 @@ class StoreManager {
         this.priceSort = document.getElementById('price-sort');
         this.productGrid = document.querySelector('.product-grid');
         this.products = Array.from(document.querySelectorAll('.product-card'));
+        
+        // Search Elements
+        this.searchContainer = document.querySelector('.search-container');
+        this.searchInput = document.getElementById('catalog-search');
+        this.searchDropdown = document.getElementById('search-dropdown');
+        this.clearSearchBtn = document.getElementById('clear-search');
+        
         this.init();
     }
 
@@ -32,6 +39,104 @@ class StoreManager {
     bindEvents() {
         this.categoryFilter.addEventListener('change', () => this.updateCatalog());
         this.priceSort.addEventListener('change', () => this.updateCatalog());
+        
+        // Search Event Listeners
+        if (this.searchInput) {
+            this.searchInput.addEventListener('input', () => {
+                const query = this.searchInput.value.toLowerCase().trim();
+                
+                // Show/hide clear button
+                if (this.clearSearchBtn) {
+                    this.clearSearchBtn.style.display = query.length > 0 ? 'flex' : 'none';
+                }
+                
+                if (query.length >= 3) {
+                    this.updateSearchSuggestions(query);
+                } else {
+                    if (this.searchDropdown) this.searchDropdown.style.display = 'none';
+                }
+                
+                this.updateCatalog();
+            });
+
+            this.searchInput.addEventListener('focus', () => {
+                const query = this.searchInput.value.toLowerCase().trim();
+                if (query.length >= 3) {
+                    this.updateSearchSuggestions(query);
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (this.searchDropdown && !this.searchContainer.contains(e.target)) {
+                    this.searchDropdown.style.display = 'none';
+                }
+            });
+        }
+
+        if (this.clearSearchBtn) {
+            this.clearSearchBtn.addEventListener('click', () => {
+                this.searchInput.value = '';
+                this.clearSearchBtn.style.display = 'none';
+                if (this.searchDropdown) this.searchDropdown.style.display = 'none';
+                this.updateCatalog();
+                this.searchInput.focus();
+            });
+        }
+    }
+
+    updateSearchSuggestions(query) {
+        if (!this.searchDropdown) return;
+        
+        // Filter products that match query
+        const suggestions = [];
+        this.products.forEach(p => {
+            const name = p.getAttribute('data-name');
+            const category = p.getAttribute('data-category') || '';
+            const priceEl = p.querySelector('.product-price');
+            const price = priceEl ? priceEl.innerText : '';
+            const imgEl = p.querySelector('.product-image');
+            const imgSrc = imgEl ? imgEl.getAttribute('src') : '';
+            const linkEl = p.querySelector('a');
+            const linkHref = linkEl ? linkEl.getAttribute('href') : '#';
+
+            if (name.toLowerCase().includes(query)) {
+                suggestions.push({ name, category, price, imgSrc, linkHref });
+            }
+        });
+
+        this.searchDropdown.innerHTML = '';
+        
+        if (suggestions.length > 0) {
+            suggestions.forEach(item => {
+                // Determine display label for category
+                const cats = [];
+                if (item.category.includes('masculinas')) cats.push('Masculina');
+                if (item.category.includes('femeninas')) cats.push('Femenina');
+                if (item.category.includes('body-splash')) cats.push('Body Splash');
+                const catLabel = cats.join(' / ') || 'Fragancia';
+
+                const searchItemHTML = `
+                    <a href="${item.linkHref}" class="search-item">
+                        <img src="${item.imgSrc}" alt="${item.name}" class="search-item-thumb">
+                        <div class="search-item-info">
+                            <span class="search-item-name">${item.name}</span>
+                            <div class="search-item-meta">
+                                <span>${catLabel}</span>
+                                <strong style="color: var(--accent-color);">${item.price}</strong>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                this.searchDropdown.insertAdjacentHTML('beforeend', searchItemHTML);
+            });
+            this.searchDropdown.style.display = 'block';
+            
+            // Re-run Lucide icons for the dropdown if needed
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        } else {
+            this.searchDropdown.innerHTML = '<div class="search-no-results">No se encontraron fragancias</div>';
+            this.searchDropdown.style.display = 'block';
+        }
     }
 
     setupSizeSelectors() {
@@ -56,11 +161,11 @@ class StoreManager {
                     btn.classList.add('active');
 
                     if (btn.getAttribute('data-type') === 'decant') {
-                        decantOptions.classList.add('visible');
-                        const defaultDecant = decantOptions.querySelector('.size-btn.active') || decantBtns[1];
-                        updatePrice(defaultDecant);
+                        if (decantOptions) decantOptions.classList.add('visible');
+                        const defaultDecant = decantOptions ? (decantOptions.querySelector('.size-btn.active') || decantBtns[1]) : null;
+                        if (defaultDecant) updatePrice(defaultDecant);
                     } else {
-                        decantOptions.classList.remove('visible');
+                        if (decantOptions) decantOptions.classList.remove('visible');
                         updatePrice(btn);
                     }
                 });
@@ -79,11 +184,17 @@ class StoreManager {
     updateCatalog() {
         const category = this.categoryFilter.value;
         const sort = this.priceSort.value;
+        const searchQuery = this.searchInput ? this.searchInput.value.toLowerCase().trim() : '';
 
         // Filter
         let filteredProducts = this.products.filter(p => {
             const pCategory = p.getAttribute('data-category');
-            return category === 'todos' || pCategory.includes(category) || (category === 'decants');
+            const pName = p.getAttribute('data-name').toLowerCase();
+            
+            const matchesCategory = category === 'todos' || pCategory.includes(category) || (category === 'decants');
+            const matchesSearch = searchQuery.length < 3 || pName.includes(searchQuery);
+            
+            return matchesCategory && matchesSearch;
         });
 
         // Sort
