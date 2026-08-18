@@ -1,9 +1,7 @@
 UPDATE inventory SET stock = -1 WHERE name IN (
-    'Philos Pura',
     'Khamrah',
     'Khamrah Qahwa',
     'Fakhar Gold',
-    'Mandarin Sky',
     'Yara',
     'Yara Candy',
     'Salvo Intense',
@@ -12,7 +10,6 @@ UPDATE inventory SET stock = -1 WHERE name IN (
     'Hayaati Black',
     'Hawas Fire',
     'Fakhar Black',
-    'Haya Pink',
     'Art of Universe',
     'Tropical Vibe',
     'Eclaire Pistache',
