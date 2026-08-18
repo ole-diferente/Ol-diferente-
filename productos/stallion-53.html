@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haya Pink - OLÉ DIFERENTE</title>
+    <title>Stallion 53 - OLÉ DIFERENTE</title>
     <meta name="referrer" content="no-referrer">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/tienda.css?v=10">
     <link rel="stylesheet" href="../css/producto.css?v=10">
     <link rel="stylesheet" href="../css/cart.css?v=10">
+    <!-- Supabase JS Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -20,96 +21,87 @@
         <a href="../tienda.html" class="back-to-shop">
             <i data-lucide="arrow-left"></i> VOLVER A LA TIENDA
         </a>
-        <div class="product-detail-container" data-name="Haya Pink">
+        <div class="product-detail-container">
             <div class="product-detail-image-wrapper">
-                <img src="../img/fragancias/Haya Lattafa Perfumes.jpg" alt="Haya Pink" class="product-detail-image">
+                <img src="../img/fragancias/Stallion 53 de Emper.jpg" alt="Emper Stallion 53" class="product-detail-image">
             </div>
             <div class="product-detail-info">
-                <span class="detail-gender">GÉNERO: FEMENINA</span>
-                <h1 class="detail-title">Haya Pink</h1>
+                <span class="detail-gender">GÉNERO: MASCULINA / UNISEX</span>
+                <h1 class="detail-title">Emper Stallion 53</h1>
                 <p class="detail-description">
-                    Efervescente, floral y femenina. Haya brilla con notas de champán y fresa, floreciendo en un corazón de flores blancas lujosas sobre un lecho cálido y dulce.
+                    Una fragancia amaderada y aromática elegante, intensa y magnética. Combina el toque especiado del cardamomo con un refinado corazón de iris y cuero sobre un fondo profundo de sándalo y cedro.
                 </p>
                 <div class="detail-price-container" style="margin-bottom: 25px;">
-                    <span class="detail-price" style="font-size: 32px; font-weight: 700; color: var(--text-primary);">$73.000</span>
+                    <span class="detail-price" style="font-size: 32px; font-weight: 700; color: var(--text-primary);">$72.000</span>
                     <span class="detail-size-label" style="font-size: 14px; color: var(--text-secondary); margin-left: 10px;">/ 100 ml</span>
                 </div>
                 <div class="visual-notes">
                     <div class="pyramid-section">
                         <div class="pyramid-header"><span>NOTAS DE SALIDA</span></div>
                         <div class="pyramid-grid">
-                            
                             <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="" alt="Champán"></div>
-                                <span class="ingredient-name">Champán</span>
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Cardamomo.jpg" alt="Cardamomo"></div>
+                                <span class="ingredient-name">Cardamomo</span>
                             </div>
                             <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="" alt="Fresa"></div>
-                                <span class="ingredient-name">Fresa</span>
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Violeta.jpg" alt="Violeta"></div>
+                                <span class="ingredient-name">Violeta</span>
                             </div>
                             <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="" alt="Rosa"></div>
-                                <span class="ingredient-name">Rosa</span>
-                            </div>
-                            <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="" alt="Naranja Sanguina"></div>
-                                <span class="ingredient-name">Naranja Sanguina</span>
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Papiro.jpg" alt="Papiro"></div>
+                                <span class="ingredient-name">Papiro</span>
                             </div>
                         </div>
                     </div>
                     <div class="pyramid-section">
                         <div class="pyramid-header"><span>CORAZÓN</span></div>
                         <div class="pyramid-grid">
-                            
                             <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="" alt="Gardenia"></div>
-                                <span class="ingredient-name">Gardenia</span>
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Iris Pallida.jpg" alt="Iris"></div>
+                                <span class="ingredient-name">Iris</span>
                             </div>
                             <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="" alt="Jazmín"></div>
-                                <span class="ingredient-name">Jazmín</span>
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Cuero.jpg" alt="Cuero"></div>
+                                <span class="ingredient-name">Cuero</span>
                             </div>
                             <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="" alt="Orquídea"></div>
-                                <span class="ingredient-name">Orquídea</span>
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Cedro.jpg" alt="Cedro"></div>
+                                <span class="ingredient-name">Cedro</span>
                             </div>
                         </div>
                     </div>
                     <div class="pyramid-section">
                         <div class="pyramid-header"><span>BASE</span></div>
                         <div class="pyramid-grid">
-                            
                             <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="" alt="Ámbar"></div>
-                                <span class="ingredient-name">Ámbar</span>
-                            </div>
-                            <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="" alt="Sándalo"></div>
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Sándalo.jpg" alt="Sándalo"></div>
                                 <span class="ingredient-name">Sándalo</span>
                             </div>
                             <div class="ingredient-item">
-                                <div class="ingredient-icon"><img src="" alt="Castaña"></div>
-                                <span class="ingredient-name">Castaña</span>
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Ámbar.jpg" alt="Ámbar"></div>
+                                <span class="ingredient-name">Ámbar</span>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-icon"><img src="../Imagenes_Notas_Olfativas/Almizcle.jpg" alt="Almizcle"></div>
+                                <span class="ingredient-name">Almizcle</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="accords-container">
                     <h3 class="accords-title">Acordes Principales</h3>
-                    
                     <div class="accord-bar-wrapper">
-                        <span class="accord-label">Floral</span>
-                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 100%; background: #ffb366;"></div></div>
+                        <span class="accord-label">Amaderado</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 100%; background: #734d26;"></div></div>
                     </div>
                     <div class="accord-bar-wrapper">
-                        <span class="accord-label">Afrutado</span>
-                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 90%; background: #ff9933;"></div></div>
+                        <span class="accord-label">Cuero</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 85%; background: #4a2c11;"></div></div>
                     </div>
                     <div class="accord-bar-wrapper">
-                        <span class="accord-label">Dulce</span>
-                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 80%; background: #e6ccb3;"></div></div>
+                        <span class="accord-label">Especiado Cálido</span>
+                        <div class="accord-bar-bg"><div class="accord-bar-fill" style="width: 75%; background: #a64d2e;"></div></div>
                     </div>
-                </div>
                 <div class="purchase-controls" style="margin-top: 30px; display: flex; gap: 15px; align-items: center;">
                     <input type="number" class="quantity-selector" value="1" min="1" style="width: 70px; padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-primary); text-align: center;">
                     <button class="add-to-cart-btn" style="flex-grow: 1; padding: 18px 40px; font-size: 16px;">AGREGAR AL CARRITO</button>
@@ -120,7 +112,7 @@
     <footer></footer>
     <script src="../js/supabase-config.js"></script>
     <script src="../js/components.js?v=10"></script>
-    <script src="../js/product_manager.js?v=3"></script>
-    <script src="../js/cart.js?v=2"></script>
+    <script src="../js/product_manager.js"></script>
+    <script src="../js/cart.js"></script>
 </body>
 </html>

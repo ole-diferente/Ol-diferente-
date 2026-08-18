@@ -138,7 +138,11 @@ const NOTAS_OLFATIVAS = {
     "Pimienta Rosa": "Imagenes_Notas_Olfativas/Pimienta rosa.jpg",
     "Miel": "Imagenes_Notas_Olfativas/Miel.jpg",
     "Ruibarbo": "Imagenes_Notas_Olfativas/Ruibarbo.jpg",
-    "Ládano": "Imagenes_Notas_Olfativas/Ládano.jpg"
+    "Ládano": "Imagenes_Notas_Olfativas/Ládano.jpg",
+    "Violeta": "Imagenes_Notas_Olfativas/Violeta.jpg",
+    "Papiro": "Imagenes_Notas_Olfativas/Papiro.jpg",
+    "Leche de Almendras": "Imagenes_Notas_Olfativas/Almendra.jpg",
+    "Merengue": "Imagenes_Notas_Olfativas/Batida.jpg"
 };
 
 /**
@@ -167,6 +171,10 @@ const SEASONS_DATA = {
     "opulent-blanco.html": { winter: 60, autumn: 70, spring: 90, summer: 80 },
     "fakhar-rosa.html": { winter: 60, autumn: 80, spring: 90, summer: 70 },
     "zakat-world-cup.html": { winter: 30, autumn: 50, spring: 85, summer: 100 },
+    "stallion-53.html": { winter: 85, autumn: 90, spring: 70, summer: 40 },
+    "hayaati-al-maleky.html": { winter: 95, autumn: 90, spring: 60, summer: 30 },
+    "her-confession.html": { winter: 95, autumn: 90, spring: 60, summer: 25 },
+    "badee-al-oud-noble-blush.html": { winter: 75, autumn: 80, spring: 85, summer: 50 },
     // Masculinas
     "hawas-for-him.html": { winter: 30, autumn: 70, spring: 95, summer: 100 },
     "afnan-9pm.html": { winter: 95, autumn: 90, spring: 65, summer: 30 },
