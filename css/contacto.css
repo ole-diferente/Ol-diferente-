@@ -39,7 +39,7 @@ body.contacto-page::before {
     height: 100lvh;
     z-index: -1;
     background-color: #000;
-    background-image: url('../assets/luis-contacto.jpeg');
+    background-image: url('../assets/luis-contacto.webp');
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;

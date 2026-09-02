@@ -179,7 +179,7 @@ class WebComponents {
         header.innerHTML = `
             <div class="logo">
                 <a href="${this.basePath}index.html">
-                    <img src="${this.basePath}assets/logo.png" alt="OLÉ DIFERENTE Logo" class="logo-img">
+                    <img src="${this.basePath}assets/logo.webp" alt="OLÉ DIFERENTE Logo" class="logo-img">
                 </a>
             </div>
             <div class="mobile-menu-toggle" id="mobile-menu-toggle">
@@ -477,7 +477,7 @@ class WebComponents {
                 .single();
 
             const nombre = profile?.nombre || 'Usuario';
-            const avatar = profile?.avatar_url || 'avatar_1.png';
+            const avatar = profile?.avatar_url || 'avatar_1.webp';
             const avatarPath = avatar.startsWith('http') ? avatar : (avatar.startsWith('avatars/') ? `${this.basePath}${avatar}` : `${this.basePath}avatars/${avatar}`);
 
             accountBtn.classList.add('user-profile-btn');

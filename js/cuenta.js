@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     // --- Avatar Selection (Registro) ---
-    let selectedAvatar = 'avatar_1.png';
+    let selectedAvatar = 'avatar_1.webp';
     const avatarOptions = document.querySelectorAll('.avatar-option');
 
     avatarOptions.forEach(option => {
@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             profileEmailDisplay.textContent = user.email;
             const { data: profile } = await window.supabase.from('profiles').select('*').eq('id', user.id).single();
             if (profile) {
-                const avatar = profile.avatar_url || 'avatars/avatar_1.png';
+                const avatar = profile.avatar_url || 'avatars/avatar_1.webp';
                 profileAvatarDisplay.src = avatar.startsWith('http') ? avatar : (avatar.includes('/') ? avatar : `avatars/${avatar}`);
                 document.getElementById('per-nombre').value = profile.nombre || '';
                 document.getElementById('per-apellido').value = profile.apellido || '';
