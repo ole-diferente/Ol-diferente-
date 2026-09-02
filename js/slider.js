@@ -9,11 +9,33 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('video.video-desktop').forEach(el => el.remove());
     }
 
-    // Helper para cargar dinámicamente el video a demanda leyendo el data-src
+    // Detector de conexiones lentas o modo de ahorro de datos
+    const isLowConnection = () => {
+        if ('connection' in navigator) {
+            const conn = navigator.connection;
+            if (conn.saveData || conn.effectiveType === '2g' || conn.effectiveType === 'slow-2g') {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    // Helper para cargar dinámicamente el video a demanda leyendo todas sus fuentes (<source>)
     const lazyLoadVideo = (video) => {
-        const source = video.querySelector('source');
-        if (source && source.dataset.src && !source.src) {
-            source.src = source.dataset.src;
+        if (!video) return;
+        let needLoad = false;
+        const sources = video.querySelectorAll('source');
+        sources.forEach(source => {
+            if (source.dataset.src && !source.src) {
+                source.src = source.dataset.src;
+                needLoad = true;
+            }
+        });
+        if (needLoad || (!video.src && sources.length > 0)) {
+            const firstSource = sources[0];
+            if (firstSource && firstSource.src && !video.src) {
+                video.src = firstSource.src;
+            }
             video.load(); // Indicar al navegador que cargue el recurso multimedia
         }
     };
@@ -71,6 +93,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 v.play().catch(e => console.log('Auto-play prevented:', e));
             }
         });
+
+        // Pre-cargar de fondo el video del siguiente slide para transiciones fluidas
+        const nextIndex = (currentIndex + 1) % slides.length;
+        if (slides[nextIndex] && !isLowConnection()) {
+            const nextVideos = slides[nextIndex].querySelectorAll('video');
+            nextVideos.forEach(v => {
+                if (window.getComputedStyle(v).display !== 'none') {
+                    lazyLoadVideo(v);
+                }
+            });
+        }
     };
 
     const nextSlide = () => {
@@ -104,13 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         slides.forEach((slide, index) => {
             const videos = slide.querySelectorAll('video');
             videos.forEach(video => {
-                if (index !== currentIndex) {
-                    video.pause();
-                } else if (window.getComputedStyle(video).display !== 'none') {
-                    lazyLoadVideo(video); // Cargar primer video inmediatamente
-                    video.play().catch(e => console.log('Initial play prevented:', e));
-                }
-
                 video.addEventListener('ended', () => {
                     if (window.getComputedStyle(video).display !== 'none') {
                         nextSlide();
@@ -118,6 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
         });
+        // Cargar e iniciar la reproducción del primer slide mediante la misma rutina del slider
+        goToSlide(0);
     };
 
     initDots();
